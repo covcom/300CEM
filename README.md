@@ -1,8 +1,8 @@
 # Introduction
 
-This is the Android part of module 387COM 'Mobile Applications Development' at Coventry University. The module leader for this module is Mark Tyers. The person responsible for the teaching of the Android part is Jianhua Yang.
+This repository is for module 300CEM 'Android Application Development' at Coventry University. The module leader of this module is Jianhua Yang.
 
-There are altogether 22 labs to be delivered in 11 weeks. That is 2 labs per week. This document contains the module plan for academic year 15-16, and assessment plan (subject to changes). In the Android part of the module, we closely follow the overall structure/pace of the iOS part whenever possible. For iOS part of the module see [here](https://github.com/covcom/387COM).
+There are altogether 22 labs to be delivered in 11 weeks. That is 2 labs per week. This document contains the module plan for academic year 15-16, and assessment plan (subject to changes). In the Android part of the module, we closely follow the overall structure/pace of the iOS part whenever possible. For iOS part of the module see [here](https://github.com/covcom/300CEM).
 
 # Teaching plan
 
@@ -293,4 +293,4 @@ Refer to Moodle for this
 
 # About this Github repository
 
-This Github repository is set up to host lab materials and code examples we use throughout module 387COM. You can simply read and explore. If you would like a personal copy of it, you'll need to fork it as writing to it is not allowed. In the repository for module 305CDE, there is a [README](https://github.com/covcom/305CDE/blob/master/README.md) file written by Mark Tyers that explains how to fork repositories and keep them up to date.
+This Github repository is set up to host lab materials and code examples we use throughout module 300CEM. You can simply read and explore. If you would like a personal copy of it, you'll need to fork it as writing to it is not allowed. In the repository for module 305CDE, there is a [README](https://github.com/covcom/305CDE/blob/master/README.md) file written by Mark Tyers that explains how to fork repositories and keep them up to date.

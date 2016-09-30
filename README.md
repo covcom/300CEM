@@ -2,7 +2,7 @@
 
 This repository is for module 300CEM 'Android Application Development' at Coventry University. The module leader of this module is Jianhua Yang.
 
-There are altogether 22 labs to be delivered in 11 weeks. That is 2 labs per week. This document contains the module plan for academic year 15-16, and assessment plan (subject to changes). In the Android part of the module, we closely follow the overall structure/pace of the iOS part whenever possible. For iOS part of the module see [here](https://github.com/covcom/300CEM).
+There are altogether 22 labs to be delivered in 11 weeks. That is 2 labs per week. This current document contains the module plan for academic year 16-17, for assessment plan please refer to Moodle. Our Schoold also offers an iOS module, see [here](https://github.com/covcom/300CEM).
 
 # Teaching plan
 
@@ -283,7 +283,7 @@ Camera2, Streaming video, MediaPlayer, MediaController
 
 Refer to Moodle for this
 
-# Reading list
+# Additional reading
 
 1. <a name="ref1"></a>[Learn Android Studio](http://www.amazon.co.uk/Learn-Android-Studio-Quickly-Effectively/dp/1430266015)
 2. <a name="ref2"></a>[Learn Java for Android Development](http://www.amazon.co.uk/Learn-Java-Android-Development/dp/1430264543)
@@ -293,4 +293,4 @@ Refer to Moodle for this
 
 # About this Github repository
 
-This Github repository is set up to host lab materials and code examples we use throughout module 300CEM. You can simply read and explore. If you would like a personal copy of it, you'll need to fork it as writing to it is not allowed. In the repository for module 305CDE, there is a [README](https://github.com/covcom/305CDE/blob/master/README.md) file written by Mark Tyers that explains how to fork repositories and keep them up to date.
+This Github repository is set up to host lab materials and code examples we use throughout the module. You can simply read and explore. If you would like a personal copy of it, you'll need to fork it as writing to it is not allowed. In the repository for module 305CDE, there is a [README](https://github.com/covcom/305CDE/blob/master/README.md) file written by Mark Tyers that explains how to fork repositories and keep them up to date.

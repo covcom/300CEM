@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">My Fragments</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_dynamic">Dynamic</string>
+    <string name="action_list">Lists</string>
+    <string name="action_panel">Panels</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">This is fragment No.1</string>
+    <string name="hello_blank_fragment2">This is fragment No.2</string>
+    <string name="title_activity_list_fragment">ListFragmentActivity</string>
+    <string name="title_activity_multi_panel">MultiPanelActivity</string>
+</resources>

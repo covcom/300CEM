@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">My Lists</string>
+    <string name="action_settings">Settings</string>
+
+    <!--below from http://www.politics1.com/p2016.htm-->
+    <string-array name="candidateNames">
+        <item>Hillary Clinton</item>
+        <item>Bernie Sanders</item>
+        <item>Martin O\'Malley</item>
+        <item>Lincoln Chafee</item>
+        <item>Donald Trump</item>
+        <item>Ben Carson</item>
+        <item>Marco Rubio</item>
+        <item>Jeb Bush</item>
+    </string-array>
+
+    <string-array name="candidateDetails">
+        <item>Former US Secretary of State Hillary Clinton (New York)</item>
+        <item>US Senator Bernie Sanders (Vermont)</item>
+        <item>Former Governor Martin O\'Malley (Maryland)</item>
+        <item>Former Governor Lincoln Chafee (Rhode Island)</item>
+        <item>Businessman Donald Trump (New York)</item>
+        <item>Dr. Ben Carson (Florida)</item>
+        <item>US Senator Marco Rubio (Florida)</item>
+        <item>Former Governor Jeb Bush (Florida)</item>
+    </string-array>
+</resources>

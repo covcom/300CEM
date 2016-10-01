@@ -1,19 +1,12 @@
 # Week 1 Android Studio
 
-This is the 1st of a series of 11-week exercises for Module 387COM at Coventry University. These exercises are designed to expose different aspects of Android programming to 3rd year Computer Science/Multimedia Computing students here at Coventry.
+First of all, welcome and thank you for choosing 300CEM - you did the right thing! No offence to anyone, but I believe Android (or mobile technology in general) is the way to the future! If you think about it - what the mobile phones were like 5 years ago and what they are like right now - you'll see how rapidly technologies have evolved. And this has affected our everyday life in every possible way!
 
-Before you start, you should have some experience with programming and a good knowledge of basic principles of OOP. Understanding of Java syntax is desired but not essential as we have some dedicated sessions for the language itself.
-
-The expected outcomes after the module are:
-
-1. Demonstrate familiarity with the Java Programming language and the Android Studio.
-2. Design applications suitable for Android devices.
-3. Use the Android software development kit and an emulator to develop applications for the Android platform.
-4. Make use of the main modes of interaction available on a smartphone platform.
+> If you're taking the Monday (03/10) or Tuesday (04/10) lab sessions, watch out for the [big news](https://madeby.google.com) from Google on 4th October (California time)!
 
 ## Lab 1 Introduction to Android Studio
 
-In this 1st lab, you'll find out the things you need to have to become an Android developer. You'll also design and run your 1st Android app.
+This is the 1st of a series of 11-week exercises for Module 300CEM. In this 1st lab, you'll find out the things you need to have to become an Android developer. You'll also design and run your 1st Android app.
 
 ### What is Android?
 
@@ -21,13 +14,13 @@ First of all, let's ask a question - what is Android? Well, the answer depends o
 
 ![Android Framework](http://source.android.com/devices/tech/security/images/android_software_stack.png)
 
-Android has been around for a while, hence we have different versions. For each version of Android, we have a 'sweet' codename with the latest being 'Marshmallow', which is still in beta and not shown in the picture below.
+Android has been around for a while, hence we have different versions. For each version of Android, we have a 'sweet' codename with the latest being 'Nougat' (Android 7.0)
 
-![Android Codename](http://techtoward.com/wp-content/uploads/2014/02/Android-Versions-History.jpg)
+![Android Codename](http://www.geektech.in/wp-content/uploads/2016/07/Android-Nougat-Release-Date.png)
 
-Different versions of Android offer slightly different features, and also they have different market share. At the time of writing, KitKat (4.4) and Jelly Bean (4.1/4.2/4.3) are dominating. As you can imagine as new devices are coming to the market and old ones are gradually phasing out, this market share evolves over time. As a developer, you have to consider your targeting devices/platforms. We'll come to that later on.
+Different versions of Android offer slightly different features, and also they have different market share. At the time of writing (1 October 2016), Lollipop (5.0/5.1) and KitKat (4.4) are dominating. As you can imagine as new devices are coming to the market and old ones are gradually phasing out, this market share evolves over time. As a developer, you have to consider your targeting devices/platforms. We'll come to that later on.
 
-![Android distribution](https://chart.googleapis.com/chart?chd=t%3A0.2%2C4.1%2C3.7%2C31.8%2C39.2%2C21.0&chf=bg%2Cs%2C00000000&chl=Froyo%7CGingerbread%7CIce%20Cream%20Sandwich%7CJelly%20Bean%7CKitKat%7CLollipop&chco=c4df9b%2C6fad0c&cht=p&chs=500x250)
+![Android distribution](https://chart.googleapis.com/chart?chl=Froyo%7CGingerbread%7CIce%20Cream%20Sandwich%7CJelly%20Bean%7CKitKat%7CLollipop%7CMarshmallow&chd=t%3A0.1%2C1.5%2C1.4%2C15.6%2C27.7%2C35.0%2C18.7&chf=bg%2Cs%2C00000000&chco=c4df9b%2C6fad0c&cht=p&chs=500x250)
 
 > Click [here](https://source.android.com/source/build-numbers.html) for a list of Android version numbers and corresponding code names, [here](https://developer.android.com/about/dashboards/index.html) for an up-to-date distribution list. 
 
@@ -45,13 +38,13 @@ You'll need the following to be an Android developer:
 2. Android Studio
 3. Android SDK
 4. A version of the Android system image
-5. (optional) An Android device
+5. (optional but highly desirable) An Android device
 
 A few words about Java: when you go to the [Java download page](http://www.oracle.com/technetwork/java/javase/downloads/index.html) click on the JDK, which will lead you to a diffent page to choose your platform. There you'll see two options, select the one without demos and samples as the size is smaller. Wondering the difference between JDK and JRE? Read [this](http://stackoverflow.com/questions/1906445/what-is-the-difference-between-jdk-and-jre).
 
-Next, you'll need to [download](http://developer.android.com/sdk/index.html) and install Android Studio. Once you click the download button from the previous link, you'll be automatically redirected to the [Install Android Studio](http://developer.android.com/sdk/index.html) help page. You can get some help from there if something goes wrong. Otherwise just choose all default settings. Note once it's installed, next time you open it it will probably ask for permissions to update. My advice is that don't update unless its really necessary, at least for the duration of the module. The reason being that configuring a working IDE for Android might take a considerable amount of time!
+Next, you'll need to [download](https://developer.android.com/studio/index.html) and install Android Studio. Once you click the download button from the previous link, you'll be automatically redirected to the [Install Android Studio](https://developer.android.com/studio/install.html) help page. You can get some help from there if something goes wrong. Otherwise just choose all default settings. Note once it's installed, next time you open it it will probably ask for permissions to update. My advice is that **don't update unless its really necessary, at least for the duration of the module**. The reason is that configuring a working IDE for Android might take a considerable amount of time!
 
-Once installed, click on the 'Configure' menu under 'Quick Start' tab, and then click 'SDK Manager', which will bring up the 'Android SDK' preference settings. Now check version 6.0 and version 5.1.1 and click apply to download the SDK. Once again, next time you open it it will probably ask for permissions to update - DON'T!
+Once installed, click on the 'Configure' menu under 'Quick Start' tab, and then click 'SDK Manager', which will bring up the 'Android SDK' preference settings. Now check version 7.0 (Nougat) and click apply to download the SDK. Once again, next time you open it it will probably ask for permissions to update - DON'T!
 
 > This way of installing SDK is easy when you first get started. But the drawback is it takes a lot disk space. When you get your head around different SDK components, you might want to customize the installation using SDK Manager.
 
@@ -79,9 +72,9 @@ Follow the steps below to create and run your first Android app:
 
  ![activity_main_xml_-_Hello_Android](.md_images/activity_main_xml_-_Hello_Android.png)
  
-5. You're ready to run the app you just created. Before you do that, let's check if you have an emulator or Android device attached. Click Tools ==> Android ==> AVD Manager to show the AVD Manager. Make sure you have the default AVD installed. 
+5. You're ready to run the app you just created. Before you do that, let's check if you have an emulator or Android device attached. Click Tools ==> Android ==> AVD Manager to show the AVD Manager. Make sure you have the default AVD installed. Click the littler green triangle next to the AVD to run it.
 
- If not, click 'Create Virtual Device' button to create a new one. The following settings for an AVD seem to work well on my machine: Phone, Nexus 5, targeting at latest Android 6.0 with Google APIs. And most importantly, 'Use Host GPU' is checked. Remember in the previous section where I showed you that you need to install the Intel accelerator, here is why. Click 'Finish' and you'll have a new AVD.
+ If you not have an AVD installed already, follow these instructions to create one: click 'Create Virtual Device' button to create a new one. The following settings for an AVD seem to work well on my machine: Phone, Nexus 5, targeting at latest Android 7.0 with Google APIs. Click 'Finish' and you'll have a new AVD.
  
 5. Click Run ==> Run 'app' to run the app you just created. In the window that pops up, click 'Launch emulator' and choose the desired AVD if you have more than one. BTW, you should only have 1 AVD running, otherwise the system will be rather slow. You will see HelloAndroid running in AVD similar to the one below.
 
@@ -94,9 +87,9 @@ Follow the steps below to create and run your first Android app:
  
  If you want to use your device with a Windows machine, you'll have to install usb driver for your device. The driver can normally be downloaded from your phone maker's website. Check [here](http://developer.android.com/tools/device.html) if you get stuck.
  
- Now return to our Hello Android app. When I run it on my HTC it looks like the image below. Can you see any differences?
+ Now return to our Hello Android app. When I run it on my Nexus it looks like the image below. Can you see any differences?
  
- ![hello_android](.md_images/hello_htc.png)
+ ![hello_android](.md_images/hello_nexus.png)
 
 ### Android Studio guided tour
 
@@ -104,8 +97,8 @@ Now it's time to go back to Android Studio and have a closer look at what we hav
 
 Android Studio is based on an Java IDE called IntelliJ IDEA. In fact, Google doesn't document Android Studio very well and sometimes you'll need to go to IntelliJ website to look for answers. The whole IDE window you saw earlier can be roughly divided into 5 areas:
 
-![Android Studio UI](https://www.jetbrains.com/img/webhelp/idea/large_mainWindow.gif)
-> The image above is from [Jetbrains website](https://www.jetbrains.com/idea/help/guided-tour-around-intellij-idea-user-interface.html).
+![Android Studio UI](https://www.jetbrains.com/help/img/idea/large_mainWindow.png)
+> The image above is from [Jetbrains website](https://www.jetbrains.com/help/idea/2016.2/guided-tour-around-the-user-interface.html).
 
 1. Menus and toolbars. This is pretty standard, but it gives you quick access to some common commands. For example, you can click the little green triangle to run your project. 
 2. Navigation bar that tells you which file you're viewing and their relative position in the project.
@@ -113,13 +106,9 @@ Android Studio is based on an Java IDE called IntelliJ IDEA. In fact, Google doe
 4. The editor. This is the main area you'll be working on.
 5. Tool windows  - secondary windows that provide access to various specific tasks.
 
-In the editor window, there're some important keyboard shortcuts that you need to be aware of. Double click 'activity_main.xml' to open it if it's not opened already. Click on the lower 'Text' tab to make sure you're viewing the text view. Press 'cmd' + 'a' to select everything, then press 'alt' + 'cmd' + 'l' to reformat it. Does it look nicer now?
+In the editor window, there're some important keyboard shortcuts that you need to be aware of. Double click 'activity_main.xml' to open it if it's not opened already. Click on the lower 'Text' tab to make sure you're viewing the text view. First randomly enter some blank lines (press 'enter key' several times), then press 'cmd' + 'a' to select everything, then press 'alt' + 'cmd' + 'l' to reformat it. Does it look nicer now?
 
-> For a full list of useful shortcuts, check [here](http://developer.android.com/sdk/installing/studio-tips.html#KeyCommands)
-
-![Android Studio UI](.md_images/activity_main_shortcut.png)
-
-![Android Studio UI](.md_images/activity_main_shortcut2.png)
+> For a full list of useful shortcuts, check [here](https://developer.android.com/studio/intro/keyboard-shortcuts.html)
 
 Now take a look at the location you selected earlier to save the project. What you will see is that a bunch of files have been generated. Don't worry you don't need to know them all!
 
@@ -129,7 +118,7 @@ The most important ones, however, are being contained in app/src/main. Actually 
 
 ![Android Studio UI](.md_images/hello_files2.png)
 
-1. activity_main.xml. This is the XML layout file for the activity you added when you created the project with Android Studio. In simple words, in Android activity represent a single screen where your users can perform certain tasks. Thus this xml defines your first (and only) screen in your app. The file at the moment includes a TextView that displays the message "Hello world!" and a floating button.
+1. activity_main.xml. This is the XML layout file for the activity you added when you created the project with Android Studio. In simple words, in Android activity represent a single screen where your users can perform certain tasks. Thus this xml defines your first (and only) screen in your app. The file at the moment includes a TextView only that displays the message "Hello world!".
 2. MainActivity.java. This is the Java class that associates the xml layout file with different functions such as respond to button click. When you build and run the app, the Activity class starts the activity and loads the layout file that says "Hello World!".
 3. AndroidManifest.xml. The manifest file describes the fundamental characteristics of the app and defines each of its components. For example, it defines if your app needs to access the GPS sensor.
 

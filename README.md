@@ -1,8 +1,15 @@
 # Introduction
 
-This repository is for module 300CEM 'Android Application Development' at Coventry University. The module leader of this module is Jianhua Yang.
+This repository is for module 300CEM 'Android Application Development' at Coventry University. The module runs in 11 weeks, and there are 3 labs per week. Lab exercises are designed to expose different aspects of Android programming to our 3rd year undergraduate students. For the first 2 labs in each week, detailed instructions are given in lab sheets. You'll need to finish them all to get a basic understanding of the contents. Guidelines for the 3rd lab (if present) are normally very brief . Most of our students use the 3rd lab to catch-up, or to explore more advanced topics. 
 
-There are altogether 22 labs to be delivered in 11 weeks. That is 2 labs per week. This current document contains the module plan for academic year 16-17, for assessment plan please refer to Moodle. Our Schoold also offers an iOS module, see [here](https://github.com/covcom/300CEM).
+Before you start, you should have some experience with programming and a good knowledge of basic principles of OOP. Understanding of Java syntax is desired but not essential as we have some dedicated sessions for the language itself. The expected outcomes after the module are:
+
+1. Demonstrate familiarity with the Java Programming language and the Android Studio.
+2. Design applications suitable for Android devices.
+3. Use the Android software development kit and an emulator to develop applications for the Android platform.
+4. Make use of the main modes of interaction available on a smartphone platform.
+
+This current document contains the module plan for academic year 16-17, for assessment plan please refer to Moodle. Our School also offers an equivalent iOS module, see [here](https://github.com/covcom/387COM).
 
 # Teaching plan
 
@@ -281,15 +288,22 @@ Camera2, Streaming video, MediaPlayer, MediaController
 
 # Assessment plan
 
-Refer to Moodle for this
+Refer to Moodle for this.
 
-# Additional reading
+# Reading list
 
 1. <a name="ref1"></a>[Learn Android Studio](http://www.amazon.co.uk/Learn-Android-Studio-Quickly-Effectively/dp/1430266015)
 2. <a name="ref2"></a>[Learn Java for Android Development](http://www.amazon.co.uk/Learn-Java-Android-Development/dp/1430264543)
 3. <a name="ref3"></a>[Android Apps for Absolute Beginners](http://www.amazon.co.uk/Android-Absolute-Beginners-Wallace-Jackson/dp/1484200209)
 4. <a name="ref4"></a>[Beginning Android 4 Application Development](http://www.amazon.co.uk/Beginning-Android-4-Application-Development/dp/1118199545)
 5. <a name="ref5"></a>[Introduction to Android Application Development](http://www.amazon.co.uk/Introduction-Android-Application-Development-Essentials/dp/0321940261)
+
+# Some useful resources
+
+* [Official Android developer website](https://developer.android.com)
+* [Online Android courses on Coursera](https://www.coursera.org/courses/?languages=en&query=android)
+* [Past student coursework No. 1](https://github.com/furgerf/Squash/tree/master/Squash%20Simulation)
+* [Past student coursework No. 2](https://github.com/adrianchifor/Swiftnotes)
 
 # About this Github repository
 

@@ -1,4 +1,4 @@
-package com.example.jianhuayang.helloandroid2;
+package com.example.jianhuayang.hellome;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.jianhuayang.helloandroid2", appContext.getPackageName());
+        assertEquals("com.example.jianhuayang.hellome", appContext.getPackageName());
     }
 }

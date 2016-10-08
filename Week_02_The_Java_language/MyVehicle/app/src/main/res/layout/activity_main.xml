@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.jianhuayang.myvehicle.MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type and Run"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/labelMake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/textView"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="56dp"
+        android:text="Make:"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/inputMake"
+        android:layout_width="800dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/labelMake"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_toEndOf="@id/labelMake"
+        android:layout_toRightOf="@+id/labelMake"
+        android:ems="10"
+        android:hint="e.g. BMW"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/lableYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/labelMake"
+        android:layout_alignStart="@id/labelMake"
+        android:layout_below="@id/labelMake"
+        android:layout_marginTop="20dp"
+        android:text="Year:"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/inputYear"
+        android:layout_width="800dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lableYear"
+        android:layout_alignBottom="@+id/lableYear"
+        android:layout_alignLeft="@id/inputMake"
+        android:layout_alignStart="@+id/inputMake"
+        android:ems="10"
+        android:hint="e.g. 1980"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lableYear"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:onClick="onButtonClick"
+        android:text="Run" />
+</RelativeLayout>

@@ -8,6 +8,8 @@ In their latest book [Android Programming: The Big Nerd Ranch Guide (2nd Edition
 
 I couldn't agree more. So we'll start from there.
 
+![](https://www.bignerdranch.com/img/books/book-covers/android-cover.jpg)
+
 ## Lab 1 Language concepts
 
 In this first lab, you'll learn some basic language features and how Android Studio can be used to save your time.
@@ -17,44 +19,26 @@ In this first lab, you'll learn some basic language features and how Android Stu
 Follow steps below to create your app and initialize your layout file:
 
 1. Create a new app and name it 'My Vehicle'.
-2. If you see the red floating action button, read on. Otherwise, you can skip this step.
- 
- Under 'layout' folder you can see both 'activity_main.xml' and 'content_main.xml', open 'activity_main.xml' by double clicking on it. In the design view, click and delete the floating action button.
- 
- ![float button](.md_images/float.png)
- 
- Open MainActivity.java, delete following lines 
- 
- ```java
-         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
- ```
- 
-3. Open 'content_main.xml', in design view, drag and drop the following widgets onto the graphical layout below 'Hello World!'. These need to be in the order of:
-  * Small Text
+3. Open 'activity_main.xml'. In design view, drag and drop the following widgets onto the graphical layout below 'Hello World!'. These need to be in the order of:
+  * TextView
   * Plain Text
-  * Small Text
+  * TextView
   * Numer
   * Button
- 
- When you drag widgets, in the graphical layout you'll see guidelines that show you which another widget is being used as the guide. This gives you some idea of where to place your widgets.
+  
+  ![drag](.md_images/raw_layout.png)
+  
+ When you drag widgets, in the graphical layout you'll see guidelines that show you which other widget is being used as the guide. This gives you some idea of where to place your widgets.
  
  ![drag](.md_images/drag.png)
-  
- ![drag](.md_images/raw_layout.png)
  
-4. Double click on word 'Hello World!', a small window will pop up. Type in 'Type and Run' in the text field, and 'textView' in the id field, and hit enter. You'll see the texts being displayed has changed to 'Type and Run'. We could do this for all widgets on the graphical layout. But normally we only drag and drop on a relatively rough scale, we fine-tune the layout in Text view.
+4. In design view, double click on word 'Hello World!' in the graphical layout, the 'text' field in the property tool window will be highlighted. Type in 'Type and Run' in the text field, and make sure it's 'textView' in the ID field, and hit enter. You'll see the texts being displayed has changed to 'Type and Run'. We could do this for all widgets on the graphical layout. But normally we only drag and drop on a relatively rough scale, and then fine-tune the layout in Text view i.e. editting xml files directly.
 
 5. Switch to the Text view, edit the layouts so it looks like the following:
  
  ```xml
- <TextView
+
+    <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,8 +50,9 @@ Follow steps below to create your app and initialize your layout file:
         android:id="@+id/labelMake"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/textView"
-        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/textView"
         android:layout_marginLeft="19dp"
         android:layout_marginTop="56dp"
         android:text="Make:"
@@ -77,18 +62,21 @@ Follow steps below to create your app and initialize your layout file:
         android:id="@+id/inputMake"
         android:layout_width="800dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/labelMake"
+        android:layout_alignBaseline="@+id/labelMake"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="10dp"
-        android:layout_toRightOf="@id/labelMake"
+        android:layout_toEndOf="@id/labelMake"
+        android:layout_toRightOf="@+id/labelMake"
         android:ems="10"
-        android:hint="e.g. BMW" />
+        android:hint="e.g. BMW"
+        android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/labelYear"
+        android:id="@+id/lableYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/labelMake"
+        android:layout_alignStart="@id/labelMake"
         android:layout_below="@id/labelMake"
         android:layout_marginTop="20dp"
         android:text="Year:"
@@ -98,25 +86,25 @@ Follow steps below to create your app and initialize your layout file:
         android:id="@+id/inputYear"
         android:layout_width="800dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/labelYear"
+        android:layout_alignBaseline="@+id/lableYear"
+        android:layout_alignBottom="@+id/lableYear"
         android:layout_alignLeft="@id/inputMake"
-        android:layout_marginRight="10dp"
+        android:layout_alignStart="@+id/inputMake"
         android:ems="10"
         android:hint="e.g. 1980"
         android:inputType="number" />
 
- <Button
-        android:id="@+id/buttonRun"
+    <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/labelYear"
+        android:layout_below="@id/lableYear"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="22dp"
-        android:onClick="onButtonClick"
         android:text="Run" />
  ```
  
- You have done something similar to this (hopefully!) in last week's lab - editing different Android tags and attributes. We'll now have a closer look. And we'll look at them again later on during the module.
+ You have done something similar to this (hopefully!) in last week's labs - editing different Android tags and attributes. We'll now have a closer look. And we'll look at them again later on during the module.
   
   * Views in Android (UI elements) are defined in XML using tags similar to HTML. Some tags have two parts i.e. opening and closing parts, such as RelativeLayout, which are usually container layouts. Some tags have just opening tags, and closing tags are replaced by a forward slice.
   * Attributes have an 'android:' prefix, and the values are enclosed by double quotes.
@@ -127,7 +115,7 @@ Follow steps below to create your app and initialize your layout file:
    
   * RelativeLayout is one of the two most important layouts in Android. To align views in a RelativeLayout, you used attributes such as layout_height, layout_alignParentLeft, the layout below. For a comprehensive list of attributes that can be used to control the positioning, click [here](http://developer.android.com/reference/android/widget/RelativeLayout.LayoutParams.html).
   
-   > The reason that relative layout is important is that there're so many different screen sizes for Android. In a relative positioning system, once we know the origin point (top left corner) and the size of the view, we can determine its absolute position. By contrast, iOS use absolute positioning as there's only a limited number of screen sizes available.
+   > The reason that relative layout is important is that there're so many different screen sizes for Android. In a relative positioning system, once we know the origin point (top left corner) and the size of the view, we can determine its absolute position. By contrast, iOS use absolute positioning as there are only a limited number of screen sizes available.
     
     ![Android coordinates](http://i.stack.imgur.com/xgQ3b.png)
     
@@ -154,12 +142,12 @@ Following steps below to build a new class:
  There're several things you need to know in the above codes:
  
   * If you come from Python background (as most of you do), you'll notice the type names such as String (capital S) and int. Unlike Python, Java is a strictly typed language, you need to declare variable types before using them.
-  * Note access modifiers such as public and private. Public means everybody has access to that variable, and private is the complete opposite - nobody can. But if nobody has access rights, how can our Vehicle class use private variables? This is through getter and setter methods, as you'll find out later. There're also two other modifiers i.e. default and protected, do you know what those mean?
+  * Note access modifiers such as public and private. Public means everybody has access to that variable, and private is the complete opposite - nobody can. But if nobody has access rights, how can our Vehicle class use private variables? This is through getter and setter methods, as you'll find out later. There're also two other modifiers i.e. default and protected, do you know what those mean? Click [here](http://www.justfuckinggoogleit.com/).
   * Also note the keyword static. This makes the counter variable a class variable that serves the whole class. By contrast, variables such as make is an instance variable (also called field). Instance variables are associated with an instance of the class i.e. objects.
   * The part 'counter = 0' is an assignment expression that sets the counter to zero. All instance variables in Java have default values, and a default value for int is 0. So this step is not really necessary, but this is considered good coding practices. Local variables e.g. those appear in a for loop, have to be initialized before first use. This is the same as in Python.
   * Note the concluding semicolons at the end of each line. This makes the assignment expression a declaration statement. In Python, we don't normally use semicolons, but this is mandatory in Java. 
 
-3. Right click anywhere between the opening and closing curly brackets, and select Generate ==> Constructor ==> Select None, this will automatically generate a constructor for you.
+3. Right click anywhere between class's opening and closing curly brackets, and select Generate ==> Constructor ==> Select None, this will automatically generate a constructor for you.
  ```java
  public Vehicle() {
     }
@@ -189,7 +177,7 @@ Following steps below to build a new class:
     }
  ```
  The reason we need more than one constructor is that the user may not provide all the info we need. In case this happens, we'll use the default values stored in our class. Constructors in Java are public methods with the same name as the class without return types. Normally methods in Java are defined including the following components：
-  * Modifiers. In the case of constructors, these need (not must) to be public.
+  * Modifiers. In the case of constructors, these are most likely to be public (don't have to though).
   * Return types. Ordinary methods must have return types e.g. String and a return statement in its method body. For constructors, this is not required.
   * Name. This is needless to say. For constructors, though, this must be the same as class name.
   * Parameter list. In our examples, this is a single parameter 'String make' or parameters separated by comma 'String make, int year'.
@@ -252,7 +240,7 @@ Following steps below to build a new class:
   2. A block comment is in between <span>/&#42;</span> and */, it's inserted when you press 'alt' + 'cmd' + '/' together
    ```java
     /*
-     * This constructor takes to parameters.
+     * This constructor takes two parameters.
     */
     public Vehicle(String make, int year) {
     ...
@@ -262,9 +250,9 @@ Following steps below to build a new class:
   
       ```java
       /**
-      * Created by jianhuayang on 25/09/15.
+      * Created by jianhuayang on 08/10/16.
       * @author jianhuayang
-      * @version 1.0
+      * @version 1.1
       */
       public class Vehicle {
       ...
@@ -286,9 +274,9 @@ Following steps below to build a new class:
 
 ### Link layout with behavior
 
-Follow steps below to create an onButtonClick method that responds to user click
+Follow steps below to create an onButtonClick method that responds to user click.
 
-1. Open MainActivity.java, insert the following variables just after MainActivity class declaration
+1. Open MainActivity.java, insert the following variables just after MainActivity class declaration i.e. immediately after `public class MainActivity extends AppCompatActivity {`
 
  ```java
     private static final String TAG = "MyVehicleActivity";

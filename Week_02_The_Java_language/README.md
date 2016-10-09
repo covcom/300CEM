@@ -28,11 +28,11 @@ Follow steps below to create your app and initialize your layout file:
   
   ![drag](.md_images/raw_layout.png)
   
- When you drag widgets, in the graphical layout you'll see guidelines that show you which other widget is being used as the guide. This gives you some idea of where to place your widgets.
+ When you drag widgets, in the graphical layout you'll see guidelines that show you which widget is being used as the guide. This gives you some idea of where to place your widgets.
  
  ![drag](.md_images/drag.png)
  
-4. In design view, double click on word 'Hello World!' in the graphical layout, the 'text' field in the property tool window will be highlighted. Type in 'Type and Run' in the text field, and make sure it's 'textView' in the ID field, and hit enter. You'll see the texts being displayed has changed to 'Type and Run'. We could do this for all widgets on the graphical layout. But normally we only drag and drop on a relatively rough scale, and then fine-tune the layout in Text view i.e. editting xml files directly.
+4. In design view, double-click on the word 'Hello World!' in the graphical layout, the 'text' field in the property tool window will be highlighted. Type in 'Type and Run' in the text field, and make sure it's 'textView' in the ID field, and hit enter. You'll see the texts being displayed has changed to 'Type and Run'. We could do this for all widgets on the graphical layout. But normally we only drag and drop on a relatively rough scale, and then fine-tune the layout in Text view i.e. editing xml files directly.
 
 5. Switch to the Text view, edit the layouts so it looks like the following:
  
@@ -107,7 +107,7 @@ Follow steps below to create your app and initialize your layout file:
  You have done something similar to this (hopefully!) in last week's labs - editing different Android tags and attributes. We'll now have a closer look. And we'll look at them again later on during the module.
   
   * Views in Android (UI elements) are defined in XML using tags similar to HTML. Some tags have two parts i.e. opening and closing parts, such as RelativeLayout, which are usually container layouts. Some tags have just opening tags, and closing tags are replaced by a forward slice.
-  * Attributes have an 'android:' prefix, and the values are enclosed by double quotes.
+  * Attributes have an 'android:' prefix, and the values are enclosed in double quotes.
   * A common layout attribute is id. Note the '@+id/' part before most id texts, the plus sign means that the id is being added to the system. In other words, there're no existing views with the same id. Otherwise, the system will complain. Also, note the 'match_parent' value in the RelativeLayout tag. This value replaces the old 'fill_parent' value.
   * Other common attributes include layout_width and layout_height. Possible values for these two are 'wrap_content' and 'match_parent'. The names explain themselves.
    
@@ -177,7 +177,7 @@ Following steps below to build a new class:
     }
  ```
  The reason we need more than one constructor is that the user may not provide all the info we need. In case this happens, we'll use the default values stored in our class. Constructors in Java are public methods with the same name as the class without return types. Normally methods in Java are defined including the following components：
-  * Modifiers. In the case of constructors, these are most likely to be public (don't have to though).
+  * Modifiers. In the case of constructors, these are most likely to be public (don't have to, though).
   * Return types. Ordinary methods must have return types e.g. String and a return statement in its method body. For constructors, this is not required.
   * Name. This is needless to say. For constructors, though, this must be the same as class name.
   * Parameter list. In our examples, this is a single parameter 'String make' or parameters separated by comma 'String make, int year'.
@@ -274,7 +274,7 @@ Following steps below to build a new class:
 
 ### Link layout with behavior
 
-Follow steps below to create an onButtonClick method that responds to user click.
+Follow steps below to create an onButtonClick method that responds to a user click.
 
 1. Open MainActivity.java, insert the following variables just after MainActivity class declaration i.e. immediately after `public class MainActivity extends AppCompatActivity {`
 
@@ -312,7 +312,7 @@ Follow steps below to create an onButtonClick method that responds to user click
     ![toast](http://developer.android.com/images/toast.png)
     * You have seen Log.d before. There is another way of inserting Log.d into your class. Move you cursor to the position where you want to insert, press 'cmd' + 'j' together, a small drop-down menu will popup. This drop-down is different from normal Android Studio suggestions. You can now use your up/down key to select logm and then hit enter.
     
-        What you just did is you inserted a so-called 'live template' into your codes. There're other templates available in Android Studio, and you can also define your own templates
+        What you just inserted a so-called 'live template' into your codes. There're other templates available in Android Studio, and you can also define your own templates
         
         ![templates](.md_images/templates.png)
 
@@ -527,12 +527,12 @@ Now we're ready to explore inheritance in java:
  
  What this code does is that we create two subclasses of Vehicle, each has slightly different structure i.e.viariables/methods. Car has an additional field called color, and Diesel has one called type. In addition, Diesel has an additional control() method by implementing the Controllable interface. The idea is that by looking at the class signature i.e. `class Diesel extends Vehicle implements Vehicle.Controllable` we know that the Diesel class is capable of doing methods defined in `Controllable`.
  
- If you're used to interpretted languages such as Python, the codes above might cause some confusion:
+ If you're used to interpreted languages such as Python, the codes above might cause some confusion:
  
     * 'extends' defines a relationship between superclass (Vehicle) and subclass (Car). A subclass inherits all non-private instance variables and methods. That is why we didn't declare anything such as make/year, but we can still use them. An interesting question often asked by beginners in Java is 'Do subclasses inherit private fields?'. See [statckOverFlow](http://stackoverflow.com/questions/4716040/do-subclasses-inherit-private-fields) for some discussions.
     * In subclasses we can define additional instance variables or methods such as color for Car.
     * 'implements' defines a relationship between a class (Diesel) and an interface (Vehicle.Controllable). The interface method the class implements must be public. In our case, we must have `public void control()` and it cannot be `void control()`
-    * Note the super keyword in the control() method, this is similar to 'this' keyword -- i.e. it refers to superclass in the hierarchy. If we don't user the super keyword in our case `super.getMessage()`, we'll end up with infinite loops as the default behavior is to call `this.getMessage()`.
+    * Note the super keyword in the control() method, this is similar to 'this' keyword -- i.e. it refers to the superclass in the hierarchy. If we don't user the super keyword in our case `super.getMessage()`, we'll end up with infinite loops as the default behavior is to call `this.getMessage()`.
     
         > You might want to remove 'super' in control() method later on and run your app to see what happens.
     
@@ -583,7 +583,7 @@ Now we're ready to explore inheritance in java:
         Log.d(TAG, "User message is \"" + vehicle + "\".");
     }
  ```
- The idea of the code above is that depending on which button is being clicked we generate two different type of objects i.e. either Car or Diesel. Hence, we'll show our user different messages. If our user clicked 5 times, it'll pop back a totally different message warning they need to stop. The part of the code you need to pay attention to is listed below. This snippet creates an anonymous inner class with an overriding method and assigns it to the variable vehicle. We could create a subclass here, but the biggest advantage of anonymous inner class is that it makes your code more concise and tidy. It's vital you understand the syntax here as you'll see this a lot in following weeks.
+ The idea of the code above is that depending on which button is being clicked we generate two different type of objects i.e. either Car or Diesel. Hence, we'll show our user different messages. If our user clicked 5 times, it'll pop back a totally different message warning they need to stop. The part of the code you need to pay attention to is listed below. This snippet creates an anonymous inner class with an overriding method and assigns it to the variable vehicle. We could create a subclass here, but the biggest advantage of using an anonymous inner class is that it makes your code more concise and tidy. It's vital you understand the syntax here as you'll see this a lot in following weeks.
  
  ```java
  vehicle = new Vehicle() {
@@ -607,7 +607,7 @@ When you write you source code you need to follow certain conventions. There're 
 
 First of all, there are some common pitfalls that most students have and you should try your best to avoid:
 
-1. Don't use more than one blank lines, don't use unnecessary white spaces. This will make your codes look ugly.
+1. Don't use more than one blank lines, don't use unnecessary white spaces. This will make your code look ugly.
 2. Don't declare more than one variables in a single line.
 3. Don't prefix your variable name. If you follow some online resources you'll see some use 'm' as the prefix denoting member (i.e. instance) variables. Don't do that, it's not recommended by Google.
 
@@ -627,11 +627,11 @@ There're also some rules you must follow especially when naming your variables:
 
 ## Lab 3 Advanced topics
 
-For those of you who haven't complete previous labs, you can work on it if you wish. For those who have finished, in this final lab I'll ask some challenging questions for you to explore. These questions are related to previous labs, and somehow involves more efforts to complete.
+For those of you who haven't complete previous labs, you can work on it if you wish. For those who have finished, in this final lab, I'll ask some challenging questions for you to explore. These questions are related to previous labs, and somehow involves more efforts to complete.
 
 ### Java patterns
 
-Most of the time the problem you face is faced by many other programmers and it has very likely been solved already. The commonly used ways of solving a specific type of problem are called a *pattern*. In Java there're many design patterns available, find out what the following means and some simple examples:
+Most of the time the problems you're facing have been encountered by many other programmers and they have very likely been solved somewhere already. The commonly used ways of solving a specific type of problem are called a *pattern*. In Java there're many design patterns available, find out what the following means and some simple examples:
 
     * Delegation
     * Factory
@@ -649,7 +649,7 @@ The UML (Unified Modeling Language) is a graphical notation for showing relation
 
 ### Advanced language features
 
-The examples you have seen only showed you a tiny fraction of what's available in Java. There're some advanced features that you'll see in later weeks of the module. Try to google the following concepts and find some simple examples to play with.
+The examples you have seen so far only showed you a tiny fraction of what's available in Java. There're some advanced features that you'll see in later weeks of the module. Try to google the following concepts and find some simple examples to play with.
 
     * Static imports
     * Generics

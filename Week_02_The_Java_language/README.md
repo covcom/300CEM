@@ -231,6 +231,7 @@ Following steps below to build a new class:
  ```
 10. Now you need to comment your codes to increase its readability. There are three types of comments in Java
     1. A line comment starts with //, it is inserted when you press 'cmd' + '/' together
+        
         ```java
          // the default constructor
          public Vehicle() {
@@ -238,6 +239,7 @@ Following steps below to build a new class:
          }
         ```
     2. A block comment is in between <span>/&#42;</span> and */, it's inserted when you press 'alt' + 'cmd' + '/' together
+        
         ```java
          /*
           * This constructor takes two parameters.
@@ -249,16 +251,17 @@ Following steps below to build a new class:
     3. Documentation comments are a special kind of comments that are processed by the [Javadoc tool](http://www.oracle.com/technetwork/articles/java/index-jsp-135444.html). It begins with <span>/&#42;&#42;</span> and finishes with <span>&#42;/</span>. It's used to automatically generate documentations. The system has already generated Javadoc for you at the begining of the file with your user name and date, you can insert author and version info there.
         
         ```java
-           /**
-           * Created by jianhuayang on 08/10/16.
-           * @author jianhuayang
-           * @version 1.1
-           */
-           public class Vehicle {
-           ...
-           }
+         /**
+         * Created by jianhuayang on 08/10/16.
+         * @author jianhuayang
+         * @version 1.1
+         */
+         public class Vehicle {
+         ...
+         }
         ```
            You can also insert the following Javadoc for your constructor
+           
         ```java
          /**
           * The constructor that takes only the make of the car.

@@ -260,7 +260,7 @@ Following steps below to build a new class:
          ...
          }
         ```
-           You can also insert the following Javadoc for your constructor
+        You can also insert the following Javadoc for your constructor
            
         ```java
          /**

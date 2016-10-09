@@ -330,14 +330,14 @@ A single class can do quite a lot. But very often you want more than one classes
 
 Follow steps below to create a new app and design the layout:
 
-1. Create a new app called 'My Car'. Delete the floating action button in the xml file if you have one, and also delete the corresponding listener in MainActivity.java. This step is the same as in the previous app.
-2. Within this app, create a new Java class called Vehicle. Copy the source codes from the previous Vehicle class over.
+1. Create a new project called 'My Car' using default options. This is the same as in the previous app.
+2. Within this project, create a new Java class called Vehicle. Copy the source codes from the previous Vehicle class over (the whole class, **not** the package)
 
  > You can continue working on the previous app if you wish. In this GitHub folder, you'll see two apps for illustration purposes.
  
-3. Open content_main.xml and replace RelativeLayout with LinearLayout in both opening and closing tags. LinearLayout is another important layout group where widgets within it are stacked on top of one another, either horizontally or vertically.
+3. Open activity_main.xml and replace RelativeLayout with LinearLayout in both opening and closing tags. LinearLayout is another important layout group where widgets within it are stacked on top of one another, either horizontally or vertically.
 4. Add the following attribute into LinearLayout opening tag 'android:orientation="vertical'. There're two types of orientations available in a LinearLayout, either vertical or horizontal.
-5. Drag and drop the following widgets onto the graphical layout, in any order: three Small Texts, two Plain Texts, one Number, one LinearLayout (Horizontal), and two Buttons. Try to arrange the widgets so that it looks like the following. You may not be able to make your paddings/margins match exactly the same as in the image, but at least you need to make sure the UI elements are in the same order.
+5. Drag and drop the following widgets onto the graphical layout, in any order: three Small Texts, two Plain Texts, one Number, one LinearLayout (Horizontal), and two Buttons. Try to arrange the widgets so that it looks like the following. You may not be able to make your paddings/margins match exactly the same as in the example image, but at least you need to make sure the UI elements are in the same order.
 
  ![linear](.md_images/linear.png)
  
@@ -433,7 +433,7 @@ Follow steps below to create a new app and design the layout:
     </LinearLayout>
  ```
  You have seen most of the widgets and attributes before, but there're a couple new ones:
-  * A LinearLayout is being contained by another LinearLayout. This is possible and, in fact, the right thing to do. The reason being that this is the most effective way of changing LinearLayout orientation on a local area.
+  * A LinearLayout is being contained by another LinearLayout. This is possible and, in fact, a good thing to have. The reason is that this is the most effective way of changing LinearLayout orientation on a local area.
   * The gravity attribute is new here. This is not to be confused with layout_gravity. Gravity specifies the alignment of all the child elements; while layout_gravity defines how the view itself should be positioned within its enclosing parent layout.
    > An analog of this is `android:layout_gravity` = `float` in CSS, and `android:gravity` = `text-align` in CSS. For more explanations click [here](http://stackoverflow.com/questions/3482742/gravity-and-layout-gravity-on-android).
 
@@ -464,17 +464,23 @@ Go back to Vehicle.java, we need to prepare the class to make it ready.
 
 Now we're ready to explore inheritance in java:
 
-1. Create a new class called 'Car', and delete the public modifier. By removing the public modifier, we make the class default. That means only classes with the same package can access it.
- > We don't have to remove 'public', but I want to make sure both subclasses have the same access level. The important thing to remember is that in Java there can only be one public class per .java file.
- 
-2. Create another class called 'Diesel'. Make sure both Car and Diesel extends Vehicle. In addition, make sure Diesel implements Vehicle.Controllable.
-
- You'll see that the Diesel class signature is highlighted with a red underline. The means there's something wrong with it. Move your mouse over and read the system message that says you need to implement the control() method.
+1. Create a new class called 'Car', and select 'Package Private' as the Visibility. By doing this, we give the class default (i.e. package level) access. That means only classes with the same package can access it.
+ > You don't have to do this, but this will ensure that both subclasses in this file have the same access level. The important thing to remember is that in Java there can only be one public class per .java file.
  
  ```java
  class Car extends Vehicle {
  }
+ ```
  
+2. Create another class called 'Diesel'. Make sure both Car and Diesel extends Vehicle. In addition, make sure Diesel implements Vehicle.Controllable.
+ 
+ ```java
+ class Diesel extends Vehicle {
+ }
+ ```
+ You'll see that the Diesel class signature is highlighted with a red underline. The means there's something wrong with it. Move your mouse over and read the system message that says you need to implement the control() method.
+ 
+ ```java
  class Diesel extends Vehicle implements Vehicle.Controllable {
  
     @Override
@@ -483,7 +489,8 @@ Now we're ready to explore inheritance in java:
     }
  }
  ```
-3. Insert the following codes into your Car class file_exists
+ 
+3. Insert the following codes into your Car class:
  
  ```java
  class Car extends Vehicle{
@@ -522,7 +529,7 @@ Now we're ready to explore inheritance in java:
  
  If you're used to interpretted languages such as Python, the codes above might cause some confusion:
  
-    * 'extends' defines a relationship between superclass (Vehicle) and subclass (Car). A subclass inherits all non-private instance variables and methods. That is why we didn't declare anything such as make/year, but we can still use them.
+    * 'extends' defines a relationship between superclass (Vehicle) and subclass (Car). A subclass inherits all non-private instance variables and methods. That is why we didn't declare anything such as make/year, but we can still use them. An interesting question often asked by beginners in Java is 'Do subclasses inherit private fields?'. See [statckOverFlow](http://stackoverflow.com/questions/4716040/do-subclasses-inherit-private-fields) for some discussions.
     * In subclasses we can define additional instance variables or methods such as color for Car.
     * 'implements' defines a relationship between a class (Diesel) and an interface (Vehicle.Controllable). The interface method the class implements must be public. In our case, we must have `public void control()` and it cannot be `void control()`
     * Note the super keyword in the control() method, this is similar to 'this' keyword -- i.e. it refers to superclass in the hierarchy. If we don't user the super keyword in our case `super.getMessage()`, we'll end up with infinite loops as the default behavior is to call `this.getMessage()`.
@@ -550,7 +557,7 @@ Now we're ready to explore inheritance in java:
         int intYear = Integer.parseInt(strYear);
         String color = editTextColor.getText().toString();
 
-        Vehicle vehicle;
+        Vehicle vehicle = new Vehicle();
         switch (view.getId()) {
             case R.id.buttonRunPetrol:
                 vehicle = new Car(make, intYear, color);
@@ -586,7 +593,7 @@ Now we're ready to explore inheritance in java:
                 }
  };
  ```
-5. Insert `android:onClick="onButtonClick"' for both buttons in 'content_main.xml'. Now if you run the app you'll see something similar to below
+5. Insert `android:onClick="onButtonClick"' for both buttons in 'activity_main.xml'. Now if you run the app you'll see something similar to below
 
     ![bloodhound](.md_images/bloodhound.png)
     

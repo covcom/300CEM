@@ -319,6 +319,12 @@ Follow steps below to create an onButtonClick method that responds to a user cli
         
         ![templates](.md_images/templates.png)
 
+3. Insert the following attribute intuo the Button tag in 'activity_main.xml'
+    
+    ```java
+    android:onClick="onButtonClick"
+    ```
+    
 3. Now your are ready to test-drive your new app. Type in the make and year of your car and click RUN to see what happens. You can also leave out the year box blank to see if the app gives you a default year. Check the system log to see how many times you've clicked.
 
  ![mini](.md_images/mini.png)

@@ -30,7 +30,7 @@
 
     <EditText
         android:id="@+id/inputMake"
-        android:layout_width="800dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="19dp"
         android:layout_marginRight="20dp"
@@ -48,7 +48,7 @@
 
     <EditText
         android:id="@+id/inputYear"
-        android:layout_width="800dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="19dp"
         android:layout_marginRight="20dp"
@@ -67,7 +67,7 @@
 
     <EditText
         android:id="@+id/inputColor"
-        android:layout_width="800dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="19dp"
         android:layout_marginRight="20dp"

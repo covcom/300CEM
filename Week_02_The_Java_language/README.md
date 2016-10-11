@@ -346,7 +346,7 @@ Follow steps below to create a new app and design the layout:
  
 3. Open activity_main.xml and replace RelativeLayout with LinearLayout in both opening and closing tags. LinearLayout is another important layout group where widgets within it are stacked on top of one another, either horizontally or vertically.
 4. Add the following attribute into LinearLayout opening tag 'android:orientation="vertical'. There're two types of orientations available in a LinearLayout, either vertical or horizontal.
-5. Drag and drop the following widgets onto the graphical layout, in any order: three Small Texts, two Plain Texts, one Number, one LinearLayout (Horizontal), and two Buttons. Try to arrange the widgets so that it looks like the following. You may not be able to make your paddings/margins match exactly the same as in the example image, but at least you need to make sure the UI elements are in the same order.
+5. Drag and drop the following widgets onto the graphical layout, in any order: three TextViews, two Plain Texts, one Number, one LinearLayout (Horizontal), and two Buttons. Try to arrange the widgets so that it looks like the following. You may not be able to make your paddings/margins match exactly the same as in the example image, but at least you need to make sure the UI elements are in the same order.
 
  ![linear](.md_images/linear.png)
  
@@ -372,7 +372,7 @@ Follow steps below to create a new app and design the layout:
 
     <EditText
         android:id="@+id/inputMake"
-        android:layout_width="800dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="19dp"
         android:layout_marginRight="20dp"
@@ -390,7 +390,7 @@ Follow steps below to create a new app and design the layout:
 
     <EditText
         android:id="@+id/inputYear"
-        android:layout_width="800dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="19dp"
         android:layout_marginRight="20dp"
@@ -409,7 +409,7 @@ Follow steps below to create a new app and design the layout:
 
     <EditText
         android:id="@+id/inputColor"
-        android:layout_width="800dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="19dp"
         android:layout_marginRight="20dp"
@@ -566,7 +566,7 @@ Now we're ready to explore inheritance in java:
         int intYear = Integer.parseInt(strYear);
         String color = editTextColor.getText().toString();
 
-        Vehicle vehicle = new Vehicle();
+        Vehicle vehicle;
         switch (view.getId()) {
             case R.id.buttonRunPetrol:
                 vehicle = new Car(make, intYear, color);
@@ -575,6 +575,7 @@ Now we're ready to explore inheritance in java:
                 vehicle = new Diesel(make, intYear);
                 break;
             default:
+                vehicle = new Vehicle();
                 break;
         }
 

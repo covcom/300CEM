@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         int intYear = Integer.parseInt(strYear);
         String color = editTextColor.getText().toString();
 
-        Vehicle vehicle = new Vehicle();
+        Vehicle vehicle;
         switch (view.getId()) {
             case R.id.buttonRunPetrol:
                 vehicle = new Car(make, intYear, color);
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 vehicle = new Diesel(make, intYear);
                 break;
             default:
+                vehicle = new Vehicle();
                 break;
         }
 

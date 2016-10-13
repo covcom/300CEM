@@ -10,25 +10,22 @@ In order to produce functional apps, we need to design front-end GUI layouts and
 
 First, we look at how to provide and access resources such as layouts and strings using XML. You have used XML to design your apps previously, now we'll examine again in more details.
 
-### Checkout a Git repository
+### Import existing projects
 
-The current exercise is based on a previous project called 'My Car'. If that project is not available on you hard drive, you need to do the following to download:
+The current exercise is based on a previous project called 'My Car'. If that project is not available on your hard drive anymore, you need to do the following to download:
 
-1. Open a terminal window and navigate to the location where you want to save it. Then issue the following command to clone the whole repository into your hard drive `git clone https://github.com/covcom/388COM.git`. Alternatively, go to https://github.com/covcom/388COM, click 'Download Zip' to download the whole repository. 
+1. There're two ways to checkout a Git repository:
+    * Open a terminal window and navigate to the location where you want to save it. Then issue the following command to clone the whole repository into your hard drive `git clone https://github.com/covcom/300CEM.git`. Alternatively, go to https://github.com/covcom/300CEM, click 'Download Zip' to download the whole repository. 
     
     Once downloaded, unzip and location the 'My Car' project under 'Week_02' folder. You might want to copy the project to somewhere handy for you.
     
     ![mycar](.md_images/mycar.png)
     
-    Alternatively, open a terminal window and navigate to the location where you save it. Then issue the following command `svn checkout https://github.com/covcom/388COM/trunk/Week_02_The_Java_language/MyCar`. You'll see that the project is downloaded into the folder you have chosen.
+    * Alternatively, open a terminal window and navigate to the location where you want to save the project. Then issue the following command `svn checkout https://github.com/covcom/300CEM/trunk/Week_02_The_Java_language/MyCar`. You'll see that the project is downloaded into the folder you have chosen.
     
     ![svn](.md_images/svn.png)
     
-2. Rename the folder from 'MyCar' to 'MyXml', and then open it using Android Studio.
-    
-    Once opened, you can see in the title bar the project name has been changed. This can also be verified if you open the file called '.name' under (Project mode) ==> .idea ==> .name
-    
-    ![name](.md_images/name.png)
+2. Rename the folder from 'MyCar' to 'MyXml', and then open it using Android Studio. When opening existing projects in Android Studio, first click 'Open an existing Android Studio project', navigate to where you saved the project and select file 'build.gradle', then click OK.
     
 3. Right-click anywhere within the Project tool window, click Open Module Settings. Go to the Flavors tab, change Application Id from 'com.example.jianhuayang.mycar' to 'com.example.jianhuayang.myxml'
 4. Double click to open the string resource file, change app_name from 'My Car' to 'My Xml'.
@@ -37,7 +34,7 @@ The current exercise is based on a previous project called 'My Car'. If that pro
     
 5. Locate the long package name 'com.example.jianhuayang.mycar' under Java folder, right-click on it, select Refactor ==> Rename. In the small window that pops up, type in 'myxml'. A tool windows called 'Find Preview' will show, click 'Do Refactor'.
 6. From the menu bar, select Build ==> Clean Project, and then from the menu bar select File ==> Synchronize. This should clear out traces of the old project.
-7. To verify that you don't have anything in this current projects that relates to 'mycar' or 'my car', in the project tool window, right-click on app, then select Find in Path. Type in mycar, and hit enter. You'll see that indeed there's one occurrence of 'MyCar'. Change it to something like 'MyXml'.
+7. To verify that you don't have anything in this current projects that relates to 'mycar' or 'my car', in the project tool window, right-click on app, then select Find in Path. Type in mycar, and hit enter. You'll see that indeed there're two occurrence of 'MyCar' and one occurrence of 'My Car'. Change them all to 'MyXml' or 'My Xml'.
     Instead of using 'Find in Path', what you could do is to use 'Search Everywhere'. This is available if you hit 'shift' key twice.
     
     ![search_everywhere](.md_images/search_everywhere.png)

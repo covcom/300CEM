@@ -1,8 +1,8 @@
 # XML and Gradle
 
-Many of you have used virtual machines such as VMware Workstation Player or VirtualBox where one can setup several virtual operating systems in parallel on a  single 'solid' machine. In fact, the Android system uses some similar technologies. In Android, each app runs within its own virtual machine a.k.a. sandbox. The Android system treats different apps as different 'users', hence they need permissions to access sensors etc. 
+Many of you have used virtual machines such as VMware Workstation Player or VirtualBox where one can setup several virtual operating systems in parallel on a single 'real' machine. In fact, the Android system uses some similar technologies. In Android, each app runs within its own virtual machine a.k.a. sandbox. The Android system treats different apps as different 'users', hence they need permissions to access sensors etc. 
 
-In order to produce functional apps, we need to design front-end GUI layouts and back-end actions. We also need to define app-level entry point and permissions etc. Eventually, all these are packed into an apk archive that goes to Google Play store, and then onto your users' screen:
+In order to produce functional apps, we need to design front-end GUI layouts and back-end actions. We also need to define app-level entry point and permissions etc. Eventually, all these are packed into an apk archive that goes to Google Play store, and then onto your users' screens:
 
 **XML (.XML) ==> Java (.JAVA) ==> ByteCode (.DEX) ==> App (.APK) ==> Runtime (DVM ) ==> Screen**
 

@@ -528,7 +528,7 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
     }
     ```
     
-    What happens in the code above is that given the deprication rate and original price, we calculate the vehicle's current value. You could use more sophisticated algorithms in your app. But in this simple example, I assume it's at a rate of 80%. Note for values of double type, we have to round it to a desired decimal place otherwise you'll be given a long decimal number. 
+    What happens in the code above is that given the deprication rate and original price, we calculate the vehicle's current value. You could use more sophisticated algorithms in your app. But in this simple example, we use a rate of 80%. Note for values of double type, we have to round it to a desired decimal place otherwise you'll be given a long decimal number. 
     
     > There's a good story for this called [Pentium FDIV bug](https://en.wikipedia.org/wiki/Pentium_FDIV_bug). Also, check this out [What Every Computer Scientist Should Know About Floating-Point Arithmetic](http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html).
     
@@ -555,7 +555,7 @@ Duplicate the project folder you created for the first lab, rename it 'MyXml2'. 
 
 > You can continue working on 'MyXml' project if you wish.
 
-We first look at styles.xml. Insert the following into the file in between `style` tags
+We first look at styles.xml. Insert the following into the file in between `resources` tags
 
 ```xml
 <style name="CodeFont" parent="@android:style/TextAppearance.Small">
@@ -594,21 +594,21 @@ Open activity_main.xml, insert `style="@style/CodeFont"` into the last TextView 
 
 Note nomally we use namespace for attributes, but for styles we don't need to do that. (Don't ask me why).
 
-In the previw tool window, if you use default settings you should see it's currently Nexus 4 being used.
+In the previw tool window, in my example it's currently Nexus 4 being used.
 
 ![n4](.md_images/n4.png)
 
-Click on the littler black triangle next to 'Nexus 4' and select Preview All Screen Sizes. Now your preview tool window will show a bunch of screens. You can click on one of the small screens to swap the active model under preview (the bigger one in the top-left corner). If you look closely you'll see that the 'output' area is a bit too big on Nexus 7. (OK, this is subjective!). Click on the littler black triangle again, select Remove Previews. You should now be looking at Nexus 7.
+Click on the littler black triangle next to 'Nexus 4' and select 'Nexus 7'. If you look closely you'll see that the 'output' area is a bit too big on Nexus 7. (OK, this is subjective!).
 
 ![n7](.md_images/n7.png)
 
-When you clicked on the littler black triangle you probably saw mdpi, hdpi, xhdpi etc next to phone models. Also when you downloaded 'plus' and 'minus' icons you saw different versions of the same icon file. So what do those mean?
+When you clicked on the littler black triangle you probably noticed different screen resolutions for different phones . Also when you extracted 'plus' and 'minus' icons in the previous lab you probably noticed different versions of the same icon file. So what do those mean?
 
 In Android, there're many ways to customize system resources for your users according to their languages, screen sizes, screen density, screen orientation etc. This is very important for user experience. Here dpi refers to screen density, mdpi is around ~160dpi. We also have a set of definitions for screen sizes such as normal, large etc.
 
 ![density](http://developer.android.com/images/screens_support/screens-ranges.png)
 
-These additional resource files are called *alternative resources*. They are named using the convention `<resources_name>-<config_qualifier>`. For example, for the options menu icons, we have drawable-hdpi, drawable-mdpi etc. If you remember I mentioned earlier that folder name matters, this is why. 
+These additional resource files are called *alternative resources*. They are named using the convention `<resources_name>-<config_qualifier>`. For example, for the options menu icons, we have drawable-hdpi, drawable-mdpi etc. We mentioned previously that folder name matters, this is why. 
 
 In the project tool window, right-click on styles.xml folder icon, select New ==> Values resource file. In the window that comes up, select Smallest Screen Width as the qualifier,  click on the icon '>>' to add it to the selection window to the right, and then give it a value of 600. Name the file styles.xml and click OK. Now we just created an alternative style file for devices that has a width greater than 600dp e.g. Nexus 7.
 
@@ -616,7 +616,7 @@ In the project tool window, right-click on styles.xml folder icon, select New ==
 
 ![600dp](.md_images/600dp.png)
 
-Copy the following lines from 'styles.xml' and paste into 'styles.xml (sw600dp)'. Change `TextAppearance.Small` to `TextAppearance.Large`.
+Copy the following lines from 'styles.xml' and paste into 'styles.xml (sw600dp)' `resources` tags. Change `TextAppearance.Small` to `TextAppearance.Large`.
 
 ```xml
 <style name="CodeFont" parent="@android:style/TextAppearance.Small">
@@ -685,7 +685,7 @@ Copy contents in 'activity_main.xml' and paste into 'activity_main.xml (sw600dp)
 
 There're several things to note in the code above:
 
-* We added a ScrollView to make the large area scrollable. In the previous lab, we used a scrollable TextView, but that's not ideal as it's not a container layout. Here we use ScrollView so that we can have a button at the bottom.
+* We added a ScrollView to make the large area scrollable. In the previous lab, we used a scrollable TextView, but that's not ideal as it's not a container layout. Here we use ScrollView so that we can have a button at the bottom. This also answers one of the questions at the end of last lab.
 * ScrollView can only contain one child element.
 * `fillViewport="true"` makes the scroll view’s child expand to the height of the ScrollView. If this is set to 'false' the child element will stay at the very top of the layout.
 
@@ -693,7 +693,7 @@ Now the layout looks better on Nexus 7.
 
 ![n7_3](.md_images/n7_3.png)
 
-### HashMap, Generic, and lambda expression
+### HashMap and Generic
 
 Now we turn to MainActivity.java file. To add a listener to the 'Clear All' button above, we need to insert the following into MainActivity.java
 
@@ -722,8 +722,7 @@ Insert the following into strings.xml file
 In MainActivity.java declare a variable to hold car manufacturers information. This declaration goes together with the declaration of UI elements i.e. outside of any methods.
 
 ```java
-//remove back slash '\' in the following code
-private Map\<String, String> mapCarMaker = new HashMap<>();
+private Map<String, String> mapCarMaker = new HashMap<>();
 ```
 
 Similar to Python dictionary, the Java way of doing a dictionary is to use the **HashMap** class. HashMap allows key-value pairs to be stored and looked up quickly. In fact, both List and Map are interfaces. The declaration `Map<String, String>` but not `HashMap<String, String>` is an example of *programming to an interface* 
@@ -733,8 +732,7 @@ Insert the following lines into the `onCreate` method.
 ```java
     String[] manufacturers = getResources().getStringArray(R.array.manufacturer_array);
     String[] descriptions = getResources().getStringArray(R.array.description_array);
-    // insert 'less than' sign before manufacturers.length
-    for (int i = 0; i  manufacturers.length; i++ ){
+    for (int i = 0; i < manufacturers.length; i++ ){
         mapCarMaker.put(manufacturers[i], descriptions[i]);
         }
 ```
@@ -743,7 +741,7 @@ What the code above does is to read car manufacturer names and their info. These
 * We use String array instead of ArrayList as the size of the array is fixed.
 * For array, it has a field (i.e. member variable) called length for its size. But for ArrayList, to get its size we need to call the size() method.
 
-In the `resetOutputs()` method, insert/rearrange the for loop so that it looks like below. What this code does is that it checks if a description is available for the manufacture. If yes, append the info to the output.
+Locate the `resetOutputs()` method, insert/rearrange the for loop so that it looks like below. What this code does is that it checks if a description is available for the manufacture. If yes, append the info to the output.
 
 ```java
 for (Vehicle v : vehicleList) {
@@ -763,11 +761,10 @@ for (Vehicle v : vehicleList) {
 
 If you look at the MainActivity.java class, at the moment it's a bit redundant as it has two methods doing a similar job i.e. `depreciatePrice` and `depreciateEngine`. As Java is a type-safe language, it's necessary to have different methods for differnt different input types. But a more convinient way to do it is to use **Java Generics**.
 
-Comment out the two methods mentioned above, insert the following line of codes instead
+Comment out the two methods mentioned above by selecting the two method and then click `cmd` + `/`. Now insert the following line of codes instead
 
 ```java
-// remove back slash '\' in the following code
-private \<T extends Number> Double depreciateAnything(T originalValue) {
+private <T extends Number> Double depreciateAnything(T originalValue) {
     Double result;
     if (originalValue instanceof Double) {
         result = Math.round(originalValue.doubleValue() * 0.8 * 100) / 100.00;
@@ -791,6 +788,7 @@ outputs.append("; Current value: " + depreciateAnything(v.getPrice()));
 outputs.append("; Effective engine size: " + depreciateAnything(v.getEngine()));
 ```
 
+<!--
 > I was going to show you how to use Java lambda expression to do the above calculation, but unfortunately lambda is a feature of Java 8 and not yet supported by Android. Can you figure out how to do the 'depreciation' using lambda?
     Hint:
 ```java
@@ -800,6 +798,7 @@ Double depreciate(Double d);
 depreciatable depreciateCalculator = (Double x) -> x.doubleValue() * 0.8;
 Double output = depreciateCalculator.depreciate(v.getPrice());
 ```
+-->
 
 Now if you run the app on Nexus 7, either real device or AVD, you should see the following. Fill out the form, click 'create diesel' and then the '+' icon. You'll see the message pops up in the output area. The description for the car maker is also available.
 
@@ -810,8 +809,8 @@ Now if you run the app on Nexus 7, either real device or AVD, you should see the
 Every application must have an AndroidManifest.xml file (with precisely that name) in its root directory. Open the AndroidManifest.xml file in your editor. There're several things to note in this file:
 
 1. The file defines 'metadata' of the app. There's one only one pair of `manifest` and `application` tag allowed.
-2. The `application` tag has three attributes i.e. icon, label, theme. Here, label is your application's name, and shouldn't be changed.
-3. There can be several `activity` tags in your app. The label attibute here is for the texts in the top left corner of the screen. If you omit the `label` attibute, the activity will use the label for the application.
+2. The `application` tag has several attributes i.e. icon, label, theme. Here, label is your application's name, and shouldn't be changed. The label attibute here is for the texts in the top left corner of the screen.
+3. There can be more than one `activity` tags in your app.
 4. Activity name can be shortened. For example, we can use `".MainActivity"` instead of `"com.example.jianhuayang.myxml.MainActivity"`. The leading dot '.' in the former denotes the package attribute in 'manifest' tag.
 5. There can only be one launcher activity i.e. with tags `"android.intent.category.LAUNCHER"`. This denotes the entry point of the app.
 
@@ -835,14 +834,14 @@ When you first create your project, Android Studio generates a set of files/fold
 
 ![gradle_files](.md_images/gradle_files.png)
 
-This is a bit confusing when you first look at them as there're so many different files. I think Google realized that as well, so they put a short description next to file names i.e. those in brackets. For exmample, local.properties file contain configurations for SDK location.
+This is a bit confusing when you first look at them as there're so many different files. But fortunately there areshort description next to file names i.e. those in brackets. For exmample, local.properties file contain configurations for SDK location.
 
 To make things worse, there're two files with the same name - build.gradle - one for 'Project' and one for 'Module':
 
 1. `build.gradle (Project: MyXml2)` defines Gradle itself, for example, repositories (jcenter) and dependencies.
 2. `build.gradle (Module: app)` defines various aspects of module build settings. More on this later.
 
-You have used many times `R.id.something` in your java source code, now it's the time to have a look at it. On your hard drive, naviagate to app/build/generated/source/r/debug/com/example/jianhuayang/maxml file, open R.java file in a text editor. Try to locate 'id' class. Now you'll see different IDs available to you, either generated by the system or by yourself. Note that id itself is a class, and different IDs in it are actually integers.
+You have used many times `R.id.something` in your java source code, now it's the time to have a look at it. On your hard drive, naviagate to app/build/generated/source/r/debug/com/example/jianhuayang/myxml file, open R.java file in a text editor. Try to locate 'id' class. Now you'll see different IDs available to you, either generated by the system or by yourself. Note that id itself is a class, and different IDs in it are actually integers.
 
 ![id](.md_images/id.png)
 
@@ -855,7 +854,7 @@ label {
 //Configuration code...
 }```
 
-I'm sure you understand most of the configurations already e.g. applicationId and targetSdkVersion. There're two new configurations: buldTypes refers to whether it's 'release' or 'debug'. If it's release we'll apply a tool called ProGuard to it. productFlavors refers to, for example, if it's a free (lite) version or a paid (full) version. We could set up two different flavors here and Gradle will build both for us. Click [here](http://developer.android.com/tools/building/configuring-gradle.html#workBuildVariants) for an example app with build variants.
+Most of the configurations e.g. applicationId and targetSdkVersion have been explained already. There're two new configurations: buildTypes refers to whether it's 'release' or 'debug'. If it's release we'll apply a tool called ProGuard to it. productFlavors refers to, for example, if it's a free (lite) version or a paid (full) version. We could set up two different flavors here and Gradle will build both for us. Click [here](http://developer.android.com/tools/building/configuring-gradle.html#workBuildVariants) for an example app with build variants.
 
 > What ProGuard does is 'shrinks, optimizes, and obfuscates your code by removing unused code and renaming classes, fields, and methods with semantically obscure names'. See [here](https://developer.android.com/tools/help/proguard.html) for details.
 
@@ -882,7 +881,7 @@ Finally, remember Gradle works on conventions, you'll have to change the configu
 
 ## Lab 3 Advanced topics
 
-For those of you who haven't completed previous labs, you can work on it if you wish. For those who have finished, in this final lab I'll ask some challenging questions for you to explore. These questions are related to previous labs, and somehow involves more efforts to complete.
+For those of you who haven't completed previous labs, you can work on it if you wish. For those who have finished, in this final lab there are some challenging questions for you to explore. These questions are related to previous labs, and somehow involves more efforts to complete.
 
 ### Build from command line
 
@@ -895,4 +894,4 @@ If you look at the root folder of the project, there're a couple of files that w
 
 ### Gradle build tools
 
-Instead of using generated wrapper scripts such as gradlew in the previous steps, you can download Gradle and build everything from scratch. Follow this tutorial [Building Android Projects with Gradle](https://spring.io/guides/gs/gradle-android/) from String to explore more of Gradle.
+Instead of using generated wrapper scripts such as gradlew in the previous steps, you can download Gradle and build everything from scratch. Follow this tutorial [Building Android Projects with Gradle](https://spring.io/guides/gs/gradle-android/) from Spring to explore more of Gradle.

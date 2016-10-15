@@ -34,7 +34,7 @@ The current exercise is based on a previous project called 'My Car'. If that pro
     
 5. Locate the long package name 'com.example.jianhuayang.mycar' under Java folder, right-click on it, select Refactor ==> Rename. In the small window that pops up, type in 'myxml'. A tool windows called 'Find Preview' will show, click 'Do Refactor'.
 6. From the menu bar, select Build ==> Clean Project, and then from the menu bar select File ==> Synchronize. This should clear out traces of the old project.
-7. To verify that you don't have anything in this current projects that relates to 'mycar' or 'my car', in the project tool window, right-click on app, then select Find in Path. Type in mycar, and hit enter. You'll see that indeed there're two occurrence of 'MyCar' and one occurrence of 'My Car'. Change them all to 'MyXml' or 'My Xml'.
+7. To verify that you don't have anything in this current projects that relate to 'mycar' or 'my car', in the project tool window, right-click on app, then select Find in Path. Type in mycar, and hit enter. You'll see that indeed there're two occurrences of 'MyCar' and one occurrence of 'My Car'. Change them all to 'MyXml' or 'My Xml'.
     Instead of using 'Find in Path', what you could do is to use 'Search Everywhere'. This is available if you hit 'shift' key twice.
     
     ![search_everywhere](.md_images/search_everywhere.png)
@@ -47,9 +47,9 @@ Open activity_main.xml under app ==> res ==> layout folder and switch to Text vi
 2. The second line of the xml defines a container layout called LinearLayout. This corresponds to a class called LinearLayout. In fact, all we do here in the xml file can be done in Java source codes. But probably xml is easier as it's more visual. 
 3. In xml, all tags come in pairs. If you look down the file, you'll see the closing tab of LinearLayout i.e. `</LinearLayout>` towards the end of the file. This is for container layouts where other elements can be contained in it. For layouts such as Button, you'll need to close the tag using `/>`.
 4. xml is case-sensitive. If you use linearLayout at where LinearLayout is expected, the system will complain.
-5. xmlns stands for xml namespace. The purpose of a namespace in xml standard is to avoid conflicts. For example, in the current file the word 'android' is set to be 'http://schemas.android.com/apk/res/android'. When the system parses the file, where it sees the word android it'll  replace it with this long string. 
+5. xmlns stands for xml namespace. The purpose of a namespace in xml standard is to avoid conflicts. For example, in the current file, the word 'android' is set to be 'http://schemas.android.com/apk/res/android'. When the system parses the file, where it sees the word android it'll  replace it with this long string. 
 6. For Android, the namespace refers to http://schemas.android.com/apk/res/android, which is a URI (NOT URL). This cannot be changed.
-7. Attributes are required by the Java class to initialize the GUI on your screen. Note here although you use words such as 'wrap_content' or 'match_parent', these will later on be substituted with constants. For example wrap_content is equal to -1.
+7. Attributes are required by the Java class to initialize the GUI on your screen. Note here although you use words such as 'wrap_content' or 'match_parent', these will, later on, be substituted with constants. For example wrap_content is equal to -1.
     
     > Click [here](http://developer.android.com/reference/android/view/ViewGroup.LayoutParams.html) for a list of layout parameters.
     
@@ -61,7 +61,7 @@ Open activity_main.xml under app ==> res ==> layout folder and switch to Text vi
 
 First, we need to re-design the interface by removing some 'hard-coded' values, and we'll add some more elements onto the UI.
 
-1. In activity_main.xml locate one occurance of 800dp and double click on it. This word should now be highlighted. On the menu bar, click Edit ==> Find ==> Replace. A small window will pop up that has already had 800dp filled in on the upper textfield. In the lower textfield type 'match_parent', and then hit Replace all.
+1. In activity_main.xml locate one occurrence of 800dp and double click on it. This word should now be highlighted. On the menu bar, click Edit ==> Find ==> Replace. A small window will pop up that has already had 800dp filled in on the upper text field. In the lower text field type 'match_parent', and then hit Replace all.
 2. Open dimens.xml, insert the following into the file.
     
     ```xml
@@ -144,7 +144,7 @@ First, we need to re-design the interface by removing some 'hard-coded' values, 
     
     ![add](.md_images/add.png)
     
-7. Extract the zip file you just downloaded, go into the android folder in it. You'll see a set of folders whoes names begin with drawable. Copy all drawable folders and paste into MyXml/app/src/main/res. Repeat for both icons you downloaded. If the system asks whether you want to merge file, just merge.
+7. Extract the zip file you just downloaded, go into the android folder in it. You'll see a set of folders whose names begin with 'drawable'. Copy all drawable folders and paste into MyXml/app/src/main/res. Repeat for both icons you downloaded. If the system asks whether you want to merge file, just merge.
     
     Now your res folder should look like this
     
@@ -158,7 +158,7 @@ First, we need to re-design the interface by removing some 'hard-coded' values, 
 
 All apps we have created so far are single-page apps, and app titles always appear in the top left corner. The area where the title stays is called 'App Bar', we can also put some more useful things in it.
 
-1. Make sure that the MainActivity class is a subclass of AppCompatActivity. If you downloaded from module Github, it should be the case. If you used the project your created earlier yourself, you'll need to double check this.
+1. Make sure that the MainActivity class is a subclass of AppCompatActivity. If you downloaded from module Github, it should be the case. If you're using the project you created earlier yourself, you'll need to double check this.
     
     ```java
     public class MainActivity extends AppCompatActivity {
@@ -184,7 +184,7 @@ All apps we have created so far are single-page apps, and app titles always appe
     ```
     This will create a toolbar floating below the title bar. It doensn't look very nice at the moment, but we'll change it in a minute.
     
-4. In the containing LinearLayout, remove all padding attributes and insert the following line `xmlns:app="http://schemas.android.com/apk/res-auto"`. Now your openning tag of LinearLayout should look like
+4. In the containing LinearLayout, remove all padding attributes and insert the following line `xmlns:app="http://schemas.android.com/apk/res-auto"`. Now your opening tag of LinearLayout should look like
     
     ```xml
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -212,7 +212,7 @@ All apps we have created so far are single-page apps, and app titles always appe
     
     ![title_bar](.md_images/title_bar.png)
     
-6. Under Android view, right-click on the res folder and select New ==> Android resrouce file. In the window that pops up, fill out info as below and click OK. You'll notice that in the Project tool window a new file called menu_main.xml is created in a folder named menu.
+6. Under Android view, right-click on the res folder and select New ==> Android resource file. In the window that pops up, fill out info as below and click OK. You'll notice that in the Project tool window a new file called menu_main.xml is created in a folder named menu.
     
     ![menu](.md_images/menu.png)
     
@@ -281,7 +281,7 @@ All apps we have created so far are single-page apps, and app titles always appe
     
     ```
     
-    These two are callback functions that belong to Activity class, as indicated by the `@Override` notation. The first method inflate teh menu using menu resoure 'R.menu.menu_main' which indicates the folder and xml file name. In the second method, we can define different actions according to which icon is being clicked. This is similar to our previous example where one method is capable of responding to several different button clicks.
+    These two are callback functions that belong to Activity class, as indicated by the `@Override` notation. The first method inflates the menu using menu resource 'R.menu.menu_main' which indicates the folder and xml file name. In the second method, we can define different actions according to which icon is being clicked. This is similar to our previous example where one method is capable of responding to several different button clicks.
     
     At this point, if you run the app you should have something similar to below:
     
@@ -290,7 +290,7 @@ All apps we have created so far are single-page apps, and app titles always appe
 
 ### Some house keeping tasks
 
-Make the following changes to the MainActivity classes to accomodate the UI change.
+Make the following changes to the MainActivity classes to accommodate the UI change.
 
 1. Open Vehicle.java and insert two new member variables and generate getter methods for both.
     
@@ -350,7 +350,7 @@ Make the following changes to the MainActivity classes to accomodate the UI chan
 
 ### ArrayList, StringBuilder, Wrapper class, autoboxing
 
-Next, we need to make some changes to MainActivity.java to handle menu button click and display message back to our users.
+Next, we need to make some changes to MainActivity.java to handle menu button click and display a message back to our users.
 
 1. Declare variables that correspond to new UI element. These should be put together with declarations that are already in the class.
     
@@ -360,7 +360,7 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
     private TextView textViewBlock;
     ```
     
-    Declare a Vehicle object as a member viarable of the class. This will be used for the current vehicle on the screen, remove the `vehicle` declaration in `onButtonClick()` function. Also, declare an ArrayList that holds Vehicles the user has added through menu, and a couple of other helper variables.
+    Declare a Vehicle object as a member variable of the class. This will be used for the current vehicle on the screen, remove the `vehicle` declaration in `onButtonClick()` function. Also, declare an ArrayList that holds Vehicles the user adds through the menu, and a couple of other helper variables.
     
     ```java
     private Vehicle vehicle;
@@ -372,8 +372,8 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
     
     There're some new classes that you haven't seen before:
     
-    * In Java, arrays are initialized with a fixed size. For example, `int[] aVariable = new int[10]` will declare an integer array called aVariable of size 10. But the problem is if later on you have more than 10 elements, it won't fit into this array, The way to get around this is to use the **ArrayList** class from java.util package. The ArrayList class extends AbstractList and implements the List interface. In the declaration above, in between angle brackets are types you want to hold using this ArrayList, in our case this is the Vehicle class. 
-    * In Java, String objects are immutable. 'Immutable' here means once assigned the string itself cannot be changed. For example, consider code in the following figure, this is possible in Python but not in Java. To get around this, Java introduced **StringBuilder** class, which is effectively a String class with mutable strings. We'll see how to use it later on.
+    * In Java, arrays are initialized with a fixed size. For example, `int[] aVariable = new int[10]` will declare an integer array called aVariable of size 10. But the problem is if later on you have more than 10 elements, it won't fit into this array, The way to get around this is to use the **ArrayList** class from java.util package. The ArrayList class extends AbstractList and implements the List interface. In the declaration above, in between angle brackets are types you want to hold using this ArrayList, in our case, this is the Vehicle class. 
+    * In Java, String objects are immutable. 'Immutable' here means once assigned the string itself cannot be changed. For example, consider the code in the following figure, this is possible in Python but not in Java. To get around this, Java introduced **StringBuilder** class, which is effectively a String class with mutable strings. We'll see how to use it later on.
     
     ![python_string](.md_images/python_string.png)
     
@@ -409,7 +409,7 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
     * By now you've seen how to use xml to provide system resources such as layouts, dimensions, strings, integers. In the codes above you see how to access them. For example, `R.layout.activity_main` refers to the layout xml file 'activity_main.xml', and `R.integer.depreciation` refers to the depreciation rate we added in strings.xml.
     * R is a class automatically generated by Android Studio by collecting system resources available. In the system resource folder, i.e. the 'res' folder, folder name matters but file name does not. For example, you can rename your 'strings.xml' as 'stringsForSql.xml' and it'll still work. But if you rename the folder 'valuesForSql' it'll stop working.
     * Line `textViewBlock.setMovementMethod(new ScrollingMovementMethod());` is to make TextView scrollable. This needs to work in pair with `android:scrollbars="vertical"` attribute in xml.
-    * In Java, you need to be really careful with integer division. For example, 5/10 in Java will give you 0. This is because Java doesn't count decimal values if both operands are integers. To get around this, you can use 5/10.0, in which case both operands are automatcially converted to higher precision (double) and will produce the desired output. 
+    * In Java, you need to be really careful with integer division. For example, 5/10 in Java will give you 0. This is because Java doesn't count decimal values if both operands are integers. To get around this, you can use 5/10.0, in which case both operands are automatically converted to higher precision (double) and will produce the desired output. 
     
 3. Insert the following two lines into `onButtonClick` to initialize price and engine
     
@@ -512,11 +512,11 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
     }
     ```
     
-    The idea of the code above is that once our use press the 'add' button on options menu, we'll add the current vehicle to the list. Then we go through the list one by one to collect info of each vehicle. The info we collect will then be displayed back to our user in the big TextView arer. There're several things to know in the code above:
+    The idea of the code above is that once our use press the 'add' button on the options menu, we'll add the current vehicle to the list. Then we go through the list one by one to collect info of each vehicle. The info we collect will then be displayed back to our user in the big TextView area. There're several things to know in the code above:
     * `Vehicle v : vehicleList` is called **enhanced _for_ loop**. Normally what we do in Java is `for (int i = 0; i < vehicleList.size(); i++)`. But this enhanced for loop provides a handy shortcut.
     * `v.getPrice()` give us back variable of int type, while `v.getEngine()` gives us double.
     
-7. Insert the following to handle depreciation of value and engine capabililty.
+7. Insert the following to handle depreciation of value and engine capability.
     
     ```java
     private int depreciatePrice(int price) {
@@ -528,7 +528,7 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
     }
     ```
     
-    What happens in the code above is that given the deprication rate and original price, we calculate the vehicle's current value. You could use more sophisticated algorithms in your app. But in this simple example, we use a rate of 80%. Note for values of double type, we have to round it to a desired decimal place otherwise you'll be given a long decimal number. 
+    What happens in the code above is that given the depreciation rate and original price, we calculate the vehicle's current value. You could use more sophisticated algorithms in your app. But in this simple example, we use a rate of 80%. Note for values of double type, we have to round it to a desired decimal place otherwise you'll be given a long decimal number. 
     
     > There's a good story for this called [Pentium FDIV bug](https://en.wikipedia.org/wiki/Pentium_FDIV_bug). Also, check this out [What Every Computer Scientist Should Know About Floating-Point Arithmetic](http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html).
     
@@ -539,11 +539,12 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
     ![emptylist](.md_images/emptylist.png)
     
 The app you just created contains several bugs:
+
+* You probably have noticed that as you move to text boxes towards the bottom of the screen, they appear behind the keyboard. How do we resolve these using techniques you have just learned?
     
-    1. You probably have noticed that as you move to text boxs towards bottom of the screen, they appear behind the keyboard. How do we resolve this using technqiues you have just learned?
-    2. The reason that you need to fill all text fields is that if you don't the app will crash. What can we do to get around this?
-    3. If you continuously press 'add' button you'll see in the ouput window the list gets longer, but the serial number remains the same. Why?
+* The reason that you need to fill all text fields is that if you don't the app will crash. What can we do to get around this?
     
+* If you continuously press 'add' button you'll see in the output window the list gets longer, but the serial number remains the same. Why?
 
 ## Lab 2 Gradle
 
@@ -570,7 +571,7 @@ In the code above:
 
 * We define a new style called 'CodeFont', that inherits everything from Android system style TextAppearance.Small. This inheritance is the same as in CSS.
 
-    > Unfortunately Google didn't document Android styles very well. This has now become a trial-and-error micacle. You can have a look at the source codes [here](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/res/res/values/styles.xml) if you want to know more.
+    > Unfortunately Google didn't document Android styles very well. This has now become a trial-and-error miracle. You can have a look at the source codes [here](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/res/res/values/styles.xml) if you want to know more.
 
 * System style TextAppearance.Small also inherits from another system style called TextAppearance. The full stop '.' indicates this inheritance. But you cannot inherit system style this way. You can only inherit your own styles using this notation, as you'll see later.
 * 'item' tags define the attributes that we want to override from the parent style. In our case, we override textColor and typeface etc.
@@ -592,9 +593,9 @@ Open activity_main.xml, insert `style="@style/CodeFont"` into the last TextView 
     android:scrollbars="vertical" />
 ```
 
-Note nomally we use namespace for attributes, but for styles we don't need to do that. (Don't ask me why).
+Note normally we use namespace for attributes, but for styles, we don't need to do that. (Don't ask me why).
 
-In the previw tool window, in my example it's currently Nexus 4 being used.
+In the preview tool window, in my example, it's currently Nexus 4 being used.
 
 ![n4](.md_images/n4.png)
 
@@ -685,7 +686,7 @@ Copy contents in 'activity_main.xml' and paste into 'activity_main.xml (sw600dp)
 
 There're several things to note in the code above:
 
-* We added a ScrollView to make the large area scrollable. In the previous lab, we used a scrollable TextView, but that's not ideal as it's not a container layout. Here we use ScrollView so that we can have a button at the bottom. This also answers one of the questions at the end of last lab.
+* We added a ScrollView to make the large area scrollable. In the previous lab, we used a scrollable TextView, but that's not ideal as it's not a container layout. Here we use ScrollView so that we can have a button at the bottom. This also answers one of the questions at the end of the previous lab.
 * ScrollView can only contain one child element.
 * `fillViewport="true"` makes the scroll view’s child expand to the height of the ScrollView. If this is set to 'false' the child element will stay at the very top of the layout.
 
@@ -703,7 +704,7 @@ public void onClearClick(View v){
     }
 ```
 
-In addition, it'll be good to show some infomation about car manufacturers in our app. We'll build a 'dictionary' for it.
+In addition, it'll be good to show some information about car manufacturers in our app. We'll build a 'dictionary' for it.
 
 Insert the following into strings.xml file
 
@@ -739,7 +740,7 @@ Insert the following lines into the `onCreate` method.
 
 What the code above does is to read car manufacturer names and their info. These are then put into a dictionary for later use. Note in here:
 * We use String array instead of ArrayList as the size of the array is fixed.
-* For array, it has a field (i.e. member variable) called length for its size. But for ArrayList, to get its size we need to call the size() method.
+* For an array, it has a field (i.e. a member variable) called length for its size. But for ArrayList, to get its size we need to call the size() method.
 
 Locate the `resetOutputs()` method, insert/rearrange the for loop so that it looks like below. What this code does is that it checks if a description is available for the manufacture. If yes, append the info to the output.
 
@@ -759,9 +760,9 @@ for (Vehicle v : vehicleList) {
 }
 ```
 
-If you look at the MainActivity.java class, at the moment it's a bit redundant as it has two methods doing a similar job i.e. `depreciatePrice` and `depreciateEngine`. As Java is a type-safe language, it's necessary to have different methods for differnt different input types. But a more convinient way to do it is to use **Java Generics**.
+If you look at the MainActivity.java class, at the moment it's a bit redundant as it has two methods doing a similar job i.e. `depreciatePrice` and `depreciateEngine`. As Java is a type-safe language, it's necessary to have different methods for different different input types. But a more convenient way to do it is to use **Java Generics**.
 
-Comment out the two methods mentioned above by selecting the two method and then click `cmd` + `/`. Now insert the following line of codes instead
+Comment out the two methods mentioned above by selecting the two methods and then click `cmd` + `/`. Now insert the following line of codes instead
 
 ```java
 private <T extends Number> Double depreciateAnything(T originalValue) {
@@ -779,7 +780,7 @@ The code above is called a generic method. What it does is that we declare a typ
 
 * `T extends Number` is called bounded type parameter. In this case, we require that the variable type passed into our method must be a subclass of Number.
 * Type declaration goes before the return type i.e. Double
-* `instanceof` is an operator in Java. This is equivalent as `type()` in Python.
+* `instanceof` is an operator in Java. This is equivalent to `type()` in Python.
 
 Now replace `depreciatePrice` and `depreciateEngine` with this new generic method.
 
@@ -789,7 +790,7 @@ outputs.append("; Effective engine size: " + depreciateAnything(v.getEngine()));
 ```
 
 <!--
-> I was going to show you how to use Java lambda expression to do the above calculation, but unfortunately lambda is a feature of Java 8 and not yet supported by Android. Can you figure out how to do the 'depreciation' using lambda?
+> I was going to show you how to use Java lambda expression to do the above calculation, but unfortunately, lambda is a feature of Java 8 and not yet supported by Android. Can you figure out how to do the 'depreciation' using lambda?
     Hint:
 ```java
 interface depreciatable{
@@ -800,7 +801,7 @@ Double output = depreciateCalculator.depreciate(v.getPrice());
 ```
 -->
 
-Now if you run the app on Nexus 7, either real device or AVD, you should see the following. Fill out the form, click 'create diesel' and then the '+' icon. You'll see the message pops up in the output area. The description for the car maker is also available.
+Now if you run the app on Nexus 7, either a real device or AVD, you should see the following. Fill out the form, click 'create diesel' and then the '+' icon. You'll see the message pops up in the output area. The description for the car maker is also available.
 
 ![volvo](.md_images/volvo.png)
 
@@ -809,7 +810,7 @@ Now if you run the app on Nexus 7, either real device or AVD, you should see the
 Every application must have an AndroidManifest.xml file (with precisely that name) in its root directory. Open the AndroidManifest.xml file in your editor. There're several things to note in this file:
 
 1. The file defines 'metadata' of the app. There's one only one pair of `manifest` and `application` tag allowed.
-2. The `application` tag has several attributes i.e. icon, label, theme. Here, label is your application's name, and shouldn't be changed. The label attibute here is for the texts in the top left corner of the screen.
+2. The `application` tag has several attributes i.e. icon, label, theme. Here, the label is your application's name, and shouldn't be changed. The label attribute here is for the texts in the top left corner of the screen.
 3. There can be more than one `activity` tags in your app.
 4. Activity name can be shortened. For example, we can use `".MainActivity"` instead of `"com.example.jianhuayang.myxml.MainActivity"`. The leading dot '.' in the former denotes the package attribute in 'manifest' tag.
 5. There can only be one launcher activity i.e. with tags `"android.intent.category.LAUNCHER"`. This denotes the entry point of the app.
@@ -818,7 +819,7 @@ As we go along, you'll know more about app manifest. The above is all for now.
 
 ### Gradle build system
 
-The ultimate targets for Android application development are apk files. We need to provide resources in xml format and Java source codes to make it happen. But the problem is that, as you have seen already, the system is very complicated with so many different packages/resrouces - We need a build tool that is powerful enough to handle all these, not just a `javac` or `make`. Fortunately in Android Studio the build process is (almost!) automated. We don't normally interfere with it. But it's important you understand how the build system works. In particular, there're three things that you need to be aware of:
+The ultimate targets for Android application development are apk files. We need to provide resources in xml format and Java source codes to make it happen. But the problem is that, as you have seen already, the system is very complicated with such a lot of different packages/resources - We need a build tool that is powerful enough to handle all these, not just a `javac` or `make`. Fortunately, in Android Studio the build process is (almost!) automated. We don't normally interfere with it. But it's important you understand how the build system works. In particular, there're three things that you need to be aware of:
 
 1. Files generated by Android Studio for build purposes. Among those files, the most important one is the R.java.
 2. The build.gradle syntax.
@@ -834,14 +835,14 @@ When you first create your project, Android Studio generates a set of files/fold
 
 ![gradle_files](.md_images/gradle_files.png)
 
-This is a bit confusing when you first look at them as there're so many different files. But fortunately there areshort description next to file names i.e. those in brackets. For exmample, local.properties file contain configurations for SDK location.
+This is a bit confusing when you first look at them as there're so many different files. But fortunately, there are short descriptions next to file names i.e. those in brackets. For example, local.properties file contain configurations for SDK location.
 
 To make things worse, there're two files with the same name - build.gradle - one for 'Project' and one for 'Module':
 
 1. `build.gradle (Project: MyXml2)` defines Gradle itself, for example, repositories (jcenter) and dependencies.
 2. `build.gradle (Module: app)` defines various aspects of module build settings. More on this later.
 
-You have used many times `R.id.something` in your java source code, now it's the time to have a look at it. On your hard drive, naviagate to app/build/generated/source/r/debug/com/example/jianhuayang/myxml file, open R.java file in a text editor. Try to locate 'id' class. Now you'll see different IDs available to you, either generated by the system or by yourself. Note that id itself is a class, and different IDs in it are actually integers.
+You have used many times `R.id.something` in your java source code, now it's the time to have a look at it. On your hard drive, navigate to app/build/generated/source/r/debug/com/example/jianhuayang/myxml file, open R.java file in a text editor. Try to locate 'id' class. Now you'll see different IDs available to you, either generated by the system or by yourself. Note that id itself is a class, and different IDs in it are actually integers.
 
 ![id](.md_images/id.png)
 
@@ -881,13 +882,13 @@ Finally, remember Gradle works on conventions, you'll have to change the configu
 
 ## Lab 3 Advanced topics
 
-For those of you who haven't completed previous labs, you can work on it if you wish. For those who have finished, in this final lab there are some challenging questions for you to explore. These questions are related to previous labs, and somehow involves more efforts to complete.
+For those of you who haven't completed previous labs, you can work on it if you wish. For those who have finished, in this final lab, there are some challenging questions for you to explore. These questions are related to previous labs, and somehow involves more efforts to complete.
 
 ### Build from command line
 
-If you look at the root folder of the project, there're a couple of files that we haven't mentoned yet e.g. gradlew and gradlew.bat. These are scripts that we can run to build our apps from the command line.
+If you look at the root folder of the project, there're a couple of files that we haven't mentioned yet e.g. gradlew and gradlew.bat. These are scripts that we can run to build our apps from the command line.
 
-* Open 'gradlew' in a text editor, can you make sense from it?
+* Open 'gradlew' in a text editor, can you make sense of it?
 * Can you guess what commands to use to build the system from command line?
 
 > Hint: [Building and Running from the Command Line](http://developer.android.com/tools/building/building-cmdline.html)

@@ -374,11 +374,11 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
     
     * In Java, arrays are initialized with a fixed size. For example, `int[] aVariable = new int[10]` will declare an integer array called aVariable of size 10. But the problem is if later on you have more than 10 elements, it won't fit into this array, The way to get around this is to use the **ArrayList** class from java.util package. The ArrayList class extends AbstractList and implements the List interface. In the declaration above, in between angle brackets are types you want to hold using this ArrayList, in our case, this is the Vehicle class. 
     * In Java, String objects are immutable. 'Immutable' here means once assigned the string itself cannot be changed. For example, consider the code in the following figure, this is possible in Python but not in Java. To get around this, Java introduced **StringBuilder** class, which is effectively a String class with mutable strings. We'll see how to use it later on.
-    
-    ![python_string](.md_images/python_string.png)
-    
-    > For discussions on when to use String and when to use StringBuilder, click [here](http://stackoverflow.com/questions/4645020/when-to-use-stringbuilder-in-java)
-    
+        
+        ![python_string](.md_images/python_string.png)
+        
+        > For discussions on when to use String and when to use StringBuilder, click [here](http://stackoverflow.com/questions/4645020/when-to-use-stringbuilder-in-java)
+        
     * You have seen primitive data types such as int or double. In the codes above Double was used, which is not to be confused with double. Double here is a **wrapper class** for the primitive type double (there's also Integer for int etc.). The main reason that we need these wrapper classes is that these are objects, and primitive types are not. For example, we can declare `ArrayList<Double>` but we cannot declare `ArrayList<double>`.
         
         Wrapper class can be initialized using *proper* object initialization methods using keyword 'new'. For example, `Double  a = new Double(100.00)`. Or it can be initialized like an ordinary primitive type, e.g. `Double  a = 100.00`. This is called **autoboxing**. By definition, autoboxing refers to the automatic conversion that the Java compiler makes between the primitive types and their corresponding object wrapper classes.

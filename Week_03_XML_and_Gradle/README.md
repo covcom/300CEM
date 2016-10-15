@@ -16,11 +16,11 @@ The current exercise is based on a previous project called 'My Car'. If that pro
 
 1. There're two ways to checkout a Git repository:
     * Open a terminal window and navigate to the location where you want to save it. Then issue the following command to clone the whole repository into your hard drive `git clone https://github.com/covcom/300CEM.git`. Alternatively, go to https://github.com/covcom/300CEM, click 'Download Zip' to download the whole repository. 
-    
-    Once downloaded, unzip and location the 'My Car' project under 'Week_02' folder. You might want to copy the project to somewhere handy for you.
-    
-    ![mycar](.md_images/mycar.png)
-    
+        
+        Once downloaded, unzip and location the 'My Car' project under 'Week_02' folder. You might want to copy the project to somewhere handy for you.
+        
+        ![mycar](.md_images/mycar.png)
+        
     * Alternatively, open a terminal window and navigate to the location where you want to save the project. Then issue the following command `svn checkout https://github.com/covcom/300CEM/trunk/Week_02_The_Java_language/MyCar`. You'll see that the project is downloaded into the folder you have chosen.
     
     ![svn](.md_images/svn.png)

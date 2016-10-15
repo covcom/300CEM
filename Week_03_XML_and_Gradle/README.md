@@ -22,9 +22,9 @@ The current exercise is based on a previous project called 'My Car'. If that pro
         ![mycar](.md_images/mycar.png)
         
     * Alternatively, open a terminal window and navigate to the location where you want to save the project. Then issue the following command `svn checkout https://github.com/covcom/300CEM/trunk/Week_02_The_Java_language/MyCar`. You'll see that the project is downloaded into the folder you have chosen.
-    
-    ![svn](.md_images/svn.png)
-    
+        
+        ![svn](.md_images/svn.png)
+        
 2. Rename the folder from 'MyCar' to 'MyXml', and then open it using Android Studio. When opening existing projects in Android Studio, first click 'Open an existing Android Studio project', navigate to where you saved the project and select file 'build.gradle', then click OK.
     
 3. Right-click anywhere within the Project tool window, click Open Module Settings. Go to the Flavors tab, change Application Id from 'com.example.jianhuayang.mycar' to 'com.example.jianhuayang.myxml'

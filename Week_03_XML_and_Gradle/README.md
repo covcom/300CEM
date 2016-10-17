@@ -853,7 +853,8 @@ The most important file is `build.gradle (Module: app)`. The basic structure of 
 ```xml
 label {
 //Configuration code...
-}```
+}
+```
 
 Most of the configurations e.g. applicationId and targetSdkVersion have been explained already. There're two new configurations: buildTypes refers to whether it's 'release' or 'debug'. If it's release we'll apply a tool called ProGuard to it. productFlavors refers to, for example, if it's a free (lite) version or a paid (full) version. We could set up two different flavors here and Gradle will build both for us. Click [here](http://developer.android.com/tools/building/configuring-gradle.html#workBuildVariants) for an example app with build variants.
 

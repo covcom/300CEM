@@ -1,6 +1,6 @@
 # Simple Views and Layouts
 
-By now you should be familiar with a 'single-page application' in Android. That is an app that runs within a single Activity (capital 'A'). You should have some experience using LinearLayouts/RelativeLayouts, providing systems resources for different screen sizes etc. This week, we'll look at Activity lifecycle and how to pass data between Activities. Also, we'll examine some more layouts and widgets. 
+By now you should be familiar with a 'single-page application' in Android. That is an app that runs within a single Activity (capital 'A'). You should have some experience using LinearLayouts/RelativeLayouts, providing systems resources for different screen sizes etc. This week, we'll look at Activity lifecycle and how to pass data between Activities. Also, we'll examine some more layouts and widgets.
 
 ## Lab 1 UI design
 
@@ -26,23 +26,22 @@ On the [official Android website](http://developer.android.com/design/get-starte
 - *Simplify my life*: make your app easy to navigate, easy to use, easy to understand.
 - *Make me amazing*: provide visual hints and/or default values for your app, break big tasks into smaller steps.
 
-Google released the new [Material Design](https://www.google.com/design/spec/material-design/introduction.html) with android 5.0 Lollipop, which provides detailed guidelines for visual, motion etc. and covers almost everything one can think of in app design. Here I list some common requirements that you should try to meet and pitfall s that you should try to avoid in your app. Detailed requirements can be found in Material Design documentation.
+Google released the new [Material Design](https://www.google.com/design/spec/material-design/introduction.html) with android 5.0 Lollipop, which provides detailed guidelines for visual, motion etc. and covers almost everything one can think of in app design. Here I list some common requirements that you should try to meet and pitfall s that you should try to avoid in your apps. Detailed requirements can be found in Material Design documentation.
 
-- *Animation*: Changes in acceleration or deceleration should be smooth across the duration of an animation.
+- *Motion*: Changes in acceleration or deceleration should be smooth across the duration of an animation.
 - *Style*: Use system recommended color, icons, meaningful and genuine images. Use concise and simple languages.
 - *Layout*: Design to suit different devices and screen-sizes. Try to avoid slicing up the interface into too many regions like in the following
-
+    
     ![many regions](https://material-design.storage.googleapis.com/publish/material_v_4/material_ext_publish/0Bx4BSt6jniD7NHNfYW03U28wYnM/layout_structure_regions_guidance4.png)
-
-
+    
 - *Components*: Requirements were laid in Material Design for different UI components such as buttons or menus. Some of these requirements are very specific, e.g. button height need to be 36dp in a dialog. Some other requirements tend to be more general, e.g the rule that states don't use flat buttons in UIs where they would be difficult to see.
-- *Pattern and Usability*: Material Design has guidelines for different scenarios which is referred to as 'patterns'. For example, launch screens can be either placeholder UI or branded launch. Of course, you can implement anything you wish, but I'd go for one of these two for your app. 
+- *Patterns*: Material Design has guidelines for different scenarios which is referred to as 'patterns'. For example, launch screens can be either placeholder UI or branded launch. Of course, you can implement anything you wish, but it'll be better if you go for one of these two for your apps. 
 
 The above is a really brief 'abstract' of the Material Design documentation. The important things to remember is, if in doubt, check with the official documentation.
 
 ### Activity lifecycle
 
-Now we'll start exploring the Activity lifecycle. As we know already, in Android each Activity is (normally) associated with a layout xml file. Before and after the layout becomes visible/disappear on the screen the system has to create or destroy the Activity object by calling some callback methods such as `onCreate`. The whole process i.e. lifecycle of an Activity involves several different stages and callback methods.
+Now we'll start exploring the Activity lifecycle. As we know already, in Android each Activity is (normally) associated with a layout xml file. Before and after the layout becomes visible/invisible on the screen the system has to create or destroy the Activity object by calling some callback methods such as the `onCreate()` method. The whole process i.e. lifecycle of an Activity involves several different stages and callback methods.
 
 Following steps below to create a new project and insert some overriding methods:
 
@@ -97,18 +96,21 @@ Following steps below to create a new project and insert some overriding methods
     }
     ```
 5. Start your AVD or connect you phone/tablet, and run the app. In logcat, use 'TagLifecycle' to filter the outputs. Now try to answer the following:
-
+    
     * When you first start the app, which methods were called?
-    * If you press 'back' button, which methods are called?
-    * Now, press the app icon on your phone to start again, which methods are called?
-    * If you now press the 'home' button, which methods are called?
-    * Now press the app icon, what happened? What does it mean?
+    * Press the 'home' (circle) button, which methods are called?
+    * Press the 'overview' (square) button and bring back the app, which methods are called?
+    * If you now press 'back' button, which methods are called?
+    * Now, press the app icon on your phone to start again, what happened? What does it mean?
+
+    > For button names, see [here](https://support.google.com/nexus/answer/6073614)
 
 Talking about Activity lifecycle, there're two diagrams you have to know well:
 
 ![lifecycle](http://developer.android.com/images/activity_lifecycle.png)
 
-----------------divider---------------------------------------------------
+`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'
+   `     `     `     `     `     `     `     `     `     `
 
 ![stages](http://developer.android.com/images/training/basics/basic-lifecycle.png)
 
@@ -120,36 +122,37 @@ The upper image depicts all callback methods an Activity has to go through from 
 
 The other two states in the lower image above i.e. created and started are transient and the system quickly moves from them to the next state by calling the next lifecycle callback method.
 
-Associated with these callback methods are what we need to implement them. For this, [the official guide](http://developer.android.com/guide/components/activities.html) is thorough and comprehensive. Please spend some time to read. The two most important things that are often confused by our students are:
+Associated with these callback methods are what we need to implement them. For this, [the official guide](http://developer.android.com/guide/components/activities.html) is thorough and comprehensive. Please spend some time to read. The two most important things that often confuse our students are:
 
 1. The 'home' button doesn't destroy your activity. The system will remember your app's current state. So press 'home' button and then press your app icon to restart your app is **NOT** a way to show data persistence.
 2. If the system must recover memory in an emergency, `onStop()` and `onDestroy()` might not be called. Again, to save data for the sake of persistence you'll need to do it in `onPause()`.
 
-### FrameLayout, ScrollView, TableLayouts 
+### FrameLayout, ScrollView and TableLayouts
+
+In this section we'll continue working on the previous project and make it a 3-activity app. The idea is that in the main activity, if you click 'write note' it'll take you to a second activity where you can take some notes. Once finished, if you click 'display', all the info you typed will be shown in a 3rd activity. 
 
 Following steps below to insert two more activities and prepare the layout file for later use.
 
-1. In the Project tool window, right-click app, select New ==> Activity ==> Blank Activity, name it 'NoteEditingActivity'.
-2. Create another new FullscreenActivity and name it 'DispalyActivity'.
+1. In the Project tool window, right-click app, select New ==> Activity ==> Empty Activity, name it 'NoteEditingActivity'.
+2. Similarly, create another activity using the FullscreenActivity template and name it 'DispalyActivity'.
 3. Open activity_display.xml, you'll see the root tag is **FrameLayout**. The FrameLayout is a placeholder on the screen that you can use to display a single view. Views that you add to a FrameLayout are always anchored to the top left of the layout.
-4. Open content_main.xml (or activity_main.xml if you don't have content_main.xml), replace its content with the following:
+4. Open activity_main.xml, replace RelativeLayout with ScrollView, and delete TextView.
+5. On the graphical layout, drag and drop a TableLayout and a TableRow onto the activity. You'll notice that even though you drap/drop just one TableRow, the system has four inserted into TableLayout for you. Delete three of those, and keep just one. For the only TableRow you have, separate the closing tag i.e. replace `/>` with `></TableRow>`. The TableLayout at the moment should look like this:
     
     ```xml
-    <?xml version="1.0" encoding="utf-8"?>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
-    tools:showIn="@layout/activity_main">
-
+        <TableRow>
+        </TableRow>
+    </TableLayout>
+    ```
+    
+6. Duplate the TableRow tags seven times. In other words, we're going to have a 7-row table. Add widgets and rearrange its attributes so it looks like the following:
+    
+    ```xml
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -299,33 +302,17 @@ Following steps below to insert two more activities and prepare the layout file 
     There're several things you need to know in this layout file:
     
     * A **ScrollView** is a subclass of FrameLayout. It's a layout container for a view hierarchy that can be scrolled by the user, allowing it to be larger than the physical display. The ScrollView can contain only one child view or ViewGroup. 
-    * A **TableLayout** is like a table in spreadsheet i.e. it has columns and rows. In our example above, the first TextView i.e. with text 'Activity No.1' starts at column `android:layout_column="0"` and spans for two columns `android:layout_span="2"`.
-    * If you don't want to specify starting column number, you can put a placeholder empty TextView like the one before button 'buttonNote'.
+    * A **TableLayout** is like a table in spreadsheet i.e. it has columns and rows. In our example above, the first TextView i.e. with text 'Activity No.1' starts at column 1 `android:layout_column="0"` and spans for two columns `android:layout_span="2"`.
+    * If you don't want to specify starting column number, you can put a placeholder such as an empty TextView before button 'buttonNote'.
     * It's your first time to see the 'View' tag. What we did here is basically to draw a divider line with height 3dp.
     
     Your screen should now look like the following:
     
     ![a1](.md_images/a1.png)
     
-5. Replace the content of content_note_editing.xml with the following
+7. Open activity_note_editing.xml and change the container layout from the default RelativeLayout to vertical LinearLayout. Insert the following widgets in it: 
     
     ```xml
-    <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".SecondActivity"
-    tools:showIn="@layout/activity_second"
-    android:minWidth="350dp">
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
@@ -367,34 +354,28 @@ Following steps below to insert two more activities and prepare the layout file 
         android:layout_gravity="right"
         android:onClick="onDoneClick"
         android:text="Done" />
-
-    </LinearLayout>
-
     ```
     This is pretty easy to understand. Note line `android:layout_height="0dp"` and `android:layout_weight="1"`. This is basically telling the EditText to occupy all available pace in its parent view. Your screen now should look like:
     
     ![a2](.md_images/a2.png)
     
-6. For NoteEditingActivity, we want it to show a dialog style. In other words, it shows up as partially occupying the screen. So add the following to styles.xml
+8. For NoteEditingActivity, we want it to show a dialog style. In other words, it shows up as partially occupying the screen. So add the following to styles.xml
     
     ```xml
     <style name="MyDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowNoTitle">true</item>
     </style>
     ```
-    Open AdroidManifest.xml, change style of the activity to the one you just created 
+    Open AdroidManifest.xml, change the style of the activity to the one you just created 
     
     ```xml
     <activity
             android:name=".NoteEditingActivity"
-            android:label="@string/title_activity_note_editing"
             android:theme="@style/MyDialog" >
     </activity>
     ```
     
-Now we have three activities. The idea is that in the main activity, if you click 'write note' it'll take you to a second activity where you can take your notes. Once finished, if you click 'display', all the info you typed will be shown in a 3rd activity.
-
-We haven't looked at the DisplayActivity yet. If you open actvity_display.xml, it should look like the following
+Now we have completed GUI design for your three activities. But we haven't looked at the DisplayActivity yet. If you open actvity_display.xml, it should look like the following
 
 ![display](.md_images/display.png)
 
@@ -402,9 +383,9 @@ Change the text displayed in the Button to 'Return' by changing the following in
 
 ### Intents
 
-Next, we link-up all the buttons with methods. Also, we link all three activities together.
+Next, we link all buttons with appropriate methods. We also link all three activities together.
 
-For MainActivity.java, do the following:
+Open MainActivity.java, follow steps below to insert several functions:
 
 1. Open MainActivity.java, declare the following as class members:
     
@@ -421,7 +402,7 @@ For MainActivity.java, do the following:
     private EditText editTextNote;
     ```
     
-2. In `onCreate` method, initialize widget members by inserting the following:
+2. In `onCreate()` method, initialize widget members by inserting the following:
     
     ```java
     editTextMake = (EditText) findViewById(R.id.inputMake);
@@ -433,27 +414,27 @@ For MainActivity.java, do the following:
 3. Insert the following two methods into the class.
     
     ```java
-    public void goEdit(View arg0) {
-        Intent aIntent = new Intent(this, NoteEditingActivity.class);
-        startActivityForResult(aIntent, REQUEST1);
+    public void goEdit(View v) {
+        Intent intentEdit = new Intent(this, NoteEditingActivity.class);
+        startActivityForResult(intentEdit, REQUEST1);
     }
-    
+
     public void goDisplay(View v) {
-        Intent aIntent = new Intent();
-        aIntent.setAction("com.example.jianhuayang.myactivities.ThirdActivity");
-        aIntent.putExtra(KEY_MAKE, editTextMake.getText().toString());
-        aIntent.putExtra(KEY_YEAR, Integer.parseInt(editTextYear.getText().toString()));
-        Bundle aBundle = new Bundle();
-        aBundle.putString(KEY_COLOR, editTextColor.getText().toString());
-        aBundle.putString(KEY_NOTE, editTextNote.getText().toString());
-        aIntent.putExtras(aBundle);
-        startActivity(aIntent);
+        Intent intentDisplay = new Intent();
+        intentDisplay.setAction("com.example.jianhuayang.myactivities.ThirdActivity");
+        intentDisplay.putExtra(KEY_MAKE, editTextMake.getText().toString());
+        intentDisplay.putExtra(KEY_YEAR, Integer.parseInt(editTextYear.getText().toString()));
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_COLOR, editTextColor.getText().toString());
+        bundle.putString(KEY_NOTE, editTextNote.getText().toString());
+        intentDisplay.putExtras(bundle);
+        startActivity(intentDisplay);
     }
     ```
     
     There're quite a lot going on in the code above:
     
-    * Before you start a new Activity, you must define an **Intent** object. In the example, I used two different ways of doing it: one uses `Intent(this, NoteEditingActivity.class)` where 'this' is the current object, and '.class' is the type of the targetting object; The other way is that we create an empty Intent and then set the Action, which is a String defined in **IntentFilters**. We'll see more of this later on.
+    * Before you start a new Activity, you must define an **Intent** object. In the example above, there are two different ways of doing it: one uses `Intent(this, NoteEditingActivity.class)` where 'this' is the current object, and '.class' is the type of the targetting object; The other is that we create an empty Intent and then set the Action, which is a String defined in **IntentFilters**. We'll see more of this later on.
     * We can pass data along with Intent objects. The way to do it is to use `putExtra()` or `putExtras()` method. These methods take key-value pairs as inputs, where the key is used to retrieve the data back.
     * To actually move to a different Activity, you'll need either `startActivity()` or `startActivityForResult()` method. For both methods, you'll need to supply an Intent. The difference is that for the latter you need to get the results back from the other Intent.
     
@@ -465,42 +446,40 @@ For MainActivity.java, do the following:
         if (requestCode == REQUEST1 && resultCode == RESULT_OK) {
             editTextNote.setText(data.getData().toString());
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
     ```
     
     The code above tests to see if the results come from the original request by comparing the  request code. If it is the case and the results are ok (RESULT_OK is a constant), we'll get the data passed by the intent. In this case, we used the `getData()` method which returns the URI that the intent is operating on. The URI is then turned into String and displayed in EditText.
     
-Make changes to NoteEditingActivity.java so that the file looks like the following:
+Next, open NoteEditingActivity.java, and make some changes so that the class body looks like the following:
 
 ```java
-public class NoteEditingActivity extends AppCompatActivity {
+    EditText editText;
 
-EditText editText;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_note_editing);
+        editText = (EditText) findViewById(R.id.inputNote);
+    }
 
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_note_editing);
-    editText = (EditText) findViewById(R.id.inputNote);
-}
-
-public void onDoneClick(View v) {
-    Intent aIntent = new Intent();
-    Uri aUri = Uri.parse(editText.getText().toString());
-    aIntent.setData(aUri);
-    setResult(RESULT_OK, aIntent);
-    finish();
-}
-}
+    public void onDoneClick(View v) {
+        Intent intent = new Intent();
+        Uri uri = Uri.parse(editText.getText().toString());
+        intent.setData(uri);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
 ```
 
 The method `onDoneClick()` works in pair with `startActivityForResult()` in a sense that it set the results i.e. Intent and close the current activity. The idea is that upon user click, whatever typed in the EditText will be passed to the calling Activity. Note here `setData()` and `getData()` we saw previously are a pair. 
 
-Let's turn to DisplayActivity.java. When you first look at it, the class is full of methods and comments generated by the system. Don't be scared. The idea is that the Activity will display the toolbar/button etc for a short time, and then all these will go away apart from the TextView occupying the whole screen. You'll learn all these later on during the module. Concentrate on the lifecycle callbacks for the moment.
+Finally, open DisplayActivity.java. When you first look at it, the class is full of methods and comments generated by the system. Don't be scared. The idea is that in this Activity all toolbar/button etc. will be displayed for a short time, and then all these will go away apart from the TextView occupying the whole screen. You'll learn all these later on during the module. Concentrate on the lifecycle callbacks for the moment.
 
 Do the following to make it possible to collect data passed from MainActivity.
 
-1. Insert a TextView declaration into the class `private TextView textView`.
+1. Insert a TextView declaration into the class `private TextView textView;`.
 2. Insert the following into the `onCreate()` method
     
     ```java
@@ -517,23 +496,29 @@ Do the following to make it possible to collect data passed from MainActivity.
     
     To get the Intent that starts the current Activity you'll need to call the `getIntent()` method. The opposite of `putExtra()` to add data into Intents is to use `getStringExtra()` or `getIntExtra()` methods to retrieve the data. To do that, we'll need to know the key for these different values as in key-values pairs we mentioned previously.
     
-3. In order to enable intent-filters so that MainActivity can start the DispalyActivity by calling the Action name, we need to define the Action in the manifest. Insert the following intent-filter into the manifest file so that the 'activity' tag for DisplayActivity becomes the following
+3. Insert the following function into the class, and associate this function with the 'dummy_button' in activity_display.xml.
+```java
+public void onReturnClick(View v){
+        finish();
+    }
+```
+4. In order to enable intent-filters so that MainActivity can start the DispalyActivity by calling the Action name, we need to define the Action in the manifest. Insert the following intent-filter into the manifest file so that the 'activity' tag for DisplayActivity becomes the following
     
     ```xml
     <activity
-        android:name=".DisplayActivity"
+        android:name=".DispalyActivity"
         android:configChanges="orientation|keyboardHidden|screenSize"
-        android:label="@string/title_activity_display"
-        android:theme="@style/FullscreenTheme" >
+        android:label="@string/title_activity_dispaly"
+        android:theme="@style/FullscreenTheme">
         <intent-filter>
             <action android:name="com.example.jianhuayang.myactivities.ThirdActivity" />
-
             <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
+
     </activity>
     ```
     
-    Here Action is barely a String. You must also have a DEFAULT category, see below quoted from [Google](http://developer.android.com/guide/components/intents-filters.html):
+    Here Action is barely a String. You must also have a DEFAULT category, see below directly quoted from [Google](http://developer.android.com/guide/components/intents-filters.html):
 
     > In order to receive implicit intents, you must include the CATEGORY_DEFAULT category in the intent filter. The methods startActivity() and startActivityForResult() treat all intents as if they declared the CATEGORY_DEFAULT category. If you do not declare this category in your intent filter, no implicit intents will resolve to your activity.
 

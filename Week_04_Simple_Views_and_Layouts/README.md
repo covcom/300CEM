@@ -543,7 +543,7 @@ When you look at your layout files in Design view, the Palette shows everything 
 
 ### Common controls
 
-Google has listed some commonly used widgets and refers to those collectively as Common Controls. In the following exercise, I'll show you how to include these in your layouts and how to connect those with Java code. If you have finished the previous lab, duplicate the folder and rename it MyActivities2. We'll start from there.
+Google has listed some commonly used widgets and refers to those collectively as Common Controls. In the following exercise, you'll see how to include these in your layouts and how to connect those with Java code. If you have finished the previous lab, duplicate the project folder and rename it MyActivities2. We'll start from there.
 
 ![common controls](http://developer.android.com/images/ui/ui-controls.png)
 
@@ -551,7 +551,7 @@ Google has listed some commonly used widgets and refers to those collectively as
     
     ![](.md_images/mode_edit.png)
     
-2. Download a photo of any vehicle and add it to drawable. For example, I added something called 'bike.jpg'.
+2. Download a photo of any 'vehicle' and copy it to res/drawable folder (create one if necessary). In our example, the photo we use is called 'bike.jpg'.
 3. Insert the following into strings.xml file to get ready a string array
     
     ```xml
@@ -561,24 +561,13 @@ Google has listed some commonly used widgets and refers to those collectively as
         <item>Volkswagen</item>
     </string-array>
     ```
-4. Open content_main.xml and make changes so it looks like the following:
+4. Next, Open content_main.xml. We're going to put some more controls on the app screen. The ones we need are: Spinner, Switch, RadioButtons, CheckBoxes and an ImageBｕｔｔｏｎ. Without looking at the XML code, try to drag/drop and rearrange so that your screen looks like below.
+    
+    ![controls](.md_images/controls.png) 
+    
+    If you get stuck, compare yours with the code below, and try to understand (with the help of Google) why it is the case. Try not to just copy/paste.
     
     ```xml
-    <?xml version="1.0" encoding="utf-8"?>
-
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
-    tools:showIn="@layout/activity_main">
-
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -616,7 +605,7 @@ Google has listed some commonly used widgets and refers to those collectively as
 
             <Spinner
                 android:id="@+id/spinnerMake"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="19dp"
                 android:layout_marginTop="10dp" />
@@ -822,19 +811,12 @@ Google has listed some commonly used widgets and refers to those collectively as
                 android:layout_span="2"
                 android:gravity="center"
                 android:onClick="goDisplay"
-
                 android:text="Display" />
 
         </TableRow>
     </TableLayout>
-
-    </ScrollView>
     ```
     
-    Don't be scared by the length of the code above. What we're trying to achieve here is pretty simple - we want our layout file look like the following:
-    
-    ![controls](.md_images/controls.png)
-
     Here Make is a drop-down menu Spinner and Fuel type are a Switch. These two are new and worth spending some time on. We also have here some radio buttons and checkboxes, which are pretty straightforward. Note here the 'mode edit' is an ImageButton, which is also new. 
     
     Spend some time with this layout file, and try to understand different attributes associated with different widgets.

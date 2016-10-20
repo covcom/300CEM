@@ -497,11 +497,13 @@ Do the following to make it possible to collect data passed from MainActivity.
     To get the Intent that starts the current Activity you'll need to call the `getIntent()` method. The opposite of `putExtra()` to add data into Intents is to use `getStringExtra()` or `getIntExtra()` methods to retrieve the data. To do that, we'll need to know the key for these different values as in key-values pairs we mentioned previously.
     
 3. Insert the following function into the class, and associate this function with the 'dummy_button' in activity_display.xml.
-```java
-public void onReturnClick(View v){
-        finish();
+    
+    ```java
+    public void onReturnClick(View v){
+    finish();
     }
-```
+    ```
+    
 4. In order to enable intent-filters so that MainActivity can start the DispalyActivity by calling the Action name, we need to define the Action in the manifest. Insert the following intent-filter into the manifest file so that the 'activity' tag for DisplayActivity becomes the following
     
     ```xml

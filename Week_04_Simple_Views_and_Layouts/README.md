@@ -539,7 +539,7 @@ If you hit 'Display' you'll see all the info about your car. If you touch anywhe
 
 When you look at your layout files in Design view, the Palette shows everything that is available to you. We have only explored a small fraction of what's available. In this second lab, we'll explore some more.
 
-### Common controls 
+### Common controls
 
 Google has listed some commonly used widgets and refers to those collectively as Common Controls. In the following exercise, I'll show you how to include these in your layouts and how to connect those with Java code. If you have finished the previous lab, duplicate the folder and rename it MyActivities2. We'll start from there.
 

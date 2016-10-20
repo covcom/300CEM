@@ -27,7 +27,7 @@ The current exercise is based on a previous project called 'My Car'. If that pro
         
 2. Rename the folder from 'MyCar' to 'MyXml', and then open it using Android Studio. When opening existing projects in Android Studio, first click 'Open an existing Android Studio project', navigate to where you saved the project and select file 'build.gradle', then click OK.
     
-3. Right-click anywhere within the Project tool window, click Open Module Settings. Go to the Flavors tab, change Application Id from 'com.example.jianhuayang.mycar' to 'com.example.jianhuayang.myxml'
+3. Right-click on 'app' within the Project tool window, click Open Module Settings. Go to the Flavors tab, change Application Id from 'com.example.jianhuayang.mycar' to 'com.example.jianhuayang.myxml'
 4. Double click to open the string resource file, change app_name from 'My Car' to 'My Xml'.
     
     ![string](.md_images/string.png)

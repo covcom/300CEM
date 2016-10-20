@@ -561,7 +561,7 @@ Google has listed some commonly used widgets and refers to those collectively as
         <item>Volkswagen</item>
     </string-array>
     ```
-4. Next, Open content_main.xml. We're going to put some more controls on the app screen. The ones we need are: Spinner, Switch, RadioButtons, CheckBoxes and an ImageBｕｔｔｏｎ. Without looking at the XML code, try to drag/drop and rearrange so that your screen looks like below.
+4. Next, Open content_main.xml. We're going to put some more controls on the app screen. The ones we need are: Spinner, Switch, RadioButtons, CheckBoxes and an ImageButton. Without looking at the XML code below, try to drag/drop and rearrange so that your screen looks like this:
     
     ![controls](.md_images/controls.png) 
     
@@ -817,11 +817,9 @@ Google has listed some commonly used widgets and refers to those collectively as
     </TableLayout>
     ```
     
-    Here Make is a drop-down menu Spinner and Fuel type are a Switch. These two are new and worth spending some time on. We also have here some radio buttons and checkboxes, which are pretty straightforward. Note here the 'mode edit' is an ImageButton, which is also new. 
+    Spend some time with this layout file, and try to understand different attributes associated with different widgets. Here 'Make' is a drop-down menu Spinner and 'Fuel type' is a Switch. These two are new and worth spending some time on. We also have here some radio buttons and checkboxes, which are pretty straightforward. Note here the 'node edit' is an ImageButton, which is also new.
     
-    Spend some time with this layout file, and try to understand different attributes associated with different widgets.
-    
-5. Insert the following variable declaration into MainActivity class. This is to accommodate layout element changes.
+5. Insert/remove some variable declarations into/from the MainActivity class to accommodate layout element changes. What we want to do here is to have all input fields on the graphical layout as member variables of the class. We also need a couple more virables for later use. After this step, your member variables should look like this:
     
     ```java
     public static final String KEY_MAKE = "keyMake";
@@ -847,27 +845,24 @@ Google has listed some commonly used widgets and refers to those collectively as
     private String[] carMaker;
     private String make;
     ```
-6. Replace variable initialization blocks in `onCreate()` so that the method looks like the following:
+6. Some of the variables in `onCreate()` will now show red color. This is becuase the declarations of those variables were removed. These red-colored lines can be safely removed. Instead, you need to initialize member variables declared previously. After this step, your `onCreate()` method should look like the following:
     
     ```java
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-    
-    Log.d(TAG_LIFECYCLE, "In the onCreate() event");
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Log.d(TAG_LIFECYCLE, "In the onCreate() event");
 
-    spinnerMaker = (Spinner) findViewById(R.id.spinnerMake);
-    switchFuel = (Switch) findViewById(R.id.switchFuel);
-    editTextYear = (EditText) findViewById(R.id.inputYear);
-    radioGroupColor = (RadioGroup) findViewById(R.id.radioColor);
-    checkBoxNew = (CheckBox) findViewById(R.id.isNew);
-    checkBoxRightHand = (CheckBox) findViewById(R.id.isRightHand);
-    buttonImage = (Button) findViewById(R.id.buttonImage);
-    editTextNote = (EditText) findViewById(R.id.inputNote);
-    carMaker = getResources().getStringArray(R.array.car_maker);
+        spinnerMaker = (Spinner) findViewById(R.id.spinnerMake);
+        switchFuel = (Switch) findViewById(R.id.switchFuel);
+        editTextYear = (EditText) findViewById(R.id.inputYear);
+        radioGroupColor = (RadioGroup) findViewById(R.id.radioColor);
+        checkBoxNew = (CheckBox) findViewById(R.id.isNew);
+        checkBoxRightHand = (CheckBox) findViewById(R.id.isRightHand);
+        buttonImage = (Button) findViewById(R.id.buttonImage);
+        editTextNote = (EditText) findViewById(R.id.inputNote);
+        carMaker = getResources().getStringArray(R.array.car_maker);
     }
     ```
 
@@ -875,29 +870,34 @@ Google has listed some commonly used widgets and refers to those collectively as
     
     ```java
     public void goDisplay(View v) {
-    Intent aIntent = new Intent();
-    aIntent.setAction("com.example.jianhuayang.myactivities.ThirdActivity");
-    aIntent.putExtra(KEY_MAKE, make);
-    aIntent.putExtra(KEY_Fuel, switchFuel.isChecked());
-    aIntent.putExtra(KEY_YEAR, Integer.parseInt(editTextYear.getText().toString()));
-    Bundle aBundle = new Bundle();
-    String color = ((RadioButton) findViewById(radioGroupColor.getCheckedRadioButtonId())).getText().toString();
-    aBundle.putString(KEY_COLOR, color);
-    aBundle.putBoolean(KEY_NEW, checkBoxNew.isChecked());
-    aBundle.putBoolean(KEY_RIGHT_HAND, checkBoxRightHand.isChecked());
-    aBundle.putString(KEY_NOTE, editTextNote.getText().toString());
-    aIntent.putExtras(aBundle);
-    startActivity(aIntent);
+        Intent intent = new Intent();
+        intent.setAction("com.example.jianhuayang.myactivities.ThirdActivity");
+        intent.putExtra(KEY_MAKE, make);
+        intent.putExtra(KEY_Fuel, switchFuel.isChecked());
+        intent.putExtra(KEY_YEAR, Integer.parseInt(editTextYear.getText().toString()));
+        Bundle bundle = new Bundle();
+        String color = ((RadioButton) findViewById(radioGroupColor.getCheckedRadioButtonId())).getText().toString();
+        bundle.putString(KEY_COLOR, color);
+        bundle.putBoolean(KEY_NEW, checkBoxNew.isChecked());
+        bundle.putBoolean(KEY_RIGHT_HAND, checkBoxRightHand.isChecked());
+        bundle.putString(KEY_NOTE, editTextNote.getText().toString());
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
     ```
+    
+    We need to parse the data collected using front UI and pass it to the next activity. To do that, we used all input-collecting widgets. In fact, CheckBox, RadioButton, Switch, SwitchCompat, and ToggleButton are all sub-classes of CompoundButton, and so share a lot of things e.g. methods in common.
 
-There're quite a lot of codes above. In fact, CheckBox, RadioButton, Switch, SwitchCompat, and ToggleButton are all sub-classes of CompoundButton, and so share a lot of things e.g. methods in common. Also, most of these should be familiar by now.
-
-### Spinner, AdapterView 
+### Spinner and AdapterView 
 
 The widgets that haven't been dealt include the Spinner. It takes a separate section for it.
 
-1. Change MainActivity signature to `public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener`.
+1. Open MainActivity.java and change MainActivity signature so the class implements `AdapterView.OnItemSelectedListener`.
+    
+    ```java
+    public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+    ```
+    
 2. Insert the following into `onCreate()` method
     
     ```java
@@ -912,40 +912,27 @@ The widgets that haven't been dealt include the Spinner. It takes a separate sec
    
     ```java
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-        make = carMaker[pos];
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        make = carMaker[position];
     }
-
+    
+    @Override
     public void onNothingSelected(AdapterView<?> parent) {
         make = "No maker selected";
     }
     ```
+    
+    Spinner is a special case of AdapterView. For this type of view, which we'll see again next weeek, we need to set data source for it, so that the 'adaptor' can combine data with a view (remember MVC pattern?). Here `android.R.layout.simple_spinner_item` and `android.R.layout.simple_spinner_dropdown_item` are built-in layouts provided by the system. 
+    
+    What we need to do to initialize the adaptor is that we need to implement two concrete methods `onItemSelected()` and `onNothingSelected`. These two methods provide actions based on which item is being selected.
 
-What happened here is that Spinner is a special case of AdapterView. For this type of view, we need to set data source for it, so that the 'adaptor' can combine data with a view (remember MVC pattern?). Here `android.R.layout.simple_spinner_item` and `android.R.layout.simple_spinner_dropdown_item` are built-in layouts provided by the system. 
-
-What we need to do to initialize the adaptor is that we need to implement two concrete methods `onItemSelected` and `onNothingSelected`. These two methods provide actions based on which item is being selected.
-
-### ProgressBar, Android threading
+### ProgressBar and Android threading
 
 What we also want to do for our app is that once we click the 'Download' button we'll go to a separate Activity to download some images. And the downloaded image can be passed back to the main activity to be displayed.
 
-1. Create a new Empty Activity and name it DownloadActivity. Open activity_download.xml and replace everthing in it with the following:
+1. Create a new Empty Activity and name it DownloadActivity. Open activity_download.xml and change the default RelativeLayout to vertical LinearLayout. Insert the following XML
    
     ```xml
-    <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.jianhuayang.myactivities.DownloadActivity">
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="@android:style/Widget.ProgressBar.Horizontal"
@@ -974,11 +961,9 @@ What we also want to do for our app is that once we click the 'Download' button 
         android:layout_marginTop="10dp"
         android:onClick="onReturnClick"
         android:text="Return" />
-
-    </LinearLayout>
     ```
     
-    You haven't seen ProgressBar and ImageView before. As the name suggests, basically ProgressBar show the progress of some jobs as a vertical bar or little circle, and ImageView is a View to hold images. The rest of the layout should be self-explanatory.
+    You haven't seen ProgressBar and ImageView before. As the name suggests, basically ProgressBar show the progress of some jobs as a vertical bar or little circle, and ImageView is a view to hold images. The rest of the layout should be self-explanatory.
 
 2. Make changes to DownloadActivity so that it looks like below
    

@@ -26,7 +26,7 @@ On the [official Android website](http://developer.android.com/design/get-starte
 - *Simplify my life*: make your app easy to navigate, easy to use, easy to understand.
 - *Make me amazing*: provide visual hints and/or default values for your app, break big tasks into smaller steps.
 
-Google released the new [Material Design](https://www.google.com/design/spec/material-design/introduction.html) with android 5.0 Lollipop, which provides detailed guidelines for visual, motion etc. and covers almost everything one can think of in app design. Here I list some common requirements that you should try to meet and pitfall s that you should try to avoid in your apps. Detailed requirements can be found in Material Design documentation.
+Google released the new [Material Design](https://www.google.com/design/spec/material-design/introduction.html) with android 5.0 Lollipop, which provides detailed guidelines for visual, motion etc. and covers almost everything one can think of in app design. Here I list some common requirements that you should try to meet and pitfalls that you should try to avoid in your apps. Detailed requirements can be found in Material Design documentation.
 
 - *Motion*: Changes in acceleration or deceleration should be smooth across the duration of an animation.
 - *Style*: Use system recommended color, icons, meaningful and genuine images. Use concise and simple languages.
@@ -35,9 +35,9 @@ Google released the new [Material Design](https://www.google.com/design/spec/mat
     ![many regions](https://material-design.storage.googleapis.com/publish/material_v_4/material_ext_publish/0Bx4BSt6jniD7NHNfYW03U28wYnM/layout_structure_regions_guidance4.png)
     
 - *Components*: Requirements were laid in Material Design for different UI components such as buttons or menus. Some of these requirements are very specific, e.g. button height need to be 36dp in a dialog. Some other requirements tend to be more general, e.g the rule that states don't use flat buttons in UIs where they would be difficult to see.
-- *Patterns*: Material Design has guidelines for different scenarios which is referred to as 'patterns'. For example, launch screens can be either placeholder UI or branded launch. Of course, you can implement anything you wish, but it'll be better if you go for one of these two for your apps. 
+- *Patterns*: Material Design has guidelines for different scenarios which is referred to as 'patterns'. For example, launch screens can be either placeholder UI or branded launch. Of course, you can implement anything you wish, but it'll be better if you go for one of these two for your apps.
 
-The above is a really brief 'abstract' of the Material Design documentation. The important things to remember is, if in doubt, check with the official documentation.
+The above is a really brief 'abstract' of the Material Design documentation. The important things to remember is, if in doubt, check the official documentation.
 
 ### Activity lifecycle
 
@@ -129,7 +129,7 @@ Associated with these callback methods are what we need to implement them. For t
 
 ### FrameLayout, ScrollView and TableLayouts
 
-In this section we'll continue working on the previous project and make it a 3-activity app. The idea is that in the main activity, if you click 'write note' it'll take you to a second activity where you can take some notes. Once finished, if you click 'display', all the info you typed will be shown in a 3rd activity. 
+In this section, we'll continue working on the previous project and make it a 3-activity app. The idea is that in the main activity if you click 'write note' it'll take you to a second activity where you can take some notes. Once finished, if you click 'display', all the info you typed will be shown in a 3rd activity. 
 
 Following steps below to insert two more activities and prepare the layout file for later use.
 
@@ -137,7 +137,7 @@ Following steps below to insert two more activities and prepare the layout file 
 2. Similarly, create another activity using the FullscreenActivity template and name it 'DispalyActivity'.
 3. Open activity_display.xml, you'll see the root tag is **FrameLayout**. The FrameLayout is a placeholder on the screen that you can use to display a single view. Views that you add to a FrameLayout are always anchored to the top left of the layout.
 4. Open activity_main.xml, replace RelativeLayout with ScrollView, and delete TextView.
-5. On the graphical layout, drag and drop a TableLayout and a TableRow onto the activity. You'll notice that even though you drap/drop just one TableRow, the system has four inserted into TableLayout for you. Delete three of those, and keep just one. For the only TableRow you have, separate the closing tag i.e. replace `/>` with `></TableRow>`. The TableLayout at the moment should look like this:
+5. On the graphical layout, drag and drop a TableLayout and a TableRow onto the activity. You'll notice that even though you drag/drop just one TableRow, the system has four inserted into TableLayout for you. Delete three of those, and keep just one. For the only TableRow you have, separate the closing tag i.e. replace `/>` with `></TableRow>`. The TableLayout at the moment should look like this:
     
     ```xml
     <TableLayout
@@ -150,7 +150,7 @@ Following steps below to insert two more activities and prepare the layout file 
     </TableLayout>
     ```
     
-6. Duplate the TableRow tags seven times. In other words, we're going to have a 7-row table. Add widgets and rearrange its attributes so it looks like the following:
+6. Duplicate the TableRow tags seven times. In other words, we're going to have a 7-row table. Add widgets and rearrange its attributes so it looks like the following:
     
     ```xml
     <TableLayout
@@ -394,7 +394,7 @@ Open MainActivity.java, follow steps below to insert several functions:
     public static final String KEY_YEAR = "keyYear";
     public static final String KEY_COLOR = "keyColor";
     public static final String KEY_NOTE = "keyNote";
-    private static final int REQUEST1 = 1234;
+    private static final int REQUEST_EDIT = 1234;
     
     private EditText editTextMake;
     private EditText editTextYear;
@@ -416,7 +416,7 @@ Open MainActivity.java, follow steps below to insert several functions:
     ```java
     public void goEdit(View v) {
         Intent intentEdit = new Intent(this, NoteEditingActivity.class);
-        startActivityForResult(intentEdit, REQUEST1);
+        startActivityForResult(intentEdit, REQUEST_EDIT);
     }
 
     public void goDisplay(View v) {
@@ -434,7 +434,7 @@ Open MainActivity.java, follow steps below to insert several functions:
     
     There're quite a lot going on in the code above:
     
-    * Before you start a new Activity, you must define an **Intent** object. In the example above, there are two different ways of doing it: one uses `Intent(this, NoteEditingActivity.class)` where 'this' is the current object, and '.class' is the type of the targetting object; The other is that we create an empty Intent and then set the Action, which is a String defined in **IntentFilters**. We'll see more of this later on.
+    * Before you start a new Activity, you must define a **Intent** object. In the example above, there are two different ways of doing it: one uses `Intent(this, NoteEditingActivity.class)` where 'this' is the current object, and '.class' is the type of the targeting object; The other is that we create an empty Intent and then set the Action, which is a String defined in **IntentFilters**. We'll see more of this later on.
     * We can pass data along with Intent objects. The way to do it is to use `putExtra()` or `putExtras()` method. These methods take key-value pairs as inputs, where the key is used to retrieve the data back.
     * To actually move to a different Activity, you'll need either `startActivity()` or `startActivityForResult()` method. For both methods, you'll need to supply an Intent. The difference is that for the latter you need to get the results back from the other Intent.
     
@@ -443,7 +443,7 @@ Open MainActivity.java, follow steps below to insert several functions:
     ```java
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST1 && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_EDIT && resultCode == RESULT_OK) {
             editTextNote.setText(data.getData().toString());
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -532,7 +532,7 @@ If know you click 'Write notes', it'll take you to a second Activity where all t
 
 ![](.md_images/notes.png)
 
-If you hit 'Display' you'll see all the info about your car. If you touch anywhere in the screen, it'll give you the toolbar etc. for a short while.
+If you hit 'Display' you'll see all the info about your car. If you touch anywhere on the screen, it'll give you the toolbar etc. for a short while.
 
 ![](.md_images/show.png)
 
@@ -830,8 +830,8 @@ Google has listed some commonly used widgets and refers to those collectively as
     public static final String KEY_RIGHT_HAND = "keyRightHand";
     public static final String KEY_NOTE = "keyNote";
     private static final String TAG_LIFECYCLE = "TagLifecycle";
-    private static final int REQUEST1 = 1234;
-    private static final int REQUEST2 = 5678;
+    private static final int REQUEST_EDIT = 1234;
+    private static final int REQUEST_DOWNLOAD = 5678;
 
     private Spinner spinnerMaker;
     private Switch switchFuel;
@@ -845,7 +845,7 @@ Google has listed some commonly used widgets and refers to those collectively as
     private String[] carMaker;
     private String make;
     ```
-6. Some of the variables in `onCreate()` will now show red color. This is becuase the declarations of those variables were removed. These red-colored lines can be safely removed. Instead, you need to initialize member variables declared previously. After this step, your `onCreate()` method should look like the following:
+6. Some of the variables in `onCreate()` will now show red color. This is because the declarations of those variables were removed. These red-colored lines can be safely removed. Instead, you need to initialize member variables declared previously. After this step, your `onCreate()` method should look like the following:
     
     ```java
     @Override
@@ -886,7 +886,7 @@ Google has listed some commonly used widgets and refers to those collectively as
     }
     ```
     
-    We need to parse the data collected using front UI and pass it to the next activity. To do that, we used all input-collecting widgets. In fact, CheckBox, RadioButton, Switch, SwitchCompat, and ToggleButton are all sub-classes of CompoundButton, and so share a lot of things e.g. methods in common.
+    The code above parse the data collected using the app UI and pass them to the next activity. Here, all input-collecting widgets are being used. In fact, CheckBox, RadioButton, Switch, and ToggleButton are all sub-classes of CompoundButton, and share a lot of things in common e.g. methods.
 
 ### Spinner and AdapterView 
 
@@ -922,13 +922,13 @@ The widgets that haven't been dealt include the Spinner. It takes a separate sec
     }
     ```
     
-    Spinner is a special case of AdapterView. For this type of view, which we'll see again next weeek, we need to set data source for it, so that the 'adaptor' can combine data with a view (remember MVC pattern?). Here `android.R.layout.simple_spinner_item` and `android.R.layout.simple_spinner_dropdown_item` are built-in layouts provided by the system. 
+    Spinner is a special case of AdapterView. For this type of view, which we'll see again next week, we need to set data source for it, so that the 'adaptor' can combine data with a view (remember MVC pattern?). Here `android.R.layout.simple_spinner_item` and `android.R.layout.simple_spinner_dropdown_item` are built-in layouts provided by the system. 
     
-    What we need to do to initialize the adaptor is that we need to implement two concrete methods `onItemSelected()` and `onNothingSelected`. These two methods provide actions based on which item is being selected.
+    What we need to do to initialize the adapter is that we need to implement two concrete methods `onItemSelected()` and `onNothingSelected`. These two methods provide actions based on which item is being selected.
 
 ### ProgressBar and Android threading
 
-What we also want to do for our app is that once we click the 'Download' button we'll go to a separate Activity to download some images. And the downloaded image can be passed back to the main activity to be displayed.
+What we also want to do for our app is that once we click the 'Download' button we'll go to a separate Activity to download an image. The downloaded image can then be passed back to the main activity to be displayed.
 
 1. Create a new Empty Activity and name it DownloadActivity. Open activity_download.xml and change the default RelativeLayout to vertical LinearLayout. Insert the following XML
    
@@ -968,8 +968,6 @@ What we also want to do for our app is that once we click the 'Download' button 
 2. Make changes to DownloadActivity so that it looks like below
    
     ```java
-    public class DownloadActivity extends AppCompatActivity {
-
     public static final String KEY_DRAWABLE = "keyDrawable";
 
     private ProgressBar progressBar;
@@ -1029,17 +1027,16 @@ What we also want to do for our app is that once we click the 'Download' button 
         setResult(RESULT_OK, intent);
         finish();
     }
-    }
     ```
     
-    The `onReturnClick()` method is easy, the difficult part here is the Thread and Handler objects. In Android, your app runs in a special thread called UI thread. Your layout, animations etc are being rendered using this Thread. As you can image, if you run intensive tasks in this thread, you'll slow down the display. That is not what your user want to happen. So what you do then is to run heavy tasks in a separate thread. The way to do it is to use **Thread** objects, and define tasks in `run()` method. However, what if you want to pass data back to UI thread to update display? Here comes the **Handler** object, which is a way to bridge background threads with UI element. Note here background thread can access member variables etc. The only thing they are not allowed to do is to update UI. Hence we `post()` new jobs back to UI thread, such as updating visibilities.
+    The code above is artificial, as we have the image resource already and there's no need to download. However, the key points here are Thread and Handler objects. In Android, your app runs in a special thread called the UI thread. Your layout and animations etc are being rendered using this thread. As you can image, if you run intensive tasks in this thread, you'll slow down the display. That is not what your users want to happen. So what you do then is to run heavy tasks in a separate thread. The way to do it is to use **Thread** objects, and define tasks in `run()` method. However, what if you want to pass data back to UI thread to update display? Here comes the **Handler** object, which is a way to bridge background threads with UI element. Note here background thread can access member variables etc. The only thing they are not allowed to do is to update UI. Hence we `post()` new jobs back to UI thread, such as updating visibilities.
     
 3. Go back to MainActivity and insert the following method to respond to a button click.
    
     ```java
     public void goDownload(View v) {
         Intent aIntent = new Intent(this, DownloadActivity.class);
-        startActivityForResult(aIntent, REQUEST2);
+        startActivityForResult(aIntent, REQUEST_DOWNLOAD);
     }
     ```
     
@@ -1048,14 +1045,15 @@ What we also want to do for our app is that once we click the 'Download' button 
     ```java
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST1 && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_EDIT && resultCode == RESULT_OK) {
             editTextNote.setText(data.getData().toString());
         }
 
-        if (requestCode == REQUEST2 && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_DOWNLOAD && resultCode == RESULT_OK) {
             buttonImage.setText("");
             buttonImage.setBackgroundResource(data.getIntExtra(DownloadActivity.KEY_DRAWABLE, R.mipmap.ic_launcher));
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
     ```
 

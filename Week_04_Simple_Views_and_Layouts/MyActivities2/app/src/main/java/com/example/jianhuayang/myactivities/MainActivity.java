@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public static final String KEY_RIGHT_HAND = "keyRightHand";
     public static final String KEY_NOTE = "keyNote";
     private static final String TAG_LIFECYCLE = "TagLifecycle";
-    private static final int REQUEST1 = 1234;
-    private static final int REQUEST2 = 5678;
+    private static final int REQUEST_EDIT = 1234;
+    private static final int REQUEST_DOWNLOAD = 5678;
 
     private Spinner spinnerMaker;
     private Switch switchFuel;
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void goEdit(View v) {
         Intent intentEdit = new Intent(this, NoteEditingActivity.class);
-        startActivityForResult(intentEdit, REQUEST1);
+        startActivityForResult(intentEdit, REQUEST_EDIT);
     }
 
     public void goDisplay(View v) {
@@ -122,8 +122,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST1 && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_EDIT && resultCode == RESULT_OK) {
             editTextNote.setText(data.getData().toString());
+        }
+
+        if (requestCode == REQUEST_DOWNLOAD && resultCode == RESULT_OK) {
+            buttonImage.setText("");
+            buttonImage.setBackgroundResource(data.getIntExtra(DownloadActivity.KEY_DRAWABLE, R.mipmap.ic_launcher));
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -138,5 +143,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         make = "No maker selected";
+    }
+
+    public void goDownload(View v) {
+        Intent aIntent = new Intent(this, DownloadActivity.class);
+        startActivityForResult(aIntent, REQUEST_DOWNLOAD);
     }
 }

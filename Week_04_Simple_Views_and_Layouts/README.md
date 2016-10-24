@@ -561,7 +561,7 @@ Google has listed some commonly used widgets and refers to those collectively as
         <item>Volkswagen</item>
     </string-array>
     ```
-4. Next, Open content_main.xml. We're going to put some more controls on the app screen. The ones we need are: Spinner, Switch, RadioButtons, CheckBoxes and an ImageButton. Without looking at the XML code below, try to drag/drop and rearrange so that your screen looks like this:
+4. Next, Open activity_main.xml. We're going to put some more controls on the app screen. The ones we need are: Spinner, Switch, RadioButtons, CheckBoxes and an ImageButton. Without looking at the XML code below, try to drag/drop and rearrange so that your screen looks like this:
     
     ![controls](.md_images/controls.png) 
     

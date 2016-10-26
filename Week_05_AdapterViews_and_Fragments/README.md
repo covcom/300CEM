@@ -1,6 +1,6 @@
 # AdapterViews and Fragments
 
-Last week we looked at some 'simple' widgets and layouts. Simple here refers to the fact that those widgets are mainly used to display/collect small amount static data. What if the data are of a large quantity or dynamically generated? Shall we put say 20 headlines from a newspaper in TextViews one after another? Obviously the answer is no here. Let's find out how.
+Last week we looked at some 'simple' widgets and layouts. Simple here refers to the fact that those widgets are mainly used to display/collect small amount of data. What if the data are of a large quantity or dynamically generated? Do we put say 20 headlines from a newspaper in TextViews one after another? Obviously the answer is no here. Let's find out how.
 
 ## Lab 1 AdapterViews
 

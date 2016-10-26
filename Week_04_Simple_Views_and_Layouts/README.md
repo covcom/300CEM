@@ -129,7 +129,7 @@ Associated with these callback methods are what we need to implement them. For t
 
 ### FrameLayout, ScrollView and TableLayouts
 
-In this section, we'll continue working on the previous project and make it a 3-activity app. The idea is that in the main activity if you click 'write note' it'll take you to a second activity where you can take some notes. Once finished, if you click 'display', all the info you typed will be shown in a 3rd activity. 
+In this section, we'll continue working on 'My Activities' project and make it a 3-activity app. The idea is that in the main activity if you click 'write note' it'll take you to a second activity where you can take some notes. Once finished, if you click 'display', all the info you typed will be shown in a 3rd activity. 
 
 Following steps below to insert two more activities and prepare the layout file for later use.
 
@@ -496,7 +496,7 @@ Do the following to make it possible to collect data passed from MainActivity.
     
     To get the Intent that starts the current Activity you'll need to call the `getIntent()` method. The opposite of `putExtra()` to add data into Intents is to use `getStringExtra()` or `getIntExtra()` methods to retrieve the data. To do that, we'll need to know the key for these different values as in key-values pairs we mentioned previously.
     
-3. Insert the following function into the class, and associate this function with the 'dummy_button' in activity_display.xml.
+3. Insert the following function into the DisplayActivity.java, and associate this function with the 'dummy_button' in activity_display.xml.
     
     ```java
     public void onReturnClick(View v){

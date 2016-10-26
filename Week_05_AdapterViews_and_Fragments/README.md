@@ -1,10 +1,12 @@
 # AdapterViews and Fragments
 
-Last week we looked at some 'simple' widgets and layouts. Simple here refers to the fact that those widgets are mainly used to display/collect small amount of data. What if the data are of a large quantity or dynamically generated? Do we put say 20 headlines from a newspaper in TextViews one after another? Obviously the answer is no here. Let's find out how.
+Last week we looked at some 'simple' widgets and layouts. Simple here refers to the fact that those widgets are mainly used to display/collect small amount of data. What if the data are of a large quantity or dynamically generated? Do we put say 200 student records in TextViews one after another? Obviously the answer is no here. Let's find out how to do it properly.
+
+> On the 20th October 2016, winners were announced for this year's Google Material Design Awards, check it out [here](http://www.xda-developers.com/winners-announced-for-googles-material-design-awards-2016/)
 
 ## Lab 1 AdapterViews
 
-We have looked at Spinner, which is a special case i.e. subclass of AdapterView. In order to make it work, we had to combine three elements: the View itself (Spinner), the data resource which is typically a Collection (interface), an Adaptor that binds every *single entry* in the Collection with its layout. 
+We looked at Spinner previously, which is a special case i.e. subclass of AdapterView. In order to get it work, we had to combine three elements: the View itself (Spinner), the data resource which is typically a Collection (interface), an Adaptor that binds every *single entry* in the Collection with its layout. 
 
 ![adaptor components](http://cdn.edureka.co/blog/wp-content/uploads/2013/03/adapters-1.png)
 
@@ -12,9 +14,9 @@ Now let's look at some more subclasses of AdapterView.
 
 ### Simple ListView
 
-Follow steps below to create a simple ListView:
+Using default options, create a new project and name it 'My Lists'. Then, follow steps below to create a simple list:
 
-1. Insert the following into string.xml. We need to have some data to play with.
+1. First of all, we need to have some data to play with. Insert the following into string.xml. 
     
     ```xml
     <string-array name="candidateNames">
@@ -39,18 +41,18 @@ Follow steps below to create a simple ListView:
         <item>Former Governor Jeb Bush (Florida)</item>
     </string-array>
     ```
+    > For the latest polls on American presidential election, click [here](http://www.realclearpolitics.com/epolls/latest_polls/president/).
     
-    > There's no Biden - on 21st this month, he announced he will not run for president in 2016. What a shame!
-    
-    > For the latest poll, click [here](http://www.realclearpolitics.com/epolls/latest_polls/president/).
-    
-2. Open content_main.xml, replace the TextView with the following
+2. Open activity_main.xml, delete the default TextView and drag/drop a ListView from Containers sub-group in Palette. In text mode, rearrange XML so it looks like this
     
     ```xml
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true" />
     ```
     
 3. Open MainActivity.java, insert the following declarations:
@@ -60,7 +62,7 @@ Follow steps below to create a simple ListView:
     private String[] candidateNames;
     ```
     
-    The three steps above should be simple to understand.
+    The three steps above are 'routines' when you create new projects i.e. the model (string array), view (ListView), and controller (Activity).
     
 4. Again in MainActivity.java, insert the following into the `onCreate()` method
     
@@ -68,8 +70,7 @@ Follow steps below to create a simple ListView:
     candidateNames = getResources().getStringArray(R.array.candidateNames);
     
     listView = (ListView) findViewById(R.id.listView);
-    // replace \ with left angle bracket in the line below
-    ArrayAdapter\String> arrayAdapter = new ArrayAdapter\String>(this, android.R.layout.simple_list_item_1, candidateNames);
+    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, candidateNames);
     listView.setAdapter(arrayAdapter);
     listView.setOnItemClickListener(
     
@@ -512,7 +513,7 @@ When Android was first created, the screens weren't very big so there's no need 
 
 Follow steps below to add static Fragments:
 
-1. Start a new Android Studio project called 'My Fragments' using all default options. Open content_main.xml and change RelativeLayout to LinearLayout. 
+1. Start a new Android Studio project called 'My Fragments' using all default options. Open activity_main.xml and change RelativeLayout to LinearLayout. 
     
     > Now if you go to the Design view of this layout file, go to 'Component Tree', right click on LinearLayout, under the menu called Morphing you’ll be able to switch back from LinearLayout to RelativeLayout. But if the layout is RelativeLayout (default option), this ‘morphing’ menu doesn’t show. This is a design feature (bug?) of Android Studio.
     
@@ -534,7 +535,7 @@ Follow steps below to add static Fragments:
     > If you are using a Mac, you need to type in key combinations 'alt' + '3' to insert the # sign. 
     
 8. Repeat the steps 6 & 7 above for fragment_blank2.xml, i.e. change layout, add orientation, change TextView text to 'This is fragment No.2', and change the background color to "#ff191e". Now we have two fragments and we’re ready to put them on our activity.
-9. Open your content_main.xml, in Design view, scroll down Palette until you see fragment under Custom tab. Actually that’s almost the end, you can’t scroll down any further. Click on BlandFrangment ==> OK and leave it at the center of the screen. You fragment will appear as a narrow line as below. This is because the layout_height was set to be 'wrap_content'. Just leave it for now.
+9. Open your activity_main.xml, in Design view, scroll down Palette until you see fragment under Custom tab. Actually that’s almost the end, you can’t scroll down any further. Click on BlandFrangment ==> OK and leave it at the center of the screen. You fragment will appear as a narrow line as below. This is because the layout_height was set to be 'wrap_content'. Just leave it for now.
     
     ![frag1](.md_images/frag1.png)
     

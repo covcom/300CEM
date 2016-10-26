@@ -2,7 +2,7 @@
 
 Last week we looked at some 'simple' widgets and layouts. Simple here refers to the fact that those widgets are mainly used to display/collect small amount of data. What if the data are of a large quantity or dynamically generated? Do we put say 200 student records in TextViews one after another? Obviously the answer is no here. Let's find out how to do it properly.
 
-> On the 20th October 2016, winners were announced for this year's Google Material Design Awards, check it out [here](http://www.xda-developers.com/winners-announced-for-googles-material-design-awards-2016/)
+> On 20th October 2016, winners were announced for this year's Google Material Design Awards, check it out [here](http://www.xda-developers.com/winners-announced-for-googles-material-design-awards-2016/).
 
 ## Lab 1 AdapterViews
 
@@ -83,26 +83,27 @@ Using default options, create a new project and name it 'My Lists'. Then, follow
     );
     ```
     
-    What the code above does is to associate the ListView we declared in the layout file with the data we declared in string resource. ArrayAdapter takes three parameters: context, a layout resource for a single element of data, and the data. Here `android.R.layout.simple_list_item_1` is a system-defined resource layout file that contains only one TextView. You can define you own resource files as you see later on.
+    What the code above does is to associate the ListView declared in the layout file with the data (string array) declared in string resource. ArrayAdapter takes three parameters: context, a layout resource for a single element of data, and the data. Here `android.R.layout.simple_list_item_1` is a system-defined resource layout file that contains only one TextView. You can define you own resource files as you see later on.
     
     > [simple_list_item_1](https://github.com/android/platform_frameworks_base/blob/master/core/res/res/layout/simple_list_item_1.xml) on Github.
     
-    Inside `setOnItemClickListener()` block is an anonymous inner class. There're two ways of defining an onClickListener, one is to do `public void doSomething(View v)` and then associate with View's onClick attribute in xml, the other is what you see here. Note here instead of declaring `View.onClick()` for Buttons, which you've seen a lot already, we declared `AdapterView.OnItemClickListener()` wich is specific for AdapterViews. Here 'parent' is the parent view of single data entry, in our case is the ListView,  view is the View being clicked, position is the 'index' of current view within the adapter, id is the row id the data entry.
+    Inside `setOnItemClickListener()` block is an anonymous inner class, which was mentioned many times already in our class. There're two ways of defining an onClickListener, one is to do `public void doSomething(View v)` and then associate with View's `onClick` attribute in XML, the other is what you see here. Note here instead of declaring `View.onClick()` for Buttons, which you (hopefully) have seen a lot already, we declared `AdapterView.OnItemClickListener()` wich is specific for AdapterViews. Here 'parent' is the parent view of single data entry, in our case is the ListView,  view is the View being clicked, position is the 'index' of current view within the adapter, id is the row id the data entry.
     
     The question mark inside angle brackets is Java generic wildcard, which basically means the type of parent passed into the method is an AdapterView of any type.
     
-    If you run the app, what you'll see is this:
+    If you run the app, what you'll see is something like this:
     
     ![simple](.md_images/simple.png)
 
 
 ### Complex ListView
 
-Simple ListView is useful for displaying data that can be converted to strings in easy steps. But if you want to fine-control the presentation of single entries in your ListView, you need to provide customized layout files for your adapter. This way, you'll make it a 'complex ListView'.
+Simple ListView is useful for displaying data that can be converted to strings in easy steps. But if you want to have fine control of the presentation of single entries in your ListView, you need to provide customized layout files for your adapter. In this way, you'll make it a 'complex ListView'.
 
 Following steps below to create the data we need later on:
 
-1. Click on this [link](https://github.com/covcom/388COM/blob/master/Week_05_AdapterViews%20and%20Fragments/.md_images/candidates_photos.zip) to go to our GitHub page and the click 'Raw' to download some photos of the candidates. Add those to your drawable resources folder.
+1. Click on [this link](https://github.com/covcom/300CEM/blob/master/Week_05_AdapterViews_and_Fragments/.md_images/candidates_photos.zip) to go to our GitHub page and the click 'View Raw' to download some photos of the candidates. Add those to your res/drawable resources folder.
+    
 2. Create a new class called Candidates and insert the following 
     
     > A good point raised by Sumeet Gopiani is that it should be called 'Candidate' instead. I totally agree - I'll change it in the next year!

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private ListView listView;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        To
+                        Toast.makeText(getBaseContext(), candidateNames[position] + ", seriously?", Toast.LENGTH_SHORT).show();
                     }
                 }
         );

@@ -10,7 +10,7 @@
         <item>Marco Rubio</item>
         <item>Jeb Bush</item>
     </string-array>
-    <string-array name="cadidateDetails">
+    <string-array name="candidateDetails">
         <item>Former US Secretary of State Hillary Clinton (New York)</item>
         <item>US Senator Bernie Sanders (Vermont)</item>
         <item>Former Governor Martin O\'Malley (Maryland)</item>

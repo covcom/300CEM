@@ -41,13 +41,13 @@ Using default options, create a new project and name it 'My Lists'. Then, follow
         <item>Former Governor Jeb Bush (Florida)</item>
     </string-array>
     ```
-    > For the latest polls on American presidential election, click [here](http://www.realclearpolitics.com/epolls/latest_polls/president/).
+    > For the latest polls on US presidential election, click [here](http://www.realclearpolitics.com/epolls/latest_polls/president/).
     
 2. Open activity_main.xml, delete the default TextView and drag/drop a ListView from Containers sub-group in Palette. In text mode, rearrange XML so it looks like this
     
     ```xml
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/listViewSimple"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
@@ -64,12 +64,12 @@ Using default options, create a new project and name it 'My Lists'. Then, follow
     
     The three steps above are 'routines' when you create new projects i.e. the model (string array), view (ListView), and controller (Activity).
     
-4. Again in MainActivity.java, insert the following into the `onCreate()` method
+4. In MainActivity.java, insert the following into the `onCreate()` method
     
     ```java
     candidateNames = getResources().getStringArray(R.array.candidateNames);
     
-    listView = (ListView) findViewById(R.id.listView);
+    listView = (ListView) findViewById(R.id.listViewSimple);
     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, candidateNames);
     listView.setAdapter(arrayAdapter);
     listView.setOnItemClickListener(
@@ -100,22 +100,16 @@ Using default options, create a new project and name it 'My Lists'. Then, follow
 
 Simple ListView is useful for displaying data that can be converted to strings in easy steps. But if you want to have fine control of the presentation of single entries in your ListView, you need to provide customized layout files for your adapter. In this way, you'll make it a 'complex ListView'.
 
-Following steps below to create the data we need later on:
-
-1. Click on [this link](https://github.com/covcom/300CEM/blob/master/Week_05_AdapterViews_and_Fragments/.md_images/candidates_photos.zip) to go to our GitHub page and the click 'View Raw' to download some photos of the candidates. Add those to your res/drawable resources folder.
+1. First of all, download some images to use later on. Click on [this link](https://github.com/covcom/300CEM/blob/master/Week_05_AdapterViews_and_Fragments/.md_images/candidates_photos.zip) to go to GitHub page and then click 'View Raw' to download some images of US presidential election candidates. Add those to your res/drawable resources folder.
     
-2. Create a new class called Candidates and insert the following 
-    
-    > A good point raised by Sumeet Gopiani is that it should be called 'Candidate' instead. I totally agree - I'll change it in the next year!
+2. Create a new Java class called Candidate and insert the following 
     
     ```java
-    public class Candidates {
-
     private String name;
     private String detail;
     private int photo;
 
-    public Candidates(String name, String detail, int photo) {
+    public Candidate(String name, String detail, int photo) {
         this.name = name;
         this.detail = detail;
         this.photo = photo;
@@ -137,53 +131,47 @@ Following steps below to create the data we need later on:
     public String toString() {
         return detail;
     }
-    }
     ```
-
-Now we're ready to build our customized ListView.
-
-1. Create a new layout resource file by right-clicking on the layout folder. Name it list_item.xml. Insert the following 
+    
+3. Create a new layout resource file by right-clicking on the layout folder and select New ==> Layout resource file. Name it list_item.xml. 
+    
+    ![](.md_images/list_res.png)
+    
+    Change the default orientation of the container LinearLayout from `vertical` to `horizontal`, and insert the following within the LinearLayout
     
     ```xml
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
-    
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="85dp"
         android:layout_height="85dp"
-        android:background="@android:color/darker_gray"
-        android:padding="8dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
+        android:background="@android:color/darker_gray"
+        android:padding="8dp"
         android:scaleType="centerCrop" />
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
         android:orientation="vertical">
-    
+
         <TextView
             android:id="@+id/textViewName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="first + last name"
-            android:textSize="16dp" />
-        
+            android:textSize="16sp" />
+
         <TextView
             android:id="@+id/textViewDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="details of the candidate"
-            android:textSize="12dp" />
-    
-    </LinearLayout>
-    
+            android:textSize="12sp" />
+
     </LinearLayout>
     ```
     
@@ -191,45 +179,35 @@ Now we're ready to build our customized ListView.
     
     ![list item](.md_images/listitem.png)
     
-2. Create a new 'Empty Activity' called PhotoListActivity. Open activity_photo_list.xml, replace what's in it with the following:
+4. Create a new activity using the 'Empty Activity' template and name it PhotoListActivity. Open activity_photo_list.xml, insert the following into the container RelativeLayout:
     
     ```xml
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.jianhuayang.mylists.PhotoListActivity">
-    
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="2016 Presidential Candidates"
         android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    
-    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="2016 Presidential Candidates"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ListView
+        android:id="@+id/listViewComplex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
-        android:layout_marginTop="20dp"/>
-    
-    </RelativeLayout>
-    
+        android:layout_marginTop="20dp" />
     ```
-    This layout is very similar to the one we've just seen.
     
-3. Open PhotoListActivity.java, replace the contents of the class with the following
+    This layout is very similar to the one we saw earlier in the simple list example. The only difference is that it has an additional TextView above ListView.
+    
+5. In PhotoListActivity.java, add the following class member variable declaration/initialization.
     
     ```java
-    
+    private ListView listView;
+    private String[] candidateNames;
+    private String[] candidateDetails;
     public static int[] candidatePhotos = {
             R.drawable.clinton,
             R.drawable.sanders,
@@ -240,13 +218,14 @@ Now we're ready to build our customized ListView.
             R.drawable.rubio,
             R.drawable.bush
     };
-    private String[] candidateNames;
-    private String[] candidateDetails;
-    // replace \ with angle brackets
-    private ArrayList\Candidates> candidates = new ArrayList<>();
-
-    ListView listView;
-
+    private ArrayList<Candidate> candidates = new ArrayList<>();
+    ```
+    
+    One thing to note in the code above is that an array of integers is declared for drawable resources. The type is int, why?
+    
+6. Insert the following into the `onCreate()` method just below `setContentView()`, to initialize variables
+    
+    ```java
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -255,78 +234,78 @@ Now we're ready to build our customized ListView.
         candidateNames = getResources().getStringArray(R.array.candidateNames);
         candidateDetails = getResources().getStringArray(R.array.candidateDetails);
         generateCandidates();
-
-        listView = (ListView) findViewById(R.id.listView2);
-        listView.setAdapter(new CandidatesAdapter(this, R.layout.list_item, candidates));
-        listView.setOnItemClickListener(
-
-                new AdapterView.OnItemClickListener() {
-
-                    @Override
-                    // replace \ with angle brackets
-                    public void onItemClick(AdapterView\?> parent, View view, int position, long id) {
-
-                        Toast.makeText(getBaseContext(), "You clicked " + candidates.get(position), Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-    }
-
+    ```
+    
+    Insert the following code at outside of `onCreate()` but side the class. This is to create a function that initialize the ArrayList for Candidate.
+    
+    ```java
     private void generateCandidates() {
 
-        // replace \ with angle brackets
-        for (int i = 0; i \ candidatePhotos.length; i++) {
-            candidates.add(new Candidates(candidateNames[i], candidateDetails[i], candidatePhotos[i]));
+        for (int i = 0; i < candidatePhotos.length; i++) {
+            candidates.add(new Candidate(candidateNames[i], candidateDetails[i], candidatePhotos[i]));
         }
     }
     ```
     
-    We declared an array of integers for drawable resources fist, then initialized an ArrayList for our data. The onClickListner is the same as before. The only thing that is new here is the association of data to ListView is through a customized Adapter, as we'll see later. 
-    
-4. Create a new class called CandidatesAdapter. Open the java file generated and replace its contents with the following lines of code
+7. Insert the following code into `onCreate()` method
     
     ```java
-    // replace \ with left angle bracket in the line below
-    public class CandidatesAdapter extends ArrayAdapter\Candidates>{
+    listView = (ListView) findViewById(R.id.listViewComplex);
+        listView.setAdapter(new CandidateAdapter(this, R.layout.list_item, candidates));
+        listView.setOnItemClickListener(
+        
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    
+                        Toast.makeText(getBaseContext(), "You clicked " + candidates.get(position), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    ```
     
-    private int resource;
-    // replace \ with left angle bracket in the line below
-    private ArrayList\Candidates> candidates;
-    private Context context;
+    The code above initialize a ListView and associates it with a customized Adapter. The onClickListner is the same as in the simple list example. The only thing that is new here is the association of data to ListView is through a customized Adapter, as we'll see later. 
     
-    // replace \ with left angle bracket in the line below
-    public CandidatesAdapter(Context context, int resource, ArrayList\Candidates> candidates) {
-        super(context, resource, candidates);
-        this.resource = resource;
-        this.candidates = candidates;
-        this.context = context;
-    }
+8. Create a new class called CandidateAdapter. Open the java file generated and replace its contents with the following lines of code
     
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent){
-        View v = convertView;
-        try{
-            if (v == null){
-                LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = layoutInflater.inflate(resource, parent, false);
+    ```java
+        public class CandidateAdapter extends ArrayAdapter<Candidate> {
+        
+        private int resource;
+        private ArrayList<Candidate> candidates;
+        private Context context;
+        
+        public CandidateAdapter(Context context, int resource, ArrayList<Candidate> candidates) {
+            super(context, resource, candidates);
+            this.resource = resource;
+            this.candidates = candidates;
+            this.context = context;
+        }
+        
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View v = convertView;
+            try {
+                if (v == null) {
+                    LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    v = layoutInflater.inflate(resource, parent, false);
+                }
+
+                ImageView imageView = (ImageView) v.findViewById(R.id.imageView);
+                TextView textViewName = (TextView) v.findViewById(R.id.textViewName);
+                TextView textViewDetail = (TextView) v.findViewById(R.id.textViewDetail);
+
+                imageView.setImageResource(candidates.get(position).getPhoto());
+                textViewName.setText(candidates.get(position).getName());
+                textViewDetail.setText(candidates.get(position).getDetail());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                e.getCause();
             }
-            
-            ImageView imageView = (ImageView) v.findViewById(R.id.imageView);
-            TextView textViewName = (TextView) v.findViewById(R.id.textViewName);
-            TextView textViewDetail = (TextView) v.findViewById(R.id.textViewDetail);
-            
-            imageView.setImageResource(candidates.get(position).getPhoto());
-            textViewName.setText(candidates.get(position).getName());
-            textViewDetail.setText(candidates.get(position).getDetail());
-            
+            return v;
         }
-        catch (Exception e){
-            e.printStackTrace();
-            e.getCause();
-        }
-        return v;
-    }
-    
+
     }
     ```
     
@@ -342,39 +321,25 @@ Now we're ready to build our customized ListView.
     
     Note here `v.findViewById()` is different from `findViewById()`. `v.findViewById()` will only find sub views i.e. views being contained by 'v'; whereas `findViewById()` will find anything contained in the Activity.
     
-5. Insert the following into menu_main.xml
+9. Insert the following into activity_main.xml before the ListView
     
     ```xml
-    <item
-        android:id="@+id/action_photo_list"
-        android:orderInCategory="10"
-        android:title="PhotoList"
-        app:showAsAction="always" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onButtonClick"
+        android:text="Complex List" />
     ```
     
-6. Open MainActivity.java, make `onOptionsItemSelected()` look like the following
+10. Open MainActivity.java, insert the following into the class
     
     ```java
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        switch (id){
-            case R.id.action_photo_list:
-                startActivity(new Intent(this, PhotoListActivity.class));
-                return true;
-            case R.id.action_settings:
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+    public void onButtonClick(View v){
+        startActivity(new Intent(this, PhotoListActivity.class));
     }
     ```
     
-    Steps 5 & 6 are necessary to complete your app, but those two steps should be familiar by now. If you run the app, click on 'PhotoList' in the toolbar, you'll see the following:
+    Steps 9 & 10 are needed only for the sake of demonstration. If you run the app, click on 'Complex List' button, you'll see the following:
     
     ![photo](.md_images/photo.png)
 

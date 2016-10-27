@@ -1,5 +1,6 @@
 package com.example.yang.mylists;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         candidateNames = getResources().getStringArray(R.array.candidateNames);
 
-        listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listViewSimple);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, candidateNames);
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(
@@ -29,5 +30,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    public void onButtonClick(View v){
+        startActivity(new Intent(this, PhotoListActivity.class));
     }
 }

@@ -1,4 +1,4 @@
-package com.example.jianhuayang.mylists;
+package com.example.yang.mylists;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +13,8 @@ public class GridActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
-        GridView gridview = (GridView) findViewById(R.id.gridView);
+
+        GridView gridview = (GridView) findViewById(R.id.activity_grid);
         gridview.setAdapter(new ImageAdapter(this));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

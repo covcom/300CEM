@@ -11,10 +11,19 @@
     tools:context="com.example.yang.mylists.MainActivity">
 
     <Button
+        android:id="@+id/complexList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onButtonClick"
         android:text="Complex List" />
+
+    <Button
+        android:id="@+id/gridView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/complexList"
+        android:onClick="onButtonClick"
+        android:text="Grid View" />
 
     <ListView
         android:id="@+id/listViewSimple"
@@ -22,5 +31,5 @@
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@id/gridView" />
 </RelativeLayout>

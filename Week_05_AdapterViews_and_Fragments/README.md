@@ -223,7 +223,7 @@ Simple ListView is useful for displaying data that can be converted to strings i
     
     One thing to note in the code above is that an array of integers is declared for drawable resources. The type is int, why?
     
-6. Insert the following into the `onCreate()` method just below `setContentView()`, to initialize variables
+6. Insert the following into the `onCreate()` method, just below `setContentView()`, to initialize variables
     
     ```java
     @Override
@@ -236,7 +236,7 @@ Simple ListView is useful for displaying data that can be converted to strings i
         generateCandidates();
     ```
     
-    Insert the following code at outside of `onCreate()` but side the class. This is to create a function that initialize the ArrayList for Candidate.
+    Insert the following code at outside of `onCreate()` but inside the class. This is to create a function that initialize the ArrayList for Candidate class.
     
     ```java
     private void generateCandidates() {
@@ -264,24 +264,25 @@ Simple ListView is useful for displaying data that can be converted to strings i
         );
     ```
     
-    The code above initialize a ListView and associates it with a customized Adapter. The onClickListner is the same as in the simple list example. The only thing that is new here is the association of data to ListView is through a customized Adapter, as we'll see later. 
+    The code above initialize a ListView and associates it with a customized Adapter. The onClickListner is the same as in the simple list example. The only thing that is new here is the association of data and ListView through a customized Adapter. We'll look at it in a minute. 
     
-8. Create a new class called CandidateAdapter. Open the java file generated and replace its contents with the following lines of code
+8. Create a new class called CandidateAdapter. Open the Java file and replace auto-generated class with the following (don't touch the package declaration!)
     
     ```java
-        public class CandidateAdapter extends ArrayAdapter<Candidate> {
-        
+    public class CandidateAdapter extends ArrayAdapter<Candidate> {
+
         private int resource;
         private ArrayList<Candidate> candidates;
         private Context context;
-        
+
         public CandidateAdapter(Context context, int resource, ArrayList<Candidate> candidates) {
             super(context, resource, candidates);
             this.resource = resource;
             this.candidates = candidates;
             this.context = context;
         }
-        
+
+        @NonNull
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View v = convertView;
@@ -309,15 +310,15 @@ Simple ListView is useful for displaying data that can be converted to strings i
     }
     ```
     
-    It's important to understand the code above: our CandidatesAdapter class extends ArrayAdapter of type Candidates. In the constructor, we give the layout resource name i.e. the file that contains the custom layout, the one we created earlier. The most important method is getView, where we check if a convertView (i.e. old view) exists or not. If it doesn’t, we’ll need to inflate it. The reason we do this is because ListView recycles its rows when they move out of the screen, instead of creating new ones, to save system resources. 
+    It's important to understand the code above: our CandidatesAdapter class extends ArrayAdapter of type Candidates. In the constructor, we provide the layout resource name i.e. the file that contains the customized layout XML created earlier. The most important method is `getView()`, where we check if a convertView (i.e. old view) exists or not. If it doesn’t, we’ll need to inflate it. The reason we do this is because ListView recycles its rows when they move out of the screen, instead of creating new ones, to save system resources. 
     
     > [How ListView's recycling mechanism works](http://stackoverflow.com/questions/11945563/how-listviews-recycling-mechanism-works)
     
     There're several different ways of getting an LayoutInflater object:
     
     * The way we did it, `LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)`, is from official [documentation](http://developer.android.com/reference/android/view/LayoutInflater.html).
-    * You could use `LayoutInflater inflater = ((Activity)context).getLayoutInflater()`, see an example from [here](http://www.ezzylearning.com/tutorial/customizing-android-listview-items-with-custom-arrayadapter).
-    * You could also use `LayoutInflater inflater = (LayoutInflater) CandidatesAdapter.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)`, see an example from [here](http://www.codelearn.org/android-tutorial/android-listview).
+    * You can use `LayoutInflater inflater = ((Activity)context).getLayoutInflater()`, see an example from [here](http://www.ezzylearning.com/tutorial/customizing-android-listview-items-with-custom-arrayadapter).
+    * You can also use `LayoutInflater inflater = (LayoutInflater) CandidatesAdapter.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)`, see an example from [here](https://github.com/pranayairan/Code-Learn-Android-Example/blob/master/CodeLearnListExample/src/org/codelearn/codelearnlistexample/ListViewWithBaseAdapter.java).
     
     Note here `v.findViewById()` is different from `findViewById()`. `v.findViewById()` will only find sub views i.e. views being contained by 'v'; whereas `findViewById()` will find anything contained in the Activity.
     
@@ -325,11 +326,14 @@ Simple ListView is useful for displaying data that can be converted to strings i
     
     ```xml
     <Button
+        android:id="@+id/complexList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onButtonClick"
         android:text="Complex List" />
     ```
+    
+    Insert the following attribute into the ListView `android:layout_below="@id/complexList"`, and remove attribute `android:layout_alignParentTop="true"` if it is in there.
     
 10. Open MainActivity.java, insert the following into the class
     
@@ -345,111 +349,114 @@ Simple ListView is useful for displaying data that can be converted to strings i
 
 ### Grid View
 
-Previous two examples showed you ArrayAdapter and customized ArrayAdapter. In fact, ArrayAdapter is a subclass of BaseAdapter. Let's now go one step further and see how to customized BaseAdapter.
+Previous two examples used default ArrayAdapter and customized (extended) ArrayAdapter. In fact, ArrayAdapter is a subclass of BaseAdapter. Let's now go one step further and see how to customize (extend) BaseAdapter. In the following example you'll learn how to create a GridView and provide a customized BaseAdaptor for it.
 
-Following steps below to create a GridView and provide a customized BaseAdaptor.
-
-1. Create a new Empty Activity called GridAcitivty. Open activity_grid.xml and replace what's in it with the following
+1. Create a new Activity using the 'Empty Activity' template and name it GridAcitivty. Open activity_grid.xml and change the container layout from RelativeLayout to GridView. Insert the following attributes into the opening tag of GridView:
     
     ```xml
-    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/gridView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:columnWidth="90dp"
     android:gravity="center"
     android:horizontalSpacing="10dp"
     android:numColumns="auto_fit"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:stretchMode="columnWidth"
     android:verticalSpacing="10dp"
-    tools:context="com.example.jianhuayang.mylists.GridActivity">
-    </GridView>
     ```
     
-    There're some new attributes here, but most of them are self-explanatory.
+    There are new attributes, but they are quite self-explanatory.
     
-2. Open GridActivity.java, replace `onCreate()` with the following. The only thing new here is the Adapter, which we'll look at next.
+2. Open GridActivity.java, insert the following code into `onCreate()` just before the ending curly brackets '}'.
+    
     ```java
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_grid);
-        GridView gridview = (GridView) findViewById(R.id.gridView);
-        gridview.setAdapter(new ImageAdapter(this));
+    GridView gridview = (GridView) findViewById(R.id.activity_grid);
+    gridview.setAdapter(new ImageAdapter(this));
 
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(getBaseContext(), "At position " + position + " is " + getResources().getStringArray(R.array.candidateNames)[position], Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+    gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+            Toast.makeText(getBaseContext(), "At position " + position + " is " + getResources().getStringArray(R.array.candidateNames)[position], Toast.LENGTH_SHORT).show();
+        }
+    });
     ```
+    The only thing new here is the ImageAdapter, which we'll look at next.
     
-3. Create a new class called ImageAdapter, and insert the following
+3. Create a new class called ImageAdapter. Replace the auto-generated class with the following
     
     ```java
     public class ImageAdapter extends BaseAdapter {
-    
-    private int[] candidatePhotos = PhotoListActivity.candidatePhotos;
-    private Context context;
-    
-    public ImageAdapter(Context context) {
-        this.context = context;
-    }
-    
-    public int getCount() {
-        return candidatePhotos.length;
-    }
-    
-    public Object getItem(int position) {
-        return null;
-    }
-    
-    public long getItemId(int position) {
-        return 0;
-    }
-    
-    // create a new ImageView for each item referenced by the Adapter
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
-        if (convertView == null) {  // if it's not recycled, initialize some attributes
-            imageView = new ImageView(context);
-            imageView.setLayoutParams(new GridView.LayoutParams(200, 200));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
-        } else {
-            imageView = (ImageView) convertView;
+
+        private int[] candidatePhotos = PhotoListActivity.candidatePhotos;
+        private Context context;
+
+        public ImageAdapter(Context context) {
+            this.context = context;
         }
-        
-        imageView.setImageResource(candidatePhotos[position]);
-        return imageView;
-    }
+
+        @Override
+        public int getCount() {
+            return candidatePhotos.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ImageView imageView;
+            if (convertView == null) {
+                imageView = new ImageView(context);
+                imageView.setLayoutParams(new GridView.LayoutParams(200, 200));
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageView.setPadding(8, 8, 8, 8);
+            } else {
+                imageView = (ImageView) convertView;
+            }
+
+            imageView.setImageResource(candidatePhotos[position]);
+            return imageView;
+        }
+
     }
     ```
     
-    BaseAdapter is the superclass of different Adapters, but it's an abstract class. That means you have to provide concrete implementations for all abstract methods. That's why you see `getItem()` and `getId()` above. Although we don't use those two methods in our example we have to implement them. `getCount()` return the size of the data. The most important one is still `getView()`. Here instead of using layout resource file, we programmatically add layout widgets into the parent, and set it's properties. `GridView.LayoutParams()` creates an GridView.LayoutParams object that resides inside the parent view, which is a GridView in our case.
+    BaseAdapter is the superclass of different Adapters, but it's an abstract class. That means you have to provide concrete implementations for all abstract methods. That's why you see `getItem()` and `getItemId()` above. Although we don't use those two methods in our example we have to implement them. `getCount()` return the size of the data. The most important one is still `getView()`. Here instead of using layout resource file, we programmatically add layout widgets into the parent, and set it's properties. `GridView.LayoutParams()` creates an GridView.LayoutParams object that resides inside the parent view, which is a GridView in our case.
     
-5. Insert the following into menu_main.xml
+5. Insert the following into activity_main.xml, just before the ListView
     
     ```xml
-    <item
-        android:id="@+id/action_grid"
-        android:orderInCategory="20"
-        android:title="GridView"
-        app:showAsAction="always" />
+    <Button
+        android:id="@+id/gridView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/complexList"
+        android:onClick="onButtonClick"
+        android:text="Grid View" />
     ```
     
-6. Open MainActivity.java, insert the followin case into `onOptionsItemSelected()`
+    Change the ListView attribute `android:layout_below` value from `"@id/complexList"` to `"@id/gridView"`.
+    
+10. Open MainActivity.java, insert the following into the class
     
     ```java
-    case R.id.action_grid:
-                startActivity(new Intent(this, GridActivity.class));
-                return true;
+    public void onButtonClick(View v){
+        startActivity(new Intent(this, PhotoListActivity.class));
+    }
+    ```
+6. Open MainActivity.java, replace contents of `onButtonClick()` with the following
+    
+    ```java
+    switch (v.getId()) {
+        case R.id.complexList:
+            startActivity(new Intent(this, PhotoListActivity.class));
+            break;
+        case R.id.gridView:
+            startActivity(new Intent(this, GridActivity.class));
+            break;
+    }
     ```
     
     If you run the app and click on 'GridView', you'll see something similar to below
@@ -458,22 +465,22 @@ Following steps below to create a GridView and provide a customized BaseAdaptor.
 
 ### AdapterView hierarchy
 
-You have seen BaseAdapter and ArrayAdapter, if you Google online examples you'll see more Adapters such as ListAdapter and SimpleAdapter etc. What are the relationships among these?
+You saw BaseAdapter and ArrayAdapter, if you Google online examples you'll see more Adapters such as ListAdapter and SimpleAdapter etc. What are the relationships among these?
 
 Basically ArrayAdapter is the first concrete Adapter in the tree, above it are interfaces and an abstract class. But sometimes people do declare something like `ListAdapter listAdapter = new ArrayAdapter<String>()`, don't be confused.
 
-![AdapterViewHierarchy](http://cdn.intertech.com/Blog/wp-content/uploads/2014/06/HeirarchyOfAdapter.png)
+![AdapterViewHierarchy](http://www.intertech.com/Blog/wp-content/uploads/2014/06/HeirarchyOfAdapter-480x396.png)
 
 A similar hierarchy can be drawn for AdapterView and subclasses. Even though those 'collection' Views are named differently, they are in fact closely related to each other.
 
-![HeirarchyOfAdapter](http://cdn.intertech.com/Blog/wp-content/uploads/2014/06/AdapterViewHierarchy.png)
+![HeirarchyOfAdapter](http://www.intertech.com/Blog/wp-content/uploads/2014/06/AdapterViewHierarchy-480x396.png)
 
 
 > Above images from a [blog](http://www.intertech.com/Blog/android-adapters-adapterviews/) written by Jim White.
 
 ## Lab 2 Fragments
 
-When Android was first created, the screens weren't very big so there's no need to reuse part of the layout. But later on as screen sizes get bigger and bigger, Google introduced Fragments, which is basically a fraction of your layout. The idea is that Fragments can be reused to suit different screen sizes. We'll see some examples in the current lab.
+When Android was first created, the typical mobile devices' screens weren't very big so there's no need to reuse any part of the layout. But later on as screen sizes get bigger and bigger, Google introduced Fragments, which is basically a fraction of your layout. The idea is that Fragments can be reused to suit different screen sizes/orientations.
 
 ### Static Fragments
 

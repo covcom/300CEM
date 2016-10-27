@@ -32,7 +32,14 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-    public void onButtonClick(View v){
-        startActivity(new Intent(this, PhotoListActivity.class));
+    public void onButtonClick(View v) {
+        switch (v.getId()) {
+            case R.id.complexList:
+                startActivity(new Intent(this, PhotoListActivity.class));
+                break;
+            case R.id.gridView:
+                startActivity(new Intent(this, GridActivity.class));
+                break;
+        }
     }
 }

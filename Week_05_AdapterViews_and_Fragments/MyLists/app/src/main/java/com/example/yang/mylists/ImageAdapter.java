@@ -1,4 +1,4 @@
-package com.example.jianhuayang.mylists;
+package com.example.yang.mylists;
 
 import android.content.Context;
 import android.view.View;
@@ -8,8 +8,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 /**
- * Created by jianhuayang on 22/10/15.
+ * Created by jianhuayang on 27/10/2016.
+ * taken from https://developer.android.com/guide/topics/ui/layout/gridview.html
  */
+
 public class ImageAdapter extends BaseAdapter {
 
     private int[] candidatePhotos = PhotoListActivity.candidatePhotos;
@@ -19,14 +21,17 @@ public class ImageAdapter extends BaseAdapter {
         this.context = context;
     }
 
+    @Override
     public int getCount() {
         return candidatePhotos.length;
     }
 
+    @Override
     public Object getItem(int position) {
         return null;
     }
 
+    @Override
     public long getItemId(int position) {
         return 0;
     }
@@ -46,4 +51,5 @@ public class ImageAdapter extends BaseAdapter {
         imageView.setImageResource(candidatePhotos[position]);
         return imageView;
     }
+
 }

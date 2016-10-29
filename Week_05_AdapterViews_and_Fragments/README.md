@@ -1,6 +1,6 @@
 # AdapterViews and Fragments
 
-Last week we looked at some 'simple' widgets and layouts. Simple here refers to the fact that those widgets are mainly used to display/collect small amount of data. What if the data are of a large quantity or dynamically generated? Do we put say 200 student records in TextViews one after another? Obviously the answer is no here. Let's find out how to do it properly.
+Last week we looked at some 'simple' widgets and layouts. Simple here refers to the fact that those widgets are mainly used to display/collect a small amount of data. What if the data are of a large quantity or dynamically generated? Do we put say 200 student records in TextViews one after another? Obviously, the answer is no here. Let's find out how to do it properly.
 
 > On 20th October 2016, winners were announced for this year's Google Material Design Awards, check it out [here](http://www.xda-developers.com/winners-announced-for-googles-material-design-awards-2016/).
 
@@ -236,7 +236,7 @@ Simple ListView is useful for displaying data that can be converted to strings i
         generateCandidates();
     ```
     
-    Insert the following code at outside of `onCreate()` but inside the class. This is to create a function that initialize the ArrayList for Candidate class.
+    Insert the following code at outside of `onCreate()` but inside the class. This is to create a function that initializes the ArrayList for Candidate class.
     
     ```java
     private void generateCandidates() {
@@ -349,7 +349,8 @@ Simple ListView is useful for displaying data that can be converted to strings i
 
 ### Grid View
 
-Previous two examples used default ArrayAdapter and customized (extended) ArrayAdapter. In fact, ArrayAdapter is a subclass of BaseAdapter. Let's now go one step further and see how to customize (extend) BaseAdapter. In the following example you'll learn how to create a GridView and provide a customized BaseAdaptor for it.
+<!--https://developer.android.com/guide/topics/ui/layout/gridview.html-->
+Previous two examples used default ArrayAdapter and customized (extended) ArrayAdapter. In fact, ArrayAdapter is a subclass of BaseAdapter. Let's now go one step further and see how to customize (extend) BaseAdapter. In the following example, you'll learn how to create a GridView and provide a customized BaseAdaptor for it.
 
 1. Create a new Activity using the 'Empty Activity' template and name it GridAcitivty. Open activity_grid.xml and change the container layout from RelativeLayout to GridView. Insert the following attributes into the opening tag of GridView:
     
@@ -423,7 +424,7 @@ Previous two examples used default ArrayAdapter and customized (extended) ArrayA
     }
     ```
     
-    BaseAdapter is the superclass of different Adapters, but it's an abstract class. That means you have to provide concrete implementations for all abstract methods. That's why you see `getItem()` and `getItemId()` above. Although we don't use those two methods in our example we have to implement them. `getCount()` return the size of the data. The most important one is still `getView()`. Here instead of using layout resource file, we programmatically add layout widgets into the parent, and set it's properties. `GridView.LayoutParams()` creates an GridView.LayoutParams object that resides inside the parent view, which is a GridView in our case.
+    BaseAdapter is the superclass of different Adapters, but it's an abstract class. That means you have to provide concrete implementations for all abstract methods. That's why you see `getItem()` and `getItemId()` above. Although we don't use those two methods in our example we have to implement them. `getCount()` return the size of the data. The most important one is still `getView()`. Here instead of using layout resource file, we programmatically add layout widgets into the parent and set it's properties. `GridView.LayoutParams()` creates an GridView.LayoutParams object that resides inside the parent view, which is a GridView in our case.
     
 5. Insert the following into activity_main.xml, just before the ListView
     
@@ -459,15 +460,15 @@ Previous two examples used default ArrayAdapter and customized (extended) ArrayA
     }
     ```
     
-    If you run the app and click on 'GridView', you'll see something similar to below
-    
-    ![grid](.md_images/grid.png)
+If you run the app and click on 'GridView', you'll see something similar to below
+
+![grid](.md_images/grid.png)
 
 ### AdapterView hierarchy
 
-You saw BaseAdapter and ArrayAdapter, if you Google online examples you'll see more Adapters such as ListAdapter and SimpleAdapter etc. What are the relationships among these?
+You saw BaseAdapter and ArrayAdapter already. If you Google online examples you'll see more Adapters such as ListAdapter and SimpleAdapter etc. What are the relationships among these?
 
-Basically ArrayAdapter is the first concrete Adapter in the tree, above it are interfaces and an abstract class. But sometimes people do declare something like `ListAdapter listAdapter = new ArrayAdapter<String>()`, don't be confused.
+Basically, ArrayAdapter is the first concrete Adapter in the tree, above it are interfaces and an abstract class. But sometimes people do declare something like `ListAdapter listAdapter = new ArrayAdapter<String>()`, don't be confused.
 
 ![AdapterViewHierarchy](http://www.intertech.com/Blog/wp-content/uploads/2014/06/HeirarchyOfAdapter-480x396.png)
 
@@ -475,149 +476,118 @@ A similar hierarchy can be drawn for AdapterView and subclasses. Even though tho
 
 ![HeirarchyOfAdapter](http://www.intertech.com/Blog/wp-content/uploads/2014/06/AdapterViewHierarchy-480x396.png)
 
-
 > Above images from a [blog](http://www.intertech.com/Blog/android-adapters-adapterviews/) written by Jim White.
 
 ## Lab 2 Fragments
 
-When Android was first created, the typical mobile devices' screens weren't very big so there's no need to reuse any part of the layout. But later on as screen sizes get bigger and bigger, Google introduced Fragments, which is basically a fraction of your layout. The idea is that Fragments can be reused to suit different screen sizes/orientations.
+When Android was first created, the typical mobile devices' screens weren't very big so there's no need to reuse any part of the layout. But later on, as screen sizes get bigger and bigger, Google introduced Fragments, which is basically a fraction of your layout. The idea is that Fragments can be reused to suit different screen sizes/orientations.
 
 ### Static Fragments
 
 Follow steps below to add static Fragments:
 
-1. Start a new Android Studio project called 'My Fragments' using all default options. Open activity_main.xml and change RelativeLayout to LinearLayout. 
-    
-    > Now if you go to the Design view of this layout file, go to 'Component Tree', right click on LinearLayout, under the menu called Morphing you’ll be able to switch back from LinearLayout to RelativeLayout. But if the layout is RelativeLayout (default option), this ‘morphing’ menu doesn’t show. This is a design feature (bug?) of Android Studio.
-    
-    > ![morphing](.md_images/morphing.png)
-    
-2. Delete the TextView, and add `android:orientation` attribute as vertical.
-3. Right-click on the blank area of the Project tool window, select NewFragmentFragment (blank). If the system doesn’t give you the option to create new Fragment, check that if you are under the Android view. In the window that pops up, uncheck both 'include fragment factory methods' and 'include interface callbacks'. Use the default name 'BlankFragment' and click Finish. 
-4. Repeat the above process for a second time to produce a second fragment, and name it BlankFragment2. After this step, your project should contain three java classes and three (or four depending on your version) layout files. The project view of Android Studio should look like this
+1. Start a new Android Studio project called 'My Fragments' using all default options. Open activity_main.xml, change RelativeLayout to LinearLayout, add `android:orientation` attribute as vertical.
+2. Delete the TextView.
+3. Right-click on the blank area of the Project tool window, select New ==> Fragment ==> Fragment (blank). If the system doesn’t give you the option to create new Fragment, check that if you are under the Android view. In the window that pops up, **uncheck both** 'include fragment factory methods' and 'include interface callbacks'. Use the default name 'BlankFragment' and click Finish. 
+4. Repeat the above process for a second time to produce another fragment. In the Configure Component window, name the new fragment 'BlankFragment2', and set the Fragment Layout Name to be 'fragment_blank2'. After this step, your project should contain three java classes and three layout files (or four if you can see 'content_main.xml', depending on your Android Studio version). The project view of Android Studio should look like this
     
     ![blank](.md_images/blank.png)
     
-5. Double click to open fragment_blank.xml. Note the TODO sentence online No.6. This is a nice feature of Android Studio. If you click on the TODO tab at the bottom of the workbench you’ll see that all TODOs are being summarized there.
+5. Double click to open fragment_blank.xml. Note the TODO sentence online No.7. This is a nice feature of Android Studio. If you click on the TODO tab at the bottom of the workbench you’ll see that all TODOs are being summarized there.
     
     ![todo](.md_images/todo.png)
     
-6. Change the layout from FrameLayout to LinearLayout, add vertical as orientation. Change the TextView text to 'This is fragment No.1'. 
-7. In the LinearLayout opening tag, add `android:background="#00FF00"`. Once you finish adding the text, leave your mouse within the text for a bit and Android Studio will pop up a small help window to let you choose your color. Follow the link to choose the desired color.
+6. In fragment_blank.xml, change the layout from FrameLayout to LinearLayout, add vertical as orientation. Change the TextView text to 'This is fragment No.1'. 
+7. In the LinearLayout opening tag, add `android:background="#00FF00"`.
     
     > If you are using a Mac, you need to type in key combinations 'alt' + '3' to insert the # sign. 
     
-8. Repeat the steps 6 & 7 above for fragment_blank2.xml, i.e. change layout, add orientation, change TextView text to 'This is fragment No.2', and change the background color to "#ff191e". Now we have two fragments and we’re ready to put them on our activity.
-9. Open your activity_main.xml, in Design view, scroll down Palette until you see fragment under Custom tab. Actually that’s almost the end, you can’t scroll down any further. Click on BlandFrangment ==> OK and leave it at the center of the screen. You fragment will appear as a narrow line as below. This is because the layout_height was set to be 'wrap_content'. Just leave it for now.
+8. Repeat the steps 6 & 7 above for fragment_blank2.xml, i.e. change layout, add orientation, change TextView text to 'This is fragment No.2', and change the background color to be "#ff191e".
     
-    ![frag1](.md_images/frag1.png)
+    Now we have two fragments and we’re ready to put them on our activity.
     
-    ![frag1 center](.md_images/frag1_center.png)
+9. Open your activity_main.xml, in Design view, scroll down Palette until you see fragment under Layouts sub-group. Drag/drop fragment from Palette onto graphical layout and the system will give you a list of Fragments to choose from. Select BlankFragment and click OK. What you'll see next is that your fragment appears like a narrow line, and the system gives you some warning messages. Click on 'Use @layout/fragment_blank' to continue.
     
-10. Add BlandFrangment2 onto your layout using similar steps as above. For each fragment, change layout_height to "0dp" and add the following attribute `android:layout_weight="1"`. Now each fragment will take up approximately half of the screen. (Not exactly because of the padding spaces). Your xml should now look like the following:
+    ![frag1](.md_images/frag_warn.png)
+        
+10. In the same way, add BlandFrangment2 onto your layout. In text mode, for each fragment, change layout_height to "0dp" and add the following attribute `android:layout_weight="1"`. Now each fragment will take up approximately half of the screen. (Not exactly because of the padding spaces). Your XML should now look like the following:
     
     ```xml
     <fragment
+        android:id="@+id/fragment"
+        android:name="com.example.jianhuayang.myfragments.BlankFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:name="com.example.jianhuayang.myfragments.BlankFragment"
-        android:id="@+id/fragment"
-        android:layout_gravity="center_horizontal" />
+        tools:layout="@layout/fragment_blank" />
 
     <fragment
+        android:id="@+id/fragment2"
+        android:name="com.example.jianhuayang.myfragments.BlankFragment2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:name="com.example.jianhuayang.myfragments.BlankFragment2"
-        android:id="@+id/fragment2"
-        android:layout_gravity="center_horizontal" />
+        tools:layout="@layout/fragment_blank2" />
     ```
     
-11. If you run your app you should have something similar to the one below.
-    
-    ![static](.md_images/static.png)
+If you run your app you should have something similar to the one below.
+
+![static](.md_images/static.png)
 
 ### Programmatically add the fragment
 
 In the previous example, you added static Fragments into your layout resource file. This is possible, but a more handy way to do it is to add Fragments programmatically.
 
 1. Create an Empty Activity called DynamicActivity.
-2. Open activity_dynamic.xml, insert the following into the default RelativeLayout tag `android:id="@+id/dynamicContainer"`.
-3. Open DynamicActivity.java, modify the `onCreate()` method so it looks like below:
+2. Open DynamicActivity.java, insert the following code into `onCreate()`, just below the `setContentView()` method:
     
     ```java
-        @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dynamic);
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            BlankFragment frag1 = new BlankFragment();
-            fragmentTransaction.replace(R.id.dynamicContainer, frag1);
-        } else {
-            BlankFragment2 frag2 = new BlankFragment2();
-            fragmentTransaction.replace(R.id.dynamicContainer, frag2);
-        }
-        fragmentTransaction.commit();
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        BlankFragment frag1 = new BlankFragment();
+        fragmentTransaction.replace(R.id.activity_dynamic, frag1);
+    } else {
+        BlankFragment2 frag2 = new BlankFragment2();
+        fragmentTransaction.replace(R.id.activity_dynamic, frag2);
     }
+    fragmentTransaction.commit();
     ```
     
     In order to have Fragments loaded in your Java code, we first created a FragmentManager, which is followed by FragmentTransaction. FragmentManager, as the name suggests, can be used to track Fragments i.e. `findFragmentById()` or `findFragmentByTag()`. It can also be used to pop fragments off the back stack, or  register a listener for changes to the back stack. FragmentTransaction is used to manipulate Fragments. It has methods such as `add()`, `remove()`, and `replace()`. To apply the transaction to the activity, you must call `commit()`.
     
-    `getResources().getConfiguration().orientation` is a way to determine screen orientation. Click [here](http://developer.android.com/reference/android/content/res/Configuration.html#orientation) to read the manual on Configuration class.
+    `getResources().getConfiguration().orientation` is a way to determine screen orientation. Click [here](http://developer.android.com/reference/android/content/res/Configuration.html#orientation) to read the manual on Configuration class. There're other ways to determine screen orientation, e.g. `getWindowManager().getDefaultDisplay().getRotation()`, check it out on [StackOverflow](http://stackoverflow.com/questions/2795833/check-orientation-on-android-phone).
     
-    > Check out this StackOverflow question on Android orientation [link](http://stackoverflow.com/questions/2795833/check-orientation-on-android-phone).
-    
-4. Add the following into menu_main.xml
+3. Add the following into activity_main.xml, before the first fragment
     
     ```xml
-    <item
-        android:id="@+id/action_dynamic"
-        android:orderInCategory="90"
-        android:title="@string/action_dynamic"
-        app:showAsAction="ifRoom" />
+    <Button
+        android:id="@+id/dynamicFragments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onButtonClick"
+        android:text="Dynamic fragments" />
     ```
     
-5. Replace the  method with the following
+4. Insert the following method into MainActivity.java
     
     ```java
-       @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        switch (id) {
-            case R.id.action_dynamic:
-                startActivity(new Intent(this, DynamicActivity.class));
-                return true;
-            case R.id.action_settings:
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
+    public void onButtonClick(View v){
+        startActivity(new Intent(this, DynamicActivity.class));
     }
     ```
     
-6. If you run the app and click 'Dynamic', you'll have two different Fragments for different orientations.
-    
-    ![port](.md_images/port.png)
-    
-    ![land](.md_images/land.png)
-    
+If you run the app and click the 'Dynamic fragments', you'll have two different Fragments for different orientations.
 
-### ListFragments
+![port](.md_images/port.png)
 
-So far we have only dealt with Fragments that contain static data, we haven't used any AdapterViews we learned in the 1st lab. Let's now move to an example where we combine Fragments with ListView i.e. ListFragments. ListFragment displays a list of items that are managed by an adapter.
+![land](.md_images/land.png)
 
-First of all, we need to provide some data for the app.
+### ListFragment
 
-1. Copy the 8 photos you downloaded previously into the drawable folder of the current project.
+So far we have only dealt with Fragments that contain static data, we haven't used any of the AdapterViews we learned previously. Let's now move to an example where we combine Fragments with ListView i.e. ListFragments. ListFragment displays a list of items that are managed by an adapter.
+
+1. First of all, we need to have some data to play with. Copy the 8 photos you downloaded for project 'My Lists' into the drawable folder of the current project.
 2. Right-click on the package name of your project, select New ==> Package. Give it a name of 'data'.
     
     ![package](.md_images/package.png)
@@ -625,8 +595,6 @@ First of all, we need to provide some data for the app.
 3. Within the 'data' package, create a new class and name it Candidates. Insert the following code into the class
     
     ```java
-    public final class Candidates {
-    
     public static final String[] candidateNames = {
             "Hillary Clinton",
             "Bernie Sanders",
@@ -647,7 +615,6 @@ First of all, we need to provide some data for the app.
             "US Senator Marco Rubio (Florida)",
             "Former Governor Jeb Bush (Florida)",
     };
-    
     public static final int[] candidatePhotos = {
             R.drawable.clinton,
             R.drawable.sanders,
@@ -658,87 +625,63 @@ First of all, we need to provide some data for the app.
             R.drawable.rubio,
             R.drawable.bush
     };
-    
-    }
     ```
     
-Now we're ready to create the new Fragment.
-
-1. Create a new Fragment by clicking New ==> Fragment ==> Fragment (list). Uncheck 'Include fragment...' and 'Switch to...' checkboxes, leave the name as defaults, and click Finish.
-2. You'll see a 'dummy' folder automatically created. Delete that folder. Surprisingly the system didn't automatically generate a layout file for you. This is because the default setting is that each ListFragment has one and only one ListView with it.
-3. Change the `setListAdapter()` method to the following
+    If you see 'R' is highlighted using red underline, you'll need to import the 'R' class. Now we're ready to create a new Fragment.
+    
+4. Create a new Fragment using the Blank Fragment template, uncheck the 'Create layout XML' box, also uncheck the two 'include...' checkboxes. Name this fragment ItemFragment. Open ItemFragment.java, replace superclass Fragment with ListFragment, and implement AdapterView.OnItemClickListener. Now your class declaration should look like this
     
     ```java
-    // replace \ with angle bracket in the line below
-    setListAdapter(new ArrayAdapter\String>(getActivity(),
+    public class ItemFragment extends ListFragment implements AdapterView.OnItemClickListener
+    ```
+    
+    The reason why we unchecked '' is that ListFragment has a default layout that consists of a single list view. We can manipulate this ListView in Java code.
+    
+5. Insert the following code into the ItemFragment class.
+    ```java
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setListAdapter(new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, Candidates.candidateNames));
-    ```
-    
-4. Change `public void onFragmentInteraction(String id)` to `public void onFragmentInteraction(int position)`. Basically we want an int to be passed in this interface method.
-5. Change `mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id)` to `mListener.onFragmentInteraction(position)`. This is to accomodate the change in the previous step. Steps 3 - 5 should is the same as ListView.
-6. Create an Empty Activity and name it ListFragmentActivity. Open activity_list_fragment.xml, insert an id attribute `android:id="@+id/ListFrameLayout"`.
-7. Open ListFragmentActivity.java, modify your code so that it looks like the following:
-    
-    ```java
-    public class ListFragmentActivity extends AppCompatActivity implements ItemFragment.OnFragmentInteractionListener{
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_fragment);
-
-        getFragmentManager().beginTransaction().add(R.id.ListFrameLayout, new ItemFragment()).commit();
+        getListView().setOnItemClickListener(this);
     }
 
     @Override
-    public void onFragmentInteraction(int position){
-        Toast.makeText(getBaseContext(), Candidates.candidateNames[position], Toast.LENGTH_SHORT).show();
-    }
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(getActivity(), Candidates.candidateNames[position], Toast.LENGTH_SHORT).show();
     }
     ```
     
-    Note here to communicate from Fragment back to Activity, we had to make sure the Activity implements the interface. This is because the same Fragment might be used in several different Activities, it needs to know which one is being called using the interface contract.
+    In code above, `onItemClick()` should look familiar now. The only thing new here is the `onActivityCreated()` callback method. As we'll see later, there're a few lifecycle callback methods that are specific to fragments. This is one of those. It'll be called when the activity associated with the fragment is created.
     
-8. Add a menu item and case for the new Activity
-    
-    ```xml
-    <item
-        android:id="@+id/action_list"
-        android:orderInCategory="80"
-        android:title="@string/action_list"
-        app:showAsAction="ifRoom" />
-    ```
+6. Create an Empty Activity and name it ListFragmentActivity. Open ListFragmentActivity.java, insert the following line of code into `onCreate()`, just below `setContentView()`
     
     ```java
-        case R.id.action_list:
-        startActivity(new Intent(this, ListFragmentActivity.class));
-        return true;
+    getSupportFragmentManager().beginTransaction().add(R.id.activity_list_fragment, new ItemFragment()).commit();
     ```
     
-    If you run the app and click 'Lists' you'll see the following
+7. Follow previous instructions (points No.3 & 4 in 'Programmatically add the fragment') to add a button called 'List Fragment' in activity_main.xml, associate this button with an intent that goes to ListFragmentActivity. 
     
-    ![lists](.md_images/lists.png)
+Now if you run the app and click 'List Fragment' you'll see the following
     
+![lists](.md_images/lists.png)
 
 ### Two-panel layouts
 
-Now you've seen how to combine AdapterView with Fragments, now it's time to move on to multi-panel layouts you often see in apps such as Gmail etc. In multi-panel apps, there's a list panel which you select and click, in the detail panel the contents will get updated accordingly.
+You often see multi-panel layouts in apps such as Gmail. In some of these apps, there's a list panel where you can click and select, and then in the detail panel contents will get updated accordingly. The following exercise teaches you how to do something alike
 
-1. Create a new blank Fragment, uncheck the two 'include...' checkboxes. Name it DetailsFragment. Open fragment_details.xml and insert the following. This fragment is going to be used to display candidates details.
-    
+1. Create a new blank Fragment, uncheck the two 'include...' checkboxes. Name it DetailsFragment. This fragment is going to be used to display candidates details. Open fragment_details.xml, delete the auto-generated TextView and insert the following attribute into FragmentLayout. 
     ```xml
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.jianhuayang.myfragments.DetailsFragment"
-    android:id="@+id/detailsFrameLayout">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:id="@+id/detailsFrameLayout"
+    ```
+    
+    Insert the following widgets into the FragmentLayout
+    ```xml
     <LinearLayout
+        android:id="@+id/detailsLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/detailsLinearLayout"
         android:orientation="vertical">
 
         <ImageView
@@ -755,13 +698,10 @@ Now you've seen how to combine AdapterView with Fragments, now it's time to move
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:gravity="center" />
-
     </LinearLayout>
-    
-    </FrameLayout>
     ```
     
-2. Insert the following lines into DetailsFragment.java. What we do here is that we get any data that passed into the fragment first of all. In a way similar to `getIntent()` for activities, for Fragments we use `getArguments()`. The arguments are typically a Bundle. Depending on if the Bundle is empty, we initialize the views accordingly.
+2. Insert the following lines into DetailsFragment class. What we do here is that we get any data that passed into the fragment first of all. In a way similar to `getIntent()` for activities, for Fragments we use `getArguments()`. The arguments are typically a Bundle. Depending on if the Bundle is empty, we initialize the views accordingly.
     
     ```java
     public static final String POSITION = "position";
@@ -783,21 +723,10 @@ Now you've seen how to combine AdapterView with Fragments, now it's time to move
     }
     ```
     
-3. Create an empty activity called MultiPanelActivity. Open activity_multi_panel.xml and insert the following
+3. Create an empty activity called MultiPanelActivity. Open activity_multi_panel.xml, change the container layout from RelativeLayout to horizontal LinearLayout and insert the following FrameLayouts. FrameLayouts here are used as placeholders for our fragments.
+
     
     ```xml
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/multiPanel"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.jianhuayang.myfragments.MultiPanelActivity">
-
     <FrameLayout
         android:id="@+id/fragmentLeft"
         android:layout_width="0dp"
@@ -810,57 +739,59 @@ Now you've seen how to combine AdapterView with Fragments, now it's time to move
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2" />
-    </LinearLayout>
     ```
     
-    FrameLayout here is used as placeholders for out fragments.
-    
-4. Open MultiPanelActivity.java and insert the following
+4. Open MultiPanelActivity.java and make the class implement `AdapterView.OnItemClickListener` interface. So your class declaration should look like this
     
     ```java
-    public class MultiPanelActivity extends AppCompatActivity implements ItemFragment.OnFragmentInteractionListener {
+    public class MultiPanelActivity extends AppCompatActivity implements AdapterView.OnItemClickListener
+    ```
     
+    Insert the following overriding `onItemClick()` method into the class. By doing this, this MultiPanelActivity is capable of handling clicks that take place within an AdapterView.
+    
+    ```java
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_multi_panel);
-        
-        if (savedInstanceState == null){
-            getFragmentManager().beginTransaction().add(R.id.fragmentLeft, new ItemFragment()).commit();
-            getFragmentManager().beginTransaction().add(R.id.fragmentRight, new DetailsFragment()).commit();
-        }
-    }
-    
-    @Override
-    public void onFragmentInteraction(int position) {
-    
-        DetailsFragment detailsFragment = (DetailsFragment)
-                getFragmentManager().findFragmentById(R.id.fragmentRight);
-                
-        if (detailsFragment != null) {
-            
-            DetailsFragment detailsFragmentNew = new DetailsFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt(DetailsFragment.POSITION, position);
-            detailsFragmentNew.setArguments(bundle);
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentRight, detailsFragmentNew);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-            
-        }
-        
-    }
-    
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        DetailsFragment detailsFragmentNew = new DetailsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(DetailsFragment.POSITION, position);
+        detailsFragmentNew.setArguments(bundle);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentRight, detailsFragmentNew);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
     ```
     
-    In the code above, we initialise the layouts in `onCreate()`. 'savedInstanceState' is used to check if we're restoring from a screen rotation i.e. configuration change. `findFragmentById()` is to check if we're in a dual panel mode, which is the case. This step isn't necessary for our current app, but it's important that you know you can use it to track fragments.
+    >Instead of creating a new fragment and passing data to it, you can use just one line of code to update, what will that be? Navigate to MyFragment sample project MultiPanelActivity.java source code to find out.
     
-    Instead of creating a new fragment and pass data to it, you can use two lines of code to update the fragment. What are those?
+5. In MultiPanelActivity class, insert the following code into `onCreate()` method, below `setContentView()`. This will initialize the activity with the two fragments.
     
-5. Open ItemFragment.java and insert the following:
+    ```java
+    if (savedInstanceState == null){
+        getSupportFragmentManager().beginTransaction().add(R.id.fragmentLeft, new
+                ItemFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragmentRight, new
+                DetailsFragment()).commit();
+    }
+    ```
+    
+    The code above initializes the activity layout in `onCreate()` using the two fragments. 'savedInstanceState' is used to check if we're restoring from configuration change e.g. screen rotation.
+    
+6. Open ItemFragment.java and replace `getListView().setOnItemClickListener(this);` with the following. This code checks the container activity and set OnItemClickListener accordingly. 
+    
+    ```java
+    if (getActivity() instanceof ListFragmentActivity) {
+        getListView().setOnItemClickListener(this);
+    }
+
+    if (getActivity() instanceof MultiPanelActivity) {
+        getListView().setOnItemClickListener((MultiPanelActivity) getActivity());
+    }
+    ```
+    
+    Insert the following method into the ItemFragment class
     
     ```java
     @Override
@@ -868,33 +799,19 @@ Now you've seen how to combine AdapterView with Fragments, now it's time to move
         super.onStart();
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         getListView().setSelector(android.R.color.darker_gray);
-    
     }
-    
-    The default behavior at the moment is that you click the ListView and the item you clicked doesn't stay highlighted. The code above is to make the item you clicked stays highlighted. This is the first time you see `onStart()`, we'll have a look at it later.
-    
-6. Finally, insert the menu item in the xml and the switch in Java file. In menu_main.xml:
-    
-    ```xml
-    <item
-        android:id="@+id/action_panel"
-        android:orderInCategory="70"
-        android:title="@string/action_panel"
-        app:showAsAction="ifRoom" 
-    />
     ```
     
-    In MainActivity.java:
+<!--    above from http://stackoverflow.com/questions/5853719/highlighting-the-selected-item-in-the-listview-in-android-->
+    The default behavior of ListView is that you click the ListView item but the item you clicked doesn't stay highlighted. The code above makes the item you clicked stays highlighted. This is the first time you see `onStart()`, we'll have a look at it later.
     
-    ```java
-    case R.id.action_panel:
-    startActivity(new Intent(this, MultiPanelActivity.class));
-    return true;
-    ```
+7. Follow previous instructions (points No.3 & 4 in 'Programmatically add the fragment') to add a button called 'Multipanel' in activity_main.xml, associate this button with an intent that goes to MultiPanelActivity.
     
-    If you run the app, you'll see something similar to below
-    
-    ![panels](.md_images/panels.png)
+If you run the app, you'll see something similar to below
+
+![panels](.md_images/panels.png)
+
+> The exercise here is a simplified version of a sample from the official API guide. For the original full version, see [here](https://developer.android.com/reference/android/app/Fragment.html) and [here](https://developer.android.com/guide/components/fragments.html).
 
 ### Fragment lifecycle
 
@@ -904,13 +821,21 @@ Now you've seen how to combine AdapterView with Fragments, now it's time to move
 
 You have seen methods such as `onCreate()`, `onCreateView()`, and `onStart()`. All these are Fragment lifecycle callbacks, similar to Activity callbacks. The most important things to remember:
 
-* Fragments need to have empty constructors. (Don't ask me why!) Data passed into it need to use `setArguments()`.
-* `onAttach()` is specific to fragments. If your Activity implements some interfaces, in your Fragment you need to `getActivity()` there so you can all the interface methods.
+* Fragments need to have empty constructors (and don't ask me why). Data passed into it need to use `setArguments()`.
+* `onAttach()` is specific to fragments. There're several other fragment-specific call-back functions. Read the [official guide](https://developer.android.com/guide/components/fragments.html) for details on this.
 * Activity coordinates Fragments lifecycle. For example, when the activity receives `onPause()`, each fragment in the activity receives `onPause()`.
 
 ## Lab 3 Advanced topics
 
-In a similar module run by Professor Andrew T. Campbell at Dartmouth College, they used some material from the official Android samples. Follow the tutorial at [here](http://www.cs.dartmouth.edu/~campbell/cs65/lecture09/lecture09.html) and answer the following questions:
+### The RecylerView in Material design
+
+List fragment template (i.e. Fragment (list)) has changed since the release of Android Studio 2. The recommended way of doing ListFragment is through a view called [RecyclerView](). Now try to generate a list fragment using that template and see how much you understand the source code including the auto-generated dummy folder?
+
+### Module taught at US Dartmouth College
+
+![](http://www.cs.dartmouth.edu/~campbell/cs65/lecture09/images/sfragdesign.png)
+
+In a similar module run by Professor Andrew T. Campbell at the US Dartmouth College, they also used some material from the official Android samples. Follow their tutorial [here](http://www.cs.dartmouth.edu/~campbell/cs65/lecture09/lecture09.html) and answer the following questions:
 
 * What did they use to manage state between orientation flips?
 * How did they achieve fragment transition from TitlesFragment to DetailsFragment?

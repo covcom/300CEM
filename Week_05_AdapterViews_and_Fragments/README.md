@@ -91,10 +91,9 @@ Using default options, create a new project and name it 'My Lists'. Then, follow
     
     The question mark inside angle brackets is Java generic wildcard, which basically means the type of parent passed into the method is an AdapterView of any type.
     
-    If you run the app, what you'll see is something like this:
-    
-    ![simple](.md_images/simple.png)
+If you run the app, what you'll see is something like this:
 
+![simple](.md_images/simple.png)
 
 ### Complex ListView
 
@@ -343,9 +342,9 @@ Simple ListView is useful for displaying data that can be converted to strings i
     }
     ```
     
-    Steps 9 & 10 are needed only for the sake of demonstration. If you run the app, click on 'Complex List' button, you'll see the following:
-    
-    ![photo](.md_images/photo.png)
+Steps 9 & 10 are needed only for the sake of demonstration. If you run the app, click on 'Complex List' button, you'll see the following:
+
+![photo](.md_images/photo.png)
 
 ### Grid View
 

@@ -137,7 +137,7 @@ Following steps below to insert two more activities and prepare the layout file 
 2. Similarly, create another activity using the FullscreenActivity template and name it 'DispalyActivity'.
 3. Open activity_display.xml, you'll see the root tag is **FrameLayout**. The FrameLayout is a placeholder on the screen that you can use to display a single view. Views that you add to a FrameLayout are always anchored to the top left of the layout.
 4. Open activity_main.xml, replace RelativeLayout with ScrollView, and delete TextView.
-5. On the graphical layout, drag and drop a TableLayout and a TableRow onto the activity. You'll notice that even though you drag/drop just one TableRow, the system has four inserted into TableLayout for you. Delete three of those, and keep just one. For the only TableRow you have, separate the closing tag i.e. replace `/>` with `></TableRow>`. The TableLayout at the moment should look like this:
+5. On the graphical layout, drag and drop a TableLayout and a TableRow onto the activity. In the TableRow, separate the closing tag i.e. replace `/>` with `></TableRow>`. The TableLayout at the moment should look like this:
     
     ```xml
     <TableLayout

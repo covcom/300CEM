@@ -109,7 +109,7 @@ Talking about Activity lifecycle, there're two diagrams you have to know well:
 
 ![lifecycle](http://developer.android.com/images/activity_lifecycle.png)
 
-`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'
+`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'`'. .'(a beautiful divider)
    `     `     `     `     `     `     `     `     `     `
 
 ![stages](http://developer.android.com/images/training/basics/basic-lifecycle.png)

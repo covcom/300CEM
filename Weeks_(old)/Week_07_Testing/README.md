@@ -312,7 +312,6 @@ The critical part of the app above is the capability to calculate time differenc
             Deadline deadline = new Deadline("12/12/16");
             assertEquals(deadline.calculate(), 1);
         }
-        
     }
     ```
     

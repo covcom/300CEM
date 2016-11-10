@@ -1,18 +1,9 @@
 # Testing
 
-Last week I showed that you need to be really careful with online tutorials. The (bad) example is the SharedPreferences tutorial on [TutorialsPoint](http://www.tutorialspoint.com/android/android_shared_preferences.htm) that uses MODE_WORLD_READABLE and MODE_WORLD_WRITEABLE, both of which were [deprecated in API level 17](http://developer.android.com/reference/android/content/Context.html#MODE_WORLD_READABLE). If that caused confusion already, could situation get worse? Read on.
+When you create your apps, you need to make sure it works as expected. The ways we have used in the past to do this is to use `Log.d()` to produce some results. What we can also do is to use the [Assert](http://developer.android.com/reference/junit/framework/Assert.html) class. But to test properly, we need to write testing classes. 
 
-> In general, TutorialsPoint is a good website. But some of the contents are out-of-date.
-
-Click [this link](http://developer.android.com/training/testing/unit-testing/local-unit-tests.html) to go to the official Android training on *Building Local Unit Tests*, locate texts that read *"Your local unit test class should be written as a JUnit 4 test class"*. Next, click on [this link](http://developer.android.com/tools/testing/testing_android.html) to go to the official Android guide on *Testing Fundamentals*, locate texts that read *"Android testing API supports JUnit 3 code style, but not JUnit 4"*. To use JUnit 4, or not to use JUnit 4, that is the question. The answer? Read on.
-
-## Lab 1 Unit testing
-
-There're two types of testing in Android depending on whether an Android device (physical or AVD) is needed or not : local unit tests run on a local JVM on your development machine, and doesn't require Android devices; the other type of testing is called instrumented testing, which requires an Android device, as will be discussed later. At runtime, local unit tests will be executed against a modified version of android.jar where all final modifiers have been stripped off. For more info on this, click [here](http://tools.android.com/tech-docs/unit-testing-support).
-
-### The idea of testing
-
-Once you created some apps, you need to make sure it works as expected. The ways we have used in the past to do this is to use `Log.d()` to produce some results. This has been fine so far. What we could also do is to use the ['Assert'](http://developer.android.com/reference/junit/framework/Assert.html) class. But to this properly, we need to write testing classes. 
+<!--http://english.stackexchange.com/questions/174017/is-this-correct-let-me-know-once-you-finish-->
+<!--https://books.google.com/ngrams/graph?content=once+you+finish%2Conce+you+have+finished%2Cwhen+you+finish%2Cwhen+you+have+finished&year_start=1940&year_end=2000&corpus=15&smoothing=3&share=&direct_url=t1%3B%2Conce%20you%20finish%3B%2Cc0%3B.t1%3B%2Conce%20you%20have%20finished%3B%2Cc0%3B.t1%3B%2Cwhen%20you%20finish%3B%2Cc0%3B.t1%3B%2Cwhen%20you%20have%20finished%3B%2Cc0-->
 
 As a simple example, consider the following class (example taken from [JUnit introduction](https://github.com/junit-team/junit/wiki/Getting-started))
 
@@ -43,24 +34,30 @@ public class CalculatorTest {
 }
 ```
 
-Now this explains the idea of testing. Instead of JUnit, you'll see other tools/packages available for Java. But JUnit is what we need for Android. Now back to the question of JUnit 3 or JUnit 4, most of the syntax between the two are the same. But the differences are also huge. The most noticeable difference is the use of annotations in JUnit 4 such as `@Before` and `@after` in replacement of `setup()` and `tearDown()` in JUnit 3. Click [here](http://javarevisited.blogspot.co.uk/2012/06/junit4-annotations-test-examples-and.html) for a nice blog on JUnit 4 annotations.
+Now this explains the idea of testing. Instead of JUnit, you can find other tools/packages available for Java. But JUnit is what we need for Android.
 
-> Some people use `@Before setup()` in their codes. Once you see this you know you're in JUnit 4. Here `setup()` is just a name, not an overriding method anymore.
+> The lastest version of JUnit is 4, but some online tutorials still use JUnit 3. A lot of syntax between the two versions are the same. But the differences are also huge. The most noticeable difference is the use of annotations in JUnit 4 such as `@Before` and `@after` in replacement of `setup()` and `tearDown()` in JUnit 3. Click to read a nice blog on [JUnit 4 annotations](http://javarevisited.blogspot.co.uk/2012/06/junit4-annotations-test-examples-and.html).
+
+> Some people use `@Before setup()` in their codes. Once you see this you know straightaway it's JUnit 4. Here `setup()` is just a name, not an overriding method anymore.
+
+## Lab 1 Unit testing
+
+There're two types of testing in Android depending on whether an Android device (physical or AVD) is needed or not: 
+
+1. Local unit tests run on a local JVM on your development machine, and doesn't require Android devices; 
+2. The other type of testing is called instrumented testing, which requires an Android device, as will be discussed later. 
+
+At runtime, local unit tests will be executed against a modified version of android.jar where all final modifiers have been stripped off. For more info on this, read [the official Android user guide on testing](https://developer.android.com/studio/test/index.html).
+<!--http://tools.android.com/tech-docs/unit-testing-support-->
 
 ### Default app and default tests
 
 Let's have a look at the default tests generated by Android Studio
 
 1. Create a new project called 'My Tests' using all default options. 
-2. In the Project tool window, click on app ==> java. You'll see there're two sub-folders and the bottom one has the suffix of '(androidTest)'. Click to open the Build Variants tool window, you'll see Test Artifact is Android Instrumentation Tests.
+2. In the Project tool window, click on app ==> java. You'll see there're three sub-folders (packages) and each has a auto-generated class
     
     ![](.md_images/toolbar.png)
-    
-3. Switch Test Artifact to Unit Tests. You'll see the Java folder suffix changed to 'test'.
-    
-    ![](.md_images/toolbar2.png)
-    
-    > Some versions of Android Studio don't generate JUnit test folder by default. If this applies to you, switch to Project view and generate folder structure test/java under src. Also make sure you have line `testCompile 'junit:junit:4.12'` in your build.gradle.xml file.
     
     As we know already, Gradle uses conventions to build the system. The convention here is this:
     * Your 'main' codes and resources are saved in a folder called 'app/src/main'.
@@ -69,7 +66,7 @@ Let's have a look at the default tests generated by Android Studio
     
     ![](.md_images/folder.png)
     
-4. Click to open ExampleUnitTests.java, what you'll see is the following
+3. Double-click to open ExampleUnitTests.java, what you'll see is the following
     
     ```java
     import org.junit.Test;
@@ -85,32 +82,30 @@ Let's have a look at the default tests generated by Android Studio
     
     Note the use of JUnit classes. Also, here we used `import static` statement to import static members.
     
-5. With Unit Tests set as the Test Artifact, right-click on ExampleUnitTest and select Run 'ExampleUnitTest'.
+4. Right-click on ExampleUnitTest and select Run 'ExampleUnitTest'.
     
-    ![](.md_images/run.png)
-    
-6. Now your Run tool window will look similar to this
+5. Now your Run tool window will look similar to this
     
     ![](.md_images/runResults.png)
     
-    * The color of the status bar indicates whether the tests have passed successfully. Green or pass, red for fail.
+    * The color of the status bar indicates whether the tests have passed successfully. Green for pass, red for fail.
     * The left-hand pane shows the tree view of all tests within the current run/debug configuration.
     * The toolbar provides controls that enable you to monitor the tests and analyze results. Notice the export icon (the one to the right of down-arrow), if you click it you'll be able to export the test results.
     
     ![](.md_images/export.png)
     
-    > If you follow tutorials you found on the web, some talks about HTML reports generated in build/reports folder. Forget about it, those have been deprecated!
+    > If you follow some online tutorials, you'll find that some talks about HTML reports generated in build/reports folder. Forget about it, those have been deprecated!
 
 Now you have just finished your first ever tests!
 
 ### The 'Deadline' app
 
-To do some testing exercises, we'll need to create an app. Here we use an app that calculates the days left until 387COM assignment deadline (how exciting!). The idea of the app is that given the current date in the format of dd/mm/yy, the app should 
+To do some testing exercises, we'll need to create an app. Here we create an app that calculates time left until 300CEM assignment deadline (how exciting!). The idea of the app is that given the current date in the format of dd/mm/yy, the app should 
 
 * Display how many days left until coursework submission once you click 'Update'.
-
+    
     ![](.md_images/update.png)
-
+    
 * Save the current date to SharedPreferences once you click 'Save'.
 * Send current date to new activity once you click 'Send'.
 
@@ -118,23 +113,9 @@ To do some testing exercises, we'll need to create an app. Here we use an app th
 
 Follow steps below to create the app. This is a simple app and should be self-explanatory.
 
-1. Replace what's in content_main.xml with the following:
+1. Open activity_main.xml, delete the auto-generated TextView and insert the following:
     
     ```xml
-    <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
-    tools:showIn="@layout/activity_main">
-    
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -198,14 +179,11 @@ Follow steps below to create the app. This is a simple app and should be self-ex
         android:layout_toRightOf="@id/buttonSave"
         android:onClick="onSendClick"
         android:text="Send" />
-    </RelativeLayout>
     ```
     
 2. Create a new Deadline class, and insert the following into Deadline.java
     
     ```java
-    public class Deadline {
-    
     private Date date;
     private Context context;
     private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
@@ -245,12 +223,11 @@ Follow steps below to create the app. This is a simple app and should be self-ex
         editor.putString(DATE_KEY, dateFormat.format(date));
         return editor.commit();
     }
-    }
     ```
     
-    This class has two methods. The `calculate()` method calculates the time difference in days between the input and the submission deadline which is 18/12/15. The `save()` method save the date data in a SharedPreferences xml file.
+    This class has two methods. The `calculate()` method calculates the time difference in days between the input and the submission deadline which is 13/12/16. The `save()` method save the date data in a SharedPreferences xml file.
     
-3. Open MainActivity.java, insert the following within the class definition:
+3. Open MainActivity.java, insert the following into the class:
     
     ```java
     private TextView textView;
@@ -260,7 +237,7 @@ Follow steps below to create the app. This is a simple app and should be self-ex
     
     public void onUpdateClick(View v){
         deadline = new Deadline(editText.getText().toString(), this);
-        textView.setText(deadline.calculate() + " days to 387COM deadline!");
+        textView.setText(deadline.calculate() + " days to 300CEM deadline!");
     }
     
     public void onSaveClick(View v){
@@ -283,56 +260,31 @@ Follow steps below to create the app. This is a simple app and should be self-ex
     textView = (TextView) findViewById(R.id.textView);
     ```
     
-4. Create a new empty Activity called Display Activity. Insert the following into activity_display.xml
+4. Create a new empty Activity called DisplayActivity. Insert the following into the RelativeLayout in activity_display.xml
     
     ```xml
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.jianhuayang.mytests.DisplayActivity">
-    
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="50sp"
-        android:text="aa"/>
-    
-    </RelativeLayout>
+        android:text="placeholder"/>
     ```
     
-5. Open DisplayActivity.java, make changes so it looks like the following:
+5. Open DisplayActivity.java, insert the following code into the `onCreate()` method, just below `setContentView()`
     
     ```java
-    public class DisplayActivity extends AppCompatActivity {
-    private TextView textView;
-    
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display);
-        
-        textView = (TextView) findViewById(R.id.textView);
-        Intent intent = getIntent();
-        int daysLeft = intent.getIntExtra(MainActivity.DAYS_KEY, 0);
-        textView.setText(Integer.toString(daysLeft + 13) + " days until 2016!" );
-        
-    }
-    }
+    TextView textView = (TextView) findViewById(R.id.textView);
+    Intent intent = getIntent();
+    int daysLeft = intent.getIntExtra(MainActivity.DAYS_KEY, 0);
+    textView.setText(Integer.toString(daysLeft + 18) + " days until 2017!" );
     ```
-    
 
 ### Local unit tests
 
-The critical part of the app above is the ability to calculate the time difference. Now let's design a test for this.
+The critical part of the app above is the capability to calculate time differences. Now let's design a test for this.
 
-1. Make sure Unit Tests is selected in Build Variants tool window.
-2. Open Deadline.java, navigate your cursor to be within the class body (not within member methods), right-click and select Go To ==> Test.
+1. Open Deadline.java, navigate your cursor to be within the class body (but outsite of member methods), right-click and select Go To ==> Test.
     
     ![](.md_images/goto.png)
     

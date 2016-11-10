@@ -308,3 +308,5 @@ Refer to Moodle for this.
 # About this Github repository
 
 This Github repository is set up to host lab materials and code examples we use throughout the module. You can simply read and explore. If you would like a personal copy of it, you'll need to fork it as writing to it is not allowed. In the repository for module 305CDE, there is a [README](https://github.com/covcom/305CDE/blob/master/README.md) file written by Mark Tyers that explains how to fork repositories and keep them up to date.
+
+A lot of colleagues and students contributed to this set of material by providing comments and/or corrections. I would especially express my thanks to the following people: Mark Tyers, Sumeet Gopiani, Adam Towse

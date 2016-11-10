@@ -109,7 +109,7 @@ Next, we need to use SharedPreferences API to save some simple data.
         editor.putString(NAME_KEY, editTextName.getText().toString());
         editor.putString(PHONE_KEY, editTextPhone.getText().toString());
         editor.commit();
-        Toast.makeText(get.context(),"data saved",Toast.LENGTH_SHORT).show();
+        Toast.makeText(v.getContext(),"data saved",Toast.LENGTH_SHORT).show();
     }
     ```
    
@@ -329,6 +329,7 @@ For those of you who aren't familiar with SQL syntax, follow instructions below 
     
     ![](.md_images/fiddle_o.png)
     
+    Some of you experienced problems with SQL Fiddle lately e.g. the website is very slow. If that happens again, repeat above steps using [SQL Tryit Editor from W3Schools](http://www.w3schools.com/sql/trysql.asp?filename=trysql_delete), or try [Online SQL interpreter](https://kripken.github.io/sql.js/GUI/) as suggested by Adam Towse.
 
 Have a play around and make sure you understand everything, as these are important for the following steps. In case you want to know more, go to [W3Schools](http://www.w3schools.com/sql/) and click links on the left to read.
 
@@ -562,6 +563,10 @@ Once installed, restart Firefox and click Tools ==> SQLite Manager. In the windo
 Now we have finished database insertion. The rest of the CRUD operation follow exactly the same routes. With the help of [the official documentation of SQLiteDatabase class] (https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html), try to implement 'read', 'update' and 'delete'.
 
 ## Lab 3 Advanced topics
+
+### Free online tutorial
+
+You should be really careful with free online tutorials, as some may contain out-of-date or even incorrect information. One example is the SharedPreferences example on [TutorialsPoint](http://www.tutorialspoint.com/android/android_shared_preferences.htm) that still shows MODE_WORLD_READABLE and MODE_WORLD_WRITEABLE, both of which were [deprecated in API level 17](http://developer.android.com/reference/android/content/Context.html#MODE_WORLD_READABLE). In general, TutorialsPoint is a good website. But for this particular case at least it's not very helpful.
 
 ### Array data using SharedPreferences
 

@@ -325,19 +325,13 @@ The critical part of the app above is the capability to calculate time differenc
 
 ### Local mocked unit tests
 
-The test we did above used a Deadline constructor that doesn't require the Context input parameter. This is because Context is Android dependant we cannot run it on a local JVM. The way to get around this is to use a mocking framework called Mockito.
+The test we did above used the Deadline constructor that doesn't require the Context input parameter. This is because Context is Android dependant we cannot run a test on local JVMs. The way to get around this, i.e. to test Android SDK dependant code, is to use a mocking framework called Mockito.
 
-1. Open build.gradle (Module: app), insert Mockito and Hamcrest dependencies so it becomes
+1. Open build.gradle (Module: app), insert Mockito and Hamcrest dependencies into the dependencies configuration block
     
     ```xml
-    dependencies {
-        compile fileTree(dir: 'libs', include: ['*.jar'])
-        testCompile 'junit:junit:4.12'
-        testCompile 'org.mockito:mockito-core:1.10.19'
-        testCompile 'org.hamcrest:hamcrest-library:1.1'
-        compile 'com.android.support:appcompat-v7:23.1.0'
-        compile 'com.android.support:design:23.1.0'
-    }
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    testCompile 'org.hamcrest:hamcrest-library:1.3'
     ```
     
     Mockito is a mocking framework, and Hamcrest is a package to make testing more readable. You'll see both later. Click 'Sync Now' after making changes.

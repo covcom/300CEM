@@ -327,7 +327,7 @@ The critical part of the app above is the capability to calculate time differenc
 
 The test we did above used the Deadline constructor that doesn't require the Context input parameter. This is because Context is Android dependant we cannot run a test on local JVMs. The way to get around this, i.e. to test Android SDK dependant code, is to use a mocking framework called Mockito.
 
-1. Open build.gradle (Module: app), insert Mockito and Hamcrest dependencies into the dependencies configuration block
+1. Open build.gradle (Module: app), insert Mockito and Hamcrest dependencies into the dependencies configuration block (after line `testCompile 'junit:junit:4.12'`)
     
     ```xml
     testCompile 'org.mockito:mockito-core:1.10.19'
@@ -336,7 +336,7 @@ The test we did above used the Deadline constructor that doesn't require the Con
     
     Mockito is a mocking framework, and Hamcrest is a package to make testing more readable. You'll see both later. Click 'Sync Now' after making changes.
     
-2. Paste the following codes to replace the class body of DeadlineTest
+2. Modify your DeadlineTest.java so it looks like the following (If you type the code you'll probably understand more than if you simply copy/paste)
     
     ```java
     @SmallTest
@@ -388,8 +388,9 @@ The test we did above used the Deadline constructor that doesn't require the Con
     ```
     
     There're quite a lot going on here:
-    * `@SmallTest` is a way to classify different tests, as you guessed, so later on we can ask the system to run for example SmallTests only. Check out [here](http://developer.android.com/tools/testing/testing_otheride.html) for an example. Also this [StackOverflow page](http://stackoverflow.com/questions/4671923/what-is-the-purpose-of-smalltest-mediumtest-and-largetest-annotations-in-an) for the differences among SmallTest, MediumTest and LargeTest. Texts below are quoted directly from [Google](http://developer.android.com/training/activity-testing/activity-ui-testing.html):
-    > Typically, a short running test that take only a few milliseconds should be marked as a @SmallTest. Longer running tests (100 milliseconds or more) are usually marked as @MediumTests or @LargeTests, depending on whether the test accesses resources on the local system only or remote resources over a network. 
+    * `@SmallTest` is a way to classify different tests, as you might have guessed, so later on we can ask the system to run for example SmallTests only. Check out [here](http://developer.android.com/tools/testing/testing_otheride.html) for an example. Also this [StackOverflow page](http://stackoverflow.com/questions/4671923/what-is-the-purpose-of-smalltest-mediumtest-and-largetest-annotations-in-an) for the differences among SmallTest, MediumTest and LargeTest. Texts below are quoted directly from [Google](http://developer.android.com/training/activity-testing/activity-ui-testing.html):
+    
+        > Typically, a short running test that take only a few milliseconds should be marked as a @SmallTest. Longer running tests (100 milliseconds or more) are usually marked as @MediumTests or @LargeTests, depending on whether the test accesses resources on the local system only or remote resources over a network. 
     * `@RunWith` line specifies the Runner of the current testing class. A Runner is merely another class that is designed to perform some specific functions. In the current case, MockitoJUnitRunner will mock our dependencies in Android system. An example Runner is something like below (example taken from [TutorialsPoint](http://www.tutorialspoint.com/junit/junit_suite_test.htm))
     ```
     import org.junit.runner.JUnitCore;

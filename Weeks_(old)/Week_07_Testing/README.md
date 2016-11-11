@@ -336,7 +336,7 @@ The test we did above used the Deadline constructor that doesn't require the Con
     
     Mockito is a mocking framework, and Hamcrest is a package to make testing more readable. You'll see both later. Click 'Sync Now' after making changes.
     
-2. Modify your DeadlineTest.java so it looks like the following (If you type the code you'll probably understand more than if you simply copy/paste)
+2. Modify your DeadlineTest.java so it looks like the following (If you type the code you'll probably understand better than simply copy/paste)
     
     ```java
     @SmallTest

@@ -1,5 +1,7 @@
 # Wearables
 
+http://www.androidheadlines.com/2016/11/top-10-android-wear-apps-and-faces-november-2016-edition.html
+
 Congratulations to those of you who had their Moto 360 delivered last week. For those who haven't got it, you can expect a nice Easter present from the university! (That's how long it takes to re-process the order.)
 
 This week we look at Android wearables i.e. watches. There are mainly two different usages of an Android watch: 1) as an extension of your phone/tablet. By extension I meant the watch provides assistive functions to apps installed on the phone; 2) You can also have apps run directly on the watch, in which case, the watch is a separate device.

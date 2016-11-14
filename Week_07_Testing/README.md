@@ -186,44 +186,51 @@ Follow steps below to create the app. This is a simple app and should be self-ex
 2. Create a new Deadline class, and insert the following into Deadline.java
     
     ```java
-    private Date date;
-    private Context context;
-    private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
-    private static final String DATE_KEY = "dateKey";
+    import java.text.DateFormat;
+    import java.text.ParseException;
+    import java.text.SimpleDateFormat;
+    import java.util.Date;
     
-    public Deadline(String date, Context context) {
-        try {
-            this.date = dateFormat.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
+    public class Deadline {
+        private Date date;
+        private Context context;
+        private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        private static final String DATE_KEY = "dateKey";
+        
+        public Deadline(String date, Context context) {
+            try {
+                this.date = dateFormat.parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            this.context = context;
         }
-        this.context = context;
-    }
-    
-    public Deadline(String date) {
-        try {
-            this.date = dateFormat.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        
+        public Deadline(String date) {
+            try {
+                this.date = dateFormat.parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
-    }
-    
-    public int calculate() {
-        Date submission;
-        try {
-            submission = dateFormat.parse("18/12/15");
-            return (int) ((submission.getTime() - date.getTime() )/ (1000 * 60 * 60 * 24));
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return -1;
+        
+        public int calculate() {
+            Date submission;
+            try {
+                submission = dateFormat.parse("13/12/16");
+                return (int) ((submission.getTime() - date.getTime() )/ (1000 * 60 * 60 * 24));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return -1;
+            }
         }
-    }
-    
-    public boolean save() {
-        SharedPreferences sharedPreferences = ((Activity)context).getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(DATE_KEY, dateFormat.format(date));
-        return editor.commit();
+        
+        public boolean save() {
+            SharedPreferences sharedPreferences = ((Activity)context).getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(DATE_KEY, dateFormat.format(date));
+            return editor.commit();
+        }
     }
     ```
     
@@ -442,7 +449,6 @@ Follow steps below to create an instrumented unit test:
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
     androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
-    }
     ```
     
     Note in the above the version number of `'com.android.support:support-annotations:24.2.1'` i.e. 24.2.1 must match that of your support library i.e. `compile 'com.android.support:appcompat-v7:24.2.1'`.

@@ -1,9 +1,6 @@
 # Graphics and Animation
 
-> The fool doth think he is a 387COMer, but the 387COMer knows himself to be a fool.
-> -- [William Shakespeare Quote Generator](http://thesurrealist.co.uk)
-
-Android provides a number of useful APIs for manipulating graphics and animation. We will look at some simple examples in the exercises below. Full documentations on this can be found [here](http://developer.android.com/guide/topics/graphics/overview.html). Upon finishing the exercises, you should have an app that looks like below. The app has two 'pages', each of which contains a single graphic. If you press the 'start/stop' button, you'll start/stop the animation on that graphic.
+Android provides a number of useful APIs for manipulating graphics and animation. We will look at some simple examples in the exercises below. Upon finishing the exercises, you should have an app that looks like below. The app has two 'pages', each of which contains a single graphic. If you press the 'start/stop' button, you'll start/stop the animation on that graphic.
 
 [![](.md_images/ezgif-23203067.gif)](https://youtu.be/ewk5-RKs-X4)
 
@@ -533,3 +530,13 @@ Android includes support for high-performance 2D and 3D graphics with the Open G
 
 * [How to embed a video into GitHub README.md](http://stackoverflow.com/questions/4279611/how-to-embed-a-video-into-github-readme-md/29842302#29842302)
 * [EZGif.com/](http://ezgif.com)
+
+Full documentations on this can be found [here](http://developer.android.com/guide/topics/graphics/overview.html). 
+
+ Training, Creating Swipe Views with Tabs
+https://developer.android.com/training/implementing-navigation/lateral.html
+
+API Guides, Canvas and Drawables
+https://developer.android.com/guide/topics/graphics/2d-graphics.html
+
+https://www.simplifiedcoding.net/android-tablayout-example-using-viewpager-fragments/

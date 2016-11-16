@@ -305,6 +305,14 @@ Refer to Moodle for this.
 * [Past student coursework No. 1](https://github.com/furgerf/Squash/tree/master/Squash%20Simulation)
 * [Past student coursework No. 2](https://github.com/adrianchifor/Swiftnotes)
 
+# T0-DO list
+
+1. Week1, in Android Studio intro, use something from https://developer.android.com/studio/intro/index.html
+2. Week2, together with Toast, introduce Snackbar, https://developer.android.com/training/snackbar/showing.html
+3. Week3, creating old non-generic arraylist example, http://www.javatpoint.com/ArrayList-in-collection-framework
+4. Week5, together with listview, introduce RecyclerView, https://developer.android.com/training/material/lists-cards.html
+
+
 # About this Github repository
 
 This Github repository is set up to host lab materials and code examples we use throughout the module. You can simply read and explore. If you would like a personal copy of it, you'll need to fork it as writing to it is not allowed. In the repository for module 305CDE, there is a [README](https://github.com/covcom/305CDE/blob/master/README.md) file written by Mark Tyers that explains how to fork repositories and keep them up to date.

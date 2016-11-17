@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -14,18 +15,11 @@ import android.view.ViewGroup;
 public class PageFragment extends Fragment {
 
     public static final String ARG_PAGE = "ARG_PAGE";
-    public static final String DEBUG_KEY = "DEBUG_KEY";
+    //    public static final String DEBUG_KEY = "DEBUG_KEY";
     private int pageNumber;
 
     public PageFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_page, container, false);
     }
 
     public static PageFragment create(int pageNumber) {
@@ -36,4 +30,20 @@ public class PageFragment extends Fragment {
         return pageFragment;
     }
 
+    @Override
+    public void onCreate(Bundle b) {
+        super.onCreate(b);
+        pageNumber = getArguments().getInt(ARG_PAGE);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_page, container, false);
+//        Log.d(DEBUG_KEY, Integer.toString(pageNumber));
+        TextView textView = (TextView) v.findViewById(R.id.title);
+        textView.setText("This is page No. " + Integer.toString(pageNumber + 1));
+        return v;
+    }
 }

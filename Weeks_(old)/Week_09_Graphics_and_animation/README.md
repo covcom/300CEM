@@ -109,46 +109,75 @@ Create an app called My Graphics using all default options. Then follow steps be
     Next, create a static method that takes an integer and returns the fragment itself as the return type
     
     ```java
-    
+    public static PageFragment create(int pageNumber) {
+        PageFragment pageFragment = new PageFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(ARG_PAGE, pageNumber);
+        pageFragment.setArguments(bundle);
+        return pageFragment;
+    }
     
     ```
-make changes so that it looks like the following:
+    
+    Here this `create()` method uses the [factory pattern](http://www.tutorialspoint.com/design_pattern/factory_pattern.htm). Instead of using constructors and passing values using Bundle, we use the static factory method to create the fragment object. 
+    
+    Insert the following method into PageFragment class. This will initialize the member variable `pageNumber` using values passed from the static factory method. This variable is later used in the `onCreateView()` method to update the TextView texts.
     
     ```java
-    
-        
-
-        
-        
-        public PageFragment() {
-            // Required empty public constructor
-        }
-        
         @Override
         public void onCreate(Bundle b) {
             super.onCreate(b);
             pageNumber = getArguments().getInt(ARG_PAGE);
             
         }
+    ```
+    
+    In `onCreateView()` method, delete auto-genearted line `return inflater.inflate(R.layout.fragment_page, container, false)`. Insert following lines into this `onCreateView()` method instead. This is to link the member variable `pageNumber` with front UI
+    
+    ```java
+    View v = inflater.inflate(R.layout.fragment_page, container, false);
+    TextView textView = (TextView) v.findViewById(R.id.title);
+    textView.setText("This is page No. " + Integer.toString(pageNumber + 1));
+    return v;
+    ```
+    
+    Now the finished PageFragment class should look like the following
+    
+    ```java
+    public class PageFragment extends Fragment {
+
+        public static final String ARG_PAGE = "ARG_PAGE";
+        private int pageNumber;
+
+        public PageFragment() {
+        }
+
+        public static PageFragment create(int pageNumber) {
+            PageFragment pageFragment = new PageFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt(ARG_PAGE, pageNumber);
+            pageFragment.setArguments(bundle);
+            return pageFragment;
+        }
+
+        @Override
+        public void onCreate(Bundle b) {
+            super.onCreate(b);
+            pageNumber = getArguments().getInt(ARG_PAGE);
+        }
         
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            // Inflate the layout for this fragment
             View v = inflater.inflate(R.layout.fragment_page, container, false);
-            Log.d(DEBUG_KEY, Integer.toString(pageNumber));
             TextView textView = (TextView) v.findViewById(R.id.title);
             textView.setText("This is page No. " + Integer.toString(pageNumber + 1));
-            
             return v;
         }
-        
-
+    }
     ```
     
-    Here line `public static PageFragment create(int pageNumber) {}` declare a method using the [factory pattern](http://www.tutorialspoint.com/design_pattern/factory_pattern.htm). Instead of using constructors and passing values using Bundle, we use the static factory method to create the fragment object. In the `onCreate()` method, we get the variable that is passed into the fragment. And this variable is later used in the `onCreateView()` method to update the TextView texts.
-
-7. Open MainActivity.java and comment out the following lines:
+7. Open MainActivity.java and delete (or comment out) following lines:
     
     ```java
     FragmentManager fragmentManager = getFragmentManager();
@@ -158,14 +187,14 @@ make changes so that it looks like the following:
     fragmentTransaction.commit();
     ```
     
-8. In MainActivity.java insert the following declaration for member variables:
+    Insert following declarations for member variables:
     
     ```java
     ViewPager viewPager;
     PageFragmentPagerAdapter pageFragmentPagerAdapter;
     ```
     
-    Insert the following into the `onCreate()` method:
+    Insert the following into the `onCreate()` method. You'll see this is very similar to AdapterViews.
     
     ```java
     viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -173,7 +202,7 @@ make changes so that it looks like the following:
     viewPager.setAdapter(pageFragmentPagerAdapter);
     ```
     
-9. Again, in MainActivity.java insert the following as a member method:
+    Insert the following class as an inner class:
     
     ```java
     private class PageFragmentPagerAdapter extends FragmentStatePagerAdapter {
@@ -194,7 +223,7 @@ make changes so that it looks like the following:
     }
     ```
     
-    In order to combine Fragment with ViewPager, you have to use a FragmentStatePagerAdapter, which is a subclass of android.support.v4.view.PagerAdapter. This is not to be confused with android.widget.Adapter, which is used to work together with AdapterView to achieve dynamic data binding. For FragmentStatePagerAdapter we need to override the two methods `getItem()` and `getCount()`. Note here the two Fragments will be created as soon as ViewPager becomes visible. This means that ordinary call-backs for Fragment such as `onPause()` etc. will not work!
+    In order to combine Fragment with ViewPager, you need to use a FragmentStatePagerAdapter, which is a subclass of android.support.v4.view.PagerAdapter. This is not to be confused with android.widget.Adapter, which is used to work together with AdapterView to achieve dynamic data binding. For FragmentStatePagerAdapter we need to override the two methods `getItem()` and `getCount()`. Note here the two Fragments will be created as soon as ViewPager becomes visible. This means that ordinary call-backs for Fragment such as `onPause()` etc. will not work!
     
     If you run the app now, you'll see two 'pages' that allows you to switch between each other using sliding
     

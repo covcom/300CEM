@@ -1,31 +1,24 @@
 # Graphics and Animation
 
-Android provides a number of useful APIs for manipulating graphics and animation. We will look at some simple examples in the exercises below. Upon finishing the exercises, you should have an app that looks like below. The app has two 'pages', each of which contains a single graphic. If you press the 'start/stop' button, you'll start/stop the animation on that graphic.
+Android provides a number of useful APIs for manipulating graphics and animation. We will look at some simple examples in the exercises below. Upon finishing the exercises, you should have an app that looks like below. The app has two 'pages', each of which contains a single graphic. If you press the 'start/stop' button, you'll start/stop the animation on that page.
 
 [![](.md_images/ezgif-23203067.gif)](https://youtu.be/ewk5-RKs-X4)
 
 ## Lab 1 Graphics
 
-During previous weeks, we've used various UI controls that are provided by the system. However, we haven't created any shapes or views ourselves. In the 1st lab of the week, we'll learn how to do it. But before that, let's create an app that has two 'pages' and that uses a ViewPager for the transition between the two. 
+Previously we used many UI controls provided by the system. However, we haven't created any shapes or views ourselves. In the 1st lab of the week, we'll learn how to do it. But before that, let's create an app that has two 'pages' and a user can use swipe gestures to swtich from one to another. Techinically, we use ViewPagers for the transition between the two pages.
 
 ### ViewPager
 
-Create an app called My Graphics using all default options. Then follow steps below to add ViewPager that allows the user to flip left and right through pages.
+Create an app called My Graphics using all default options. Then follow steps below to add ViewPager that allows the user to swipe left or right through pages.
 
 1. Right-click your app's package name, then select New ==> Fragment ==> Fragment (Blank). Name it PageFragment, and uncheck the bottom two options.
     
     ![](.md_images/fragment.png)
     
-2. Open fragment_page.xml and edit so it looks similar the following
-    
+2. Open fragment_page.xml, insert the following to replace the defalut TextView
+<!--    insert the following ID attribute into the default FrameLayout's openning tag `android:id="@+id/frameLayout"`. Next, -->
     ```xml
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.jianhuayang.mygraphics.PageFragment">
-    
     <RelativeLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -47,7 +40,7 @@ Create an app called My Graphics using all default options. Then follow steps be
             android:layout_below="@id/title"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
-            android:text="xxx" />
+            android:text="place holder text" />
     
         <Button
             android:id="@+id/button"
@@ -59,12 +52,27 @@ Create an app called My Graphics using all default options. Then follow steps be
             android:text="Start/Stop" />
     
     </RelativeLayout>
-    
-    </FrameLayout>
-    
     ```
     
-3. Open MainActivity.java, insert the following code into `onCreate()` method. 
+3. Open activity_main.xml and replace the default TextView with the following
+    
+    ```xml
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Graphics!" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="20dp"></FrameLayout>
+    ```
+4. Open MainActivity.java, insert the following code into `onCreate()` method
     
     ```java
     FragmentManager fragmentManager = getFragmentManager();
@@ -74,32 +82,11 @@ Create an app called My Graphics using all default options. Then follow steps be
     fragmentTransaction.commit();
     ```
     
-4. Open content_main.xml and replace the TextView with the following
-    
-    ```xml
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Graphics!" 
-    />
-
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="20dp">
-    </FrameLayout>
-    ```
-    
-    The exercises above is something we have done before when we learned Fragments. If this doesn't look familiar, you'll need to go back and check previous material. If you run the app at this moment, you'll see something similar to below.
+    Steps above are something we have done when we learned Fragments. If this doesn't look familiar, you'll need to go back and check previous material. If you run the app at this moment, you'll see something similar to below.
     
     ![](.md_images/frag.png)
     
-5. While you're still in content_main.xml, replace everything in between the RelativeLayout tags (include all its children) with the following:
+5. Open activity_main.xml and replace everything in between the RelativeLayout tags (basically everything in that file except first line 'prolog') with the following:
     
     ```xml
     <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
@@ -110,24 +97,28 @@ Create an app called My Graphics using all default options. Then follow steps be
     />
     ```
     
-    Similar to ListView in a ListActivity, we can use ViewPager as the single element in a layout file, or we can use it in combination with other views. Here it's the only thing we need. Also, note ViewPager is dependent on the v4 version of the support library.
+    Similar to ListView in a ListActivity, we can use ViewPager as the single element in a layout file, or we can use it in combination with other views. Here it's the only thing we need. Also note that ViewPager is dependent on the v4 version of the support library.
     
-6. Open PageFragment.java, make changes so that it looks like the following:
+6. Open PageFragment.java, insert the following member variables
     
     ```java
-    public class PageFragment extends android.support.v4.app.Fragment {
+    public static final String ARG_PAGE = "ARG_PAGE";
+    private int pageNumber;
+    ```
     
-        public static final String ARG_PAGE = "ARG_PAGE";
-        public static final String DEBUG_KEY = "DEBUG_KEY";
-        private int pageNumber;
+    Next, create a static method that takes an integer and returns the fragment itself as the return type
+    
+    ```java
+    
+    
+    ```
+make changes so that it looks like the following:
+    
+    ```java
+    
+        
 
-        public static PageFragment create(int pageNumber) {
-            PageFragment pageFragment = new PageFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt(ARG_PAGE, pageNumber);
-            pageFragment.setArguments(bundle);
-            return pageFragment;
-        }
+        
         
         public PageFragment() {
             // Required empty public constructor
@@ -152,7 +143,7 @@ Create an app called My Graphics using all default options. Then follow steps be
             return v;
         }
         
-    }
+
     ```
     
     Here line `public static PageFragment create(int pageNumber) {}` declare a method using the [factory pattern](http://www.tutorialspoint.com/design_pattern/factory_pattern.htm). Instead of using constructors and passing values using Bundle, we use the static factory method to create the fragment object. In the `onCreate()` method, we get the variable that is passed into the fragment. And this variable is later used in the `onCreateView()` method to update the TextView texts.

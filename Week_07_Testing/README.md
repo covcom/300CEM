@@ -336,9 +336,11 @@ The critical part of the app above is the capability to calculate time differenc
 
 The test we did above used the Deadline constructor that doesn't require the Context input parameter. This is because Context is Android dependent we cannot run a test on local JVMs. The way to get around this, i.e. to test Android SDK dependent code, is to use a mocking framework called Mockito.
 
-1. Open build.gradle (Module: app), insert Mockito and Hamcrest dependencies into the dependencies configuration block (after line `testCompile 'junit:junit:4.12'`)
+1. Open build.gradle (Module: app), insert Mockito and Hamcrest dependencies into the dependencies configuration block (after line `testCompile 'junit:junit:4.12'` if exists already)
     
     ```xml
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.android.support:support-annotations:24.2.1'
     testCompile 'com.android.support.test:rules:0.5'
     testCompile 'org.mockito:mockito-core:1.10.19'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
@@ -445,6 +447,9 @@ Follow steps below to create an instrumented unit test:
 2. open build.gradle (Module: app) file, insert following androidTestCompile dependencies into the dependencies block
     
     ```xml
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
     androidTestCompile 'com.android.support:support-annotations:24.2.1'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'

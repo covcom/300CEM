@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <set>
+        <objectAnimator
+            android:duration="500"
+            android:propertyName="x"
+            android:repeatCount="infinite"
+            android:repeatMode="reverse"
+            android:valueTo="800"
+            android:valueType="floatType"/>
+        <objectAnimator
+            android:duration="500"
+            android:propertyName="y"
+            android:repeatCount="infinite"
+            android:repeatMode="reverse"
+            android:valueTo="300"
+            android:valueType="floatType"/>
+    </set>
+    <objectAnimator
+        android:duration="500"
+        android:propertyName="alpha"
+        android:repeatCount="infinite"
+        android:repeatMode="reverse"
+        android:valueTo="0f"/>
+</set>

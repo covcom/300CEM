@@ -1,8 +1,6 @@
 # Graphics and Animation
 
-Android provides a number of useful APIs for manipulating graphics and animation. We will look at some simple examples in the exercises below. Upon finishing the exercises, you should have an app that looks like below. The app has two 'pages', each of which contains a single graphic. If you press the 'start/stop' button, you'll start/stop the animation on that page.
-
-[![](.md_images/ezgif-23203067.gif)](https://youtu.be/ewk5-RKs-X4)
+Android provides a number of useful APIs for manipulating graphics and animation. We will look at some simple examples in the exercises below. Upon finishing the exercises, you should have an app that has two 'pages', each of which contains a single graphic. If you press the 'start/stop' button, you'll start/stop some animations on those pages.
 
 ## Lab 1 Graphics
 
@@ -223,9 +221,9 @@ Create an app called My Graphics using all default options. Then follow steps be
     }
     ```
     
-    In order to combine Fragment with ViewPager, you need to use a FragmentStatePagerAdapter, which is a subclass of android.support.v4.view.PagerAdapter. This is not to be confused with android.widget.Adapter, which is used to work together with AdapterView to achieve dynamic data binding. For FragmentStatePagerAdapter we need to override the two methods `getItem()` and `getCount()`. Note here the two Fragments will be created as soon as ViewPager becomes visible. This means that ordinary call-backs for Fragment such as `onPause()` etc. will not work!
+    In order to combine Fragment with ViewPager, you need to use a FragmentStatePagerAdapter, which is a subclass of android.support.v4.view.PagerAdapter. This is not to be confused with android.widget.Adapter, which is used to work together with AdapterView to achieve dynamic data binding. For FragmentStatePagerAdapter we need to override the two methods `getItem()` and `getCount()`. Note here the two Fragments will be created as soon as ViewPager becomes visible. This means that some ordinary call-backs for Fragment such as `onPause()` etc. will never be called! Instead ViewPager provides a [OnPageChangeListener interface](https://developer.android.com/reference/android/support/v4/view/ViewPager.OnPageChangeListener.html) to deal with page state change. Apart from FragmentStatePagerAdapter, Android also provides an adapter called FragmentPagerAdapter. The difference between are two is mainly that FragmentStatePagerAdapter is for larger data (more pages) and FragmentPagerAdapter is for smaller data (less pages). But in either case, by default ViewPager will only load 3 fagments into memory. Click to see some [discussions on Stack Overflow about FragmentPagerAdapter and FragmentStatePagerAdapter](http://stackoverflow.com/questions/18747975/difference-between-fragmentpageradapter-and-fragmentstatepageradapter).
     
-    If you run the app now, you'll see two 'pages' that allows you to switch between each other using sliding
+    If you run the app now, you'll see two pages that allows you to switch between each other using sliding
     
     ![](.md_images/p1.png)
     
@@ -233,9 +231,9 @@ Create an app called My Graphics using all default options. Then follow steps be
 
 ### Drawable resources for ShapeDrawable
 
-Now we're ready to insert some shapes into the 1st page. We have images as drawable. We can also define the shapes in an xml file.
+Now we're ready to insert some shapes into the 1st page. Previously we used images as drawable. We can also define the shapes in an xml file.
 
-1. Right-click on the drawable folder to create a Drawable resource file, name it gradient_box.
+1. Right-click on the res folder and select New ==> Android resource file. In the New Resoure File pop up window, select Resource type to be Drawable, and in the File name field name the file gradient_box.
     
     ![](.md_images/drawable_res.png)
     
@@ -243,76 +241,81 @@ Now we're ready to insert some shapes into the 1st page. We have images as drawa
     
     ```xml
     <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
+       android:shape="rectangle">
     <gradient
-        android:startColor="#FFFF0000"
+        android:angle="45"
         android:endColor="#80FF00FF"
-        android:angle="45"/>
-    <padding android:left="7dp"
-        android:top="7dp"
+        android:startColor="#FFFF0000"/>
+    <padding
+        android:bottom="7dp"
+        android:left="7dp"
         android:right="7dp"
-        android:bottom="7dp" />
-    <corners android:radius="8dp" />
-    </shape>
+        android:top="7dp"/>
+    <corners android:radius="8dp"/>
+</shape>
     ```
     
-    Here we define a rectangle shape and customize it using gradient and padding tags. A full list of available tags and attributes can be found [here](http://developer.android.com/guide/topics/resources/drawable-resource.html#Shape). If you open the Preview tool window, you'll see something like below
+    Here we define a rectangle shape and customize it using gradient and padding tags. A full list of available tags and attributes can be found [on the official API guides on Drawable Resources](http://developer.android.com/guide/topics/resources/drawable-resource.html#Shape). If you open the Preview tool window, you'll see something like below
     
     ![](.md_images/rec.png)
     
-3. Open PageFragment.java, insert the following line into the `onCreateView()` method, before the final `return v;` clause
+3. Open PageFragment.java, insert the following line into the `onCreateView()` method, before the final `return v` line
     
     ```java
     if (pageNumber == 0) {
             Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.gradient_box);
-            ImageView image = (ImageView) v.findViewById(R.id.body);
-            image.setImageDrawable(drawable);
+            ImageView imageView = (ImageView) v.findViewById(R.id.body);
+            imageView.setImageDrawable(drawable);
         }
     ```
+    
+    What we did before with system resources such as string resources is to call function like `getResources().getString()`. It is also possible here to call `getResources().getDrawable()`, like the example in the [official guide on Drawable resources](https://developer.android.com/guide/topics/resources/drawable-resource.html#Shape). However, if you do that the system will prompt a warning message indicating some compatibility issues. The proper, or bullet proof, way of doing it is to use the `ContextCompat` or `ResourcesCompat` classes. The reason for this is that `[getDrawable(int)](https://developer.android.com/reference/android/content/res/Resources.html#getDrawable(int))` is deprecated, and new way of doing it is '`[getDrawable(int, Theme)](https://developer.android.com/reference/android/content/res/Resources.html#getDrawable(int, android.content.res.Resources.Theme))`, which is not supported in older platforms. For more discussions on this, view this [Stack Overflow discussions on Android getResources().getDrawable() deprecated API 22](http://stackoverflow.com/questions/29041027/android-getresources-getdrawable-deprecated-api-22).
+    
+    We have set images for ImageButtons previously in XML files using attribute `android:src`. The equivalent of that in Java code is to call function `setImageResource (int)`. Now the code above shows you a different way of doing the same thing in Java i.e. `setImageDrawable(drawable)` 
     
     If you run the app now you'll see that on the first page a little rectangle shape has been created:
     
     ![](.md_images/p1shape.png)
-    
 
 ### Extending View class
 
-You can also create a customized class by extending View and include ShapeDrawables in it.
+You can also create a customized shape by extending View and including ShapeDrawables in it.
 
 1. Create a new class called CustomDrawableView and insert the following code:
     
     ```java
     public class CustomDrawableView extends View {
-    private ShapeDrawable mDrawable;
-    
-    public CustomDrawableView(Context context) {
-        super(context);
-        
-        int x = 10;
-        int y = 10;
-        int width = 300;
-        int height = 50;
 
-        mDrawable = new ShapeDrawable(new OvalShape());
-        mDrawable.getPaint().setColor(0xff74AC23);
-        mDrawable.setBounds(x, y, x + width, y + height);
-    }
-    
-    protected void onDraw(Canvas canvas) {
-        mDrawable.draw(canvas);
-    }
+        private ShapeDrawable mDrawable;
+
+        public CustomDrawableView(Context context) {
+            super(context);
+
+            int x = 10;
+            int y = 10;
+            int width = 300;
+            int height = 50;
+
+            mDrawable = new ShapeDrawable(new OvalShape());
+            mDrawable.getPaint().setColor(0xff74AC23);
+            mDrawable.setBounds(x, y, x + width, y + height);
+        }
+
+        protected void onDraw(Canvas canvas) {
+            mDrawable.draw(canvas);
+        }
     }
     ```
     
-    This is an example taken from the office [API guide](http://developer.android.com/guide/topics/graphics/2d-graphics.html#drawables-from-xml). After defining the oval shape in constructor, once `View.onDraw()` is called, our shape will draw itself on the canvas provided by the system.
+    This is an example taken from [the office API guide on Graphics](http://developer.android.com/guide/topics/graphics/2d-graphics.html#drawables-from-xml). After defining the oval shape in constructor, once `View.onDraw()` is called, our shape will draw itself on the canvas provided by the system.
     
 2. Open PageFragment.java, edit the `if` clause inside `onCreateView()` method so it becomes the following
     
     ```java
     if (pageNumber == 0) {
             Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.gradient_box);
-            ImageView image = (ImageView) v.findViewById(R.id.body);
-            image.setImageDrawable(drawable);
+            ImageView imageView = (ImageView) v.findViewById(R.id.body);
+            imageView.setImageDrawable(drawable);
         } else if (pageNumber == 1) {
             ImageView imageView = (ImageView) v.findViewById(R.id.body);
             imageView.setVisibility(View.GONE);
@@ -333,41 +336,46 @@ You can also create a customized class by extending View and include ShapeDrawab
 
 ## Lab 2 Animations
 
-There're (at least!) two ways to do animation. One is to use property animation and the other is View animation. While the former is capable of animating any objects, the latter is limited to Views only. We'll look at examples of both.
-
-What I did in the exercise is that I duplicated the folder created earlier for lab 1 and renamed it MyGraphics2. But you can leave this step if you want.
+There're three different ways to do animation in Android, and two of those are commonly used. One is to use property animation and the other is View animation. While the former is capable of animating any objects, the latter is limited to Views only. We'll look at examples of both.
 
 ### Property animation
 
-1. Open PageFragmet.java and move variable declaration outside of the `onCreateView()` method. Insert a new Button initialization. Your method should now look like
+1. Some house keeping tasks. Duplicate the My Graphics project created earlier, and rename it My Graphics2. Open this new project, in PageFragmet.java file remove the TextView declaration in `onCreateView()` method, so that the following line
     
     ```java
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_page, container, false);
-        Log.d(DEBUG_KEY, Integer.toString(pageNumber));
-        textView = (TextView) v.findViewById(R.id.title);
-        textView.setText("This is page No. " + Integer.toString(pageNumber + 1));
-        imageView = (ImageView) v.findViewById(R.id.body);
-        button = (Button) v.findViewById(R.id.button);
-        
-        if (pageNumber == 0) {
-            Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.gradient_box);
-            imageView.setImageDrawable(drawable);
-        } else if (pageNumber == 1) {
-            imageView.setVisibility(View.GONE);
-            RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.container);
-            CustomDrawableView customDrawableView = new CustomDrawableView(getContext());
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(80, 80, 0, 0);
-            params.addRule(RelativeLayout.BELOW, textView.getId());
-            relativeLayout.addView(customDrawableView, params);
-            
-        }
-        return v;
-    }
+    TextView textView = (TextView) v.findViewById(R.id.title);
+    ```
+    
+    becomes
+    
+    ```java
+    textView = (TextView) v.findViewById(R.id.title);
+    ```
+    
+    Now declare variable `textView` directly after class declaration i.e. it becomes a member variable
+    
+    ```java
+    private TextView textView;
+    ```
+    
+    Similarly, declare member variables for the Button and ImageView
+    
+    ```java
+    private Button button;
+    private ImageView imageView;
+    ```
+    
+    and initialize those in `onCreateView()` method
+    
+    ```java
+    button = (Button) v.findViewById(R.id.button);
+    imageView = (ImageView) v.findViewById(R.id.body);
+    ```
+    
+    Delete the two ImageView lines in 'if/else' blocks.
+    
+    ```java
+    ImageView image = (ImageView) v.findViewById(R.id.body);
     ```
     
 2. Add some more variable declarations in the class

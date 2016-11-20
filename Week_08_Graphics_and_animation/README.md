@@ -117,7 +117,7 @@ Create an app called My Graphics using all default options. Then follow steps be
     
     ```
     
-    Here this `create()` method uses the factory method [*NOT* factory pattern](http://www.tutorialspoint.com/design_pattern/factory_pattern.htm). Instead of using constructors and passing values using Bundle, we use a [static factory method](http://www.javapractices.com/topic/TopicAction.do?Id=21) to create the fragment object. 
+    Here this `create()` method uses the factory method [*NOT* factory pattern](http://www.tutorialspoint.com/design_pattern/factory_pattern.htm). Instead of using constructors and passing values using Bundle, we use a [static factory method](http://stackoverflow.com/questions/929021/what-are-static-factory-methods) to create the fragment object. 
     
     Insert the following method into PageFragment class. This will initialize the member variable `pageNumber` using values passed from the static factory method. This variable is later used in the `onCreateView()` method to update the TextView texts.
     

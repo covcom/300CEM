@@ -212,6 +212,8 @@ All apps we have created so far are single-page apps, and app titles always appe
     
     ![title_bar](.md_images/title_bar.png)
     
+    > It is possible to get the toolbar in Java and do some customizations such as `getSupportActionBar().setDisplayShowTitleEnabled(false)`. Have a look at [Code Path tutorial on Using the App ToolBar](https://guides.codepath.com/android/Using-the-App-ToolBar).
+    
 6. Under Android view, right-click on the res folder and select New ==> Android resource file. In the window that pops up, fill out info as below and click OK. You'll notice that in the Project tool window a new file called menu_main.xml is created in a folder named menu.
     
     ![menu](.md_images/menu.png)
@@ -282,6 +284,8 @@ All apps we have created so far are single-page apps, and app titles always appe
     ```
     
     These two are callback functions that belong to Activity class, as indicated by the `@Override` notation. The first method inflates the menu using menu resource 'R.menu.menu_main' which indicates the folder and xml file name. In the second method, we can define different actions according to which icon is being clicked. This is similar to our previous example where one method is capable of responding to several different button clicks.
+    
+    > ['The onCreate method is called first, and before it finishes onCreateOptionsMenu is called.'](http://stackoverflow.com/questions/7705927/android-when-is-oncreateoptionsmenu-called-during-activity-lifecycle). Activity has a method [`invalidateOptionsMenu()`](https://developer.android.com/reference/android/app/Activity.html#invalidateOptionsMenu()) which declares that the 'options menu has changed, so should be recreated' i.e. the `onCreateOptionsMenu()`method will be called the next time it needs to be displayed.
     
     At this point, if you run the app you should have something similar to below:
     

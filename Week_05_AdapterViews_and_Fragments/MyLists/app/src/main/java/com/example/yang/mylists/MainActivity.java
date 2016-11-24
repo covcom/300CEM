@@ -1,8 +1,8 @@
 package com.example.yang.mylists;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+//        List<String> candidateNamesNew = new ArrayList<String>(Arrays.asList(candidateNames));
+//        ArrayAdapter<String> arrayAdapterNew = new ArrayAdapter<String>(this, android.R.layout
+//                .simple_list_item_1, candidateNamesNew);
+//        listView.setAdapter(arrayAdapterNew);
+//        arrayAdapterNew.add("New Someone");
+//        arrayAdapter.notifyDataSetInvalidated();
     }
 
     public void onButtonClick(View v) {

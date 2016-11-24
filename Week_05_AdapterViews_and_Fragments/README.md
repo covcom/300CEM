@@ -95,6 +95,23 @@ If you run the app, what you'll see is something like this:
 
 ![simple](.md_images/simple.png)
 
+The following code can be added after the `setOnItemClickListener()` block, but still within `onCreate()`method:
+
+```java
+List<String> candidateNamesNew = new ArrayList<String>(Arrays.asList(candidateNames));
+ArrayAdapter<String> arrayAdapterNew = new ArrayAdapter<String>(this, android.R.layout
+        .simple_list_item_1, candidateNamesNew);
+listView.setAdapter(arrayAdapterNew);
+arrayAdapterNew.add("New Someone");
+arrayAdapter.notifyDataSetInvalidated();
+```
+
+Have a look at the code above, and try to answer the following questions:
+
+* Why is it necessary to convert string array to array list?
+* How does array adapter update the actual dataset i.e. candidate data?
+* What is the purpose of `notifyDataSetInvalidated()`?
+
 ### Complex ListView
 
 Simple ListView is useful for displaying data that can be converted to strings in easy steps. But if you want to have fine control of the presentation of single entries in your ListView, you need to provide customized layout files for your adapter. In this way, you'll make it a 'complex ListView'.
@@ -265,6 +282,8 @@ Simple ListView is useful for displaying data that can be converted to strings i
     
     The code above initialize a ListView and associates it with a customized Adapter. The onClickListner is the same as in the simple list example. The only thing that is new here is the association of data and ListView through a customized Adapter. We'll look at it in a minute. 
     
+    > CandidateAdapter can be used to add more data to the arraylist e.g. `candidateAdapter.add(candidates.get(0)); candidateAdapter.notifyDataSetInvalidated();` But this requires a 'candidateAdapter' object to be created beforehand.
+    
 8. Create a new class called CandidateAdapter. Open the Java file and replace auto-generated class with the following (don't touch the package declaration!)
     
     ```java
@@ -320,6 +339,7 @@ Simple ListView is useful for displaying data that can be converted to strings i
     * You can also use `LayoutInflater inflater = (LayoutInflater) CandidatesAdapter.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)`, see an example from [here](https://github.com/pranayairan/Code-Learn-Android-Example/blob/master/CodeLearnListExample/src/org/codelearn/codelearnlistexample/ListViewWithBaseAdapter.java).
     
     Note here `v.findViewById()` is different from `findViewById()`. `v.findViewById()` will only find sub views i.e. views being contained by 'v'; whereas `findViewById()` will find anything contained in the Activity.
+    
     
 9. Insert the following into activity_main.xml before the ListView
     

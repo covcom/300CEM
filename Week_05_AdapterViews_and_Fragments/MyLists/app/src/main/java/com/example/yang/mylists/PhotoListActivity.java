@@ -36,7 +36,8 @@ public class PhotoListActivity extends AppCompatActivity {
         generateCandidates();
 
         listView = (ListView) findViewById(R.id.listViewComplex);
-        listView.setAdapter(new CandidateAdapter(this, R.layout.list_item, candidates));
+        CandidateAdapter candidateAdapter = new CandidateAdapter(this, R.layout.list_item, candidates);
+        listView.setAdapter(candidateAdapter);
         listView.setOnItemClickListener(
 
                 new AdapterView.OnItemClickListener() {
@@ -47,6 +48,10 @@ public class PhotoListActivity extends AppCompatActivity {
                     }
                 }
         );
+
+//        candidateAdapter.add(candidates.get(0));
+//        candidateAdapter.notifyDataSetInvalidated();
+
     }
 
     private void generateCandidates() {

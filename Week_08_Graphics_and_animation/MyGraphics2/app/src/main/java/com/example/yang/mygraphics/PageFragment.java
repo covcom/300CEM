@@ -88,7 +88,9 @@ public class PageFragment extends Fragment {
             imageView.setVisibility(View.GONE);
             RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.container);
             customDrawableView = new CustomDrawableView(getContext());
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            customDrawableView.setBackgroundColor(Color.parseColor("#ff0000"));
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(320, 70);
+//            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(80, 80, 0, 0);
             params.addRule(RelativeLayout.BELOW, textView.getId());
             relativeLayout.addView(customDrawableView, params);

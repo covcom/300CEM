@@ -321,7 +321,7 @@ You can also create a customized shape by extending View and including ShapeDraw
             imageView.setVisibility(View.GONE);
             RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.container);
             CustomDrawableView customDrawableView = new CustomDrawableView(getContext());
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(320, 70);
             params.setMargins(80, 80, 0, 0);
             params.addRule(RelativeLayout.BELOW, textView.getId());
             relativeLayout.addView(customDrawableView, params);
@@ -415,7 +415,7 @@ There're three different ways to do animation in Android, and two of those are c
             imageView.setVisibility(View.GONE);
             RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.container);
             customDrawableView = new CustomDrawableView(getContext());
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(320, 70);
             params.setMargins(80, 80, 0, 0);
             params.addRule(RelativeLayout.BELOW, textView.getId());
             relativeLayout.addView(customDrawableView, params);

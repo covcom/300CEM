@@ -526,7 +526,7 @@ In the Android tool window, right-click on the res folder and select New ==> And
         android:toDegrees="-45"
         android:toYScale="0.0"/>
 </set>
-
+```
 
 Open PageFragment.java, insert the following line into the `else if (pageNumber == 1)` block, after line `relativeLayout.addView(customDrawableView, params)`
 
@@ -567,6 +567,7 @@ Android includes support for high-performance 2D and 3D graphics with the Open G
 * [Simplified Coding tutorial on Android TabLayout Example using ViewPager and Fragments]
 (https://www.simplifiedcoding.net/android-tablayout-example-using-viewpager-fragments)
 * [Code Project Beginner's Guide to Android Animation/Graphics](http://www.codeproject.com/Articles/825700/Beginners-Guide-to-Android-Animation-Graphics)
+* [Android Hive tutorial Android Working with XML Animations written by Ravi Tamada.](http://www.androidhive.info/2013/06/android-working-with-xml-animations/) This tutorial is for view animation.
 <!--* [Add submodule in Git](https://git-scm.com/book/en/v2/Git-Tools-Submodules)-->
 <!--(git submodule add https://github.com/jianhuayang/Squash.git)-->
 <!--* [How to embed a video into GitHub README.md](http://stackoverflow.com/questions/4279611/how-to-embed-a-video-into-github-readme-md/29842302#29842302)-->

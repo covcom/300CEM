@@ -48,10 +48,8 @@ Follow steps below to setup an Android watch AVD and connect to your phone.
     
     > In case you have a real Android watch such as Moto 360 2nd Gen, to setup debugging you'll need to follow [official guides on Debugging over Bluetooth](https://developer.android.com/training/wearables/apps/bt-debugging.html). Note that some online tutorials use `localhost` instead of `127.0.0.1`, which may not work.
     
-    ```bash
-    ./adb forward tcp:4444 localabstract:/adb-hub
-    ./adb connect 127.0.0.1:4444
-    ```
+    > `./adb forward tcp:4444 localabstract:/adb-hub`
+    > `./adb connect 127.0.0.1:4444`
     
 7. On your phone, open Android Wear and connect to the watch called Emulator. To test the connection, click Take wearable screenshot. If it's connected successfully you should see in the notification area you have a new message saying 'Wearable screenshot finished.'
     

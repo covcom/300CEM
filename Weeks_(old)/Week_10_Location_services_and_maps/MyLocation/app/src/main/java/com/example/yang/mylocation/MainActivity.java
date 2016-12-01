@@ -14,15 +14,26 @@ import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+import java.text.DateFormat;
+import java.util.Date;
+
+//ConnectionCallbacks==>abstract void onConnected(Bundle connectionHint); abstract void onConnectionSuspended(int cause)
+//OnConnectionFailedListener==>abstract void onConnectionFailed(ConnectionResult result)
+//LocationListener==>abstract void	onLocationChanged(Location location)
+
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+    public static int REQUEST_LOCATION = 1;
     protected TextView mLatitudeText;
     protected TextView mLongitudeText;
+    protected TextView mTimeText;
     protected GoogleApiClient mGoogleApiClient;
     protected Location mLastLocation;
-    public static int REQUEST_LOCATION = 1;
     String TAG = "xxx";
+    LocationRequest mLocationRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,24 +42,26 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         mLatitudeText = (TextView) findViewById((R.id.latitude_text));
         mLongitudeText = (TextView) findViewById((R.id.longitude_text));
+        mTimeText = (TextView) findViewById((R.id.time_text));
         mLatitudeText.setText("Latitude not available yet");
         mLongitudeText.setText("Longitude not available yet");
+        mTimeText.setText("Time not available yet");
 
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-            Log.d(TAG, "onCreate: ");
-        }
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
     @Override
     protected void onStart() {
         mGoogleApiClient.connect();
         super.onStart();
-        Log.d(TAG, "onStart: ");
     }
 
     @Override
@@ -59,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
 
     @Override
@@ -73,33 +85,35 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
                     REQUEST_LOCATION);
         } else {
-            getLastLocation();
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            if (mLastLocation != null) {
+                mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
+                mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+                mTimeText.setText("Last known location");
+            }
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == REQUEST_LOCATION) {
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getLastLocation();
+                onConnected(null);
             }
         }
     }
 
-    public void getLastLocation() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED) {
-            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            if (mLastLocation != null) {
-                mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-                mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
-            }
-        }
-
+    @Override
+    public void onLocationChanged(Location location) {
+        mLastLocation = location;
+        mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
+        mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+        mTimeText.setText(DateFormat.getTimeInstance().format(new Date()));
     }
+
 }

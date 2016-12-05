@@ -460,6 +460,7 @@ If you run the app on your watch by tapping My Wearables icon, the counting down
 ## Lab 3 Useful Resources
 
 * [Android API guide on Services](https://developer.android.com/guide/components/services.html)
+* [Android API guide on Notifications](https://developer.android.com/guide/topics/ui/notifiers/notifications.html)
 * [Android Best Practices for Background Jobs](https://developer.android.com/training/best-background.html)
 * [Building Apps for Wearables](https://developer.android.com/training/building-wearables.html)
 

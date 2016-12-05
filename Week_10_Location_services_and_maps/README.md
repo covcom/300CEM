@@ -20,6 +20,7 @@ Follow steps below to download the sample app from module's GitHub page and run 
     
     ![](.md_images/dependency.png)
     
+    > Depending on the version of your Android Studio SDK and version of your AVD/device, you might receive an error message saying something like 'W/GooglePlayServicesUtil: Google Play services out of date. Requires 10084000 but found 9877470'. This basically means that you declare a dependency of com.google.android.gms:play-services in build.gradle that is newer than the version installed in AVD/device. If you are running on a real device, you need to update your version of Google Play Services. [If you running on an emulator, you will need to downgrade build.gradle to version 9.8.0 or 9.6.1 of the Play Services. There is no released emulator image that supports version 10.0.0](http://stackoverflow.com/questions/40740372/cannot-create-a-user-with-latest-firebase-version-i-get-a-w-dynamitemodule-and).
 3. Get the permission. Run the app on an AVD (not a real device, as you'll need to mock locations later), the first screen you'll see is something like below. These are really placeholders.
     
     ![](.md_images/app_1st.png)
@@ -115,7 +116,7 @@ In the above tutorial 'Step 4. Get a Google Maps API key', when you go to Google
 
 ### The app
 
-Download our demo project MyLocation2 and run it. (Uninstall any MyLocation apps if exists.) On the first load, the app looks like below
+Uninstall any MyLocation apps on your AVD/devices if exists. Download our demo project MyLocation2 and replace the contents of google_maps_api.xml with the key you generated in 'Get started' project. Run this project and you'll see that on the first load, the app looks like below
 
 ![](.md_images/app2_1st.png)
 
@@ -198,6 +199,30 @@ The MyLocation project roughly follows the Android official guide [Making Your A
 * [Google Play Services and Runtime Permissions](https://developers.google.com/android/guides/permissions)
 * [Android Guide Requesting Permissions at Run Time](https://developer.android.com/training/permissions/requesting.html)
 
+### Setting Up Google Play Services
+
+The simplest way of including Google Play Services in Android is to include everything in it through build.gradle dependencies
+
+```xml
+apply plugin: 'com.android.application'
+    ...
+
+    dependencies {
+        compile 'com.google.android.gms:play-services:9.6.1'
+    }
+```
+
+However, this is not a good practice as it'll include everything in your project and make it unnecessarily large. For the examples above, to avoid such situations, you can use the following instead. Take a look at the [Official guide on Setting Up Google Play Services](https://developers.google.com/android/guides/setup)
+
+```xml
+apply plugin: 'com.android.application'
+    ...
+
+    dependencies {
+        compile 'com.google.android.gms:play-services-maps:9.6.1'
+        compile 'com.google.android.gms:play-services-location:9.6.1'
+    }
+```
 
 
 

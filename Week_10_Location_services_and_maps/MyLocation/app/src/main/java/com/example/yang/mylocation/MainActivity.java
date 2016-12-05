@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mLongitudeText.setText("Longitude not available yet");
         mTimeText.setText("Time not available yet");
         mOutput.setText("");
-        mLocateButton.setEnabled(mGoogleApiClient.isConnected());
 
         // GoogleApiClient allows to connect to remote services, the two listeners are the first
         // two interfaces the current class implements
@@ -82,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+
+        mLocateButton.setEnabled(mGoogleApiClient.isConnected());
 
         // LocationReques sets how often etc the app receives location updates
         mLocationRequest = new LocationRequest();

@@ -889,6 +889,10 @@ Finally, remember Gradle works on conventions, you'll have to change the configu
 
 For those of you who haven't completed previous labs, you can work on it if you wish. For those who have finished, in this final lab, there are some challenging questions for you to explore. These questions are related to previous labs, and somehow involves more efforts to complete.
 
+### Contextual action mode
+
+You can customize menus displayed in the toolbar to suit your app contents. For an example, from Google Play Store download an app called keep and manually insert some notes. Once done, click and hold you finger on one of those notes. You'll notice that the menu has changed accordingly. This is done using the [Contextual action mode](https://developer.android.com/guide/topics/ui/menus.html#CAB). Click on this link and try to understand how CAB works and include in the exercise project above.
+
 ### Build from command line
 
 If you look at the root folder of the project, there're a couple of files that we haven't mentioned yet e.g. gradlew and gradlew.bat. These are scripts that we can run to build our apps from the command line.
@@ -901,3 +905,4 @@ If you look at the root folder of the project, there're a couple of files that w
 ### Gradle build tools
 
 Instead of using generated wrapper scripts such as gradlew in the previous steps, you can download Gradle and build everything from scratch. Follow this tutorial [Building Android Projects with Gradle](https://spring.io/guides/gs/gradle-android/) from Spring to explore more of Gradle.
+

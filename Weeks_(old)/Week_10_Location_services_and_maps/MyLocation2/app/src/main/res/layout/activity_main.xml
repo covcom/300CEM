@@ -61,17 +61,24 @@
         android:textIsSelectable="true"
         android:textSize="@dimen/lat_long_text_size"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="180dp"
+        android:background="@android:color/darker_gray"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="180dp"
         android:orientation="horizontal">
 
-        <Button
+        <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onStartClicked"
-            android:text="on/off"/>
+            android:showText="false"
+            android:text="On/Off"/>
 
         <Button
             android:id="@+id/locate"
@@ -80,13 +87,33 @@
             android:onClick="onLocateClicked"
             android:text="Locate"/>
 
+        <Button
+            android:id="@+id/map_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onMapFragClicked"
+            android:text="Map Frag"/>
+
+        <Button
+            android:id="@+id/map_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onMapViewClicked"
+            android:text="Map View"/>
+
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="230dp"
+        android:background="@android:color/darker_gray"/>
 
     <TextView
         android:id="@+id/output"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="240dp"
         android:gravity="top"
         android:text="output area"/>
 </RelativeLayout>

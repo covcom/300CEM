@@ -1,151 +1,141 @@
 # Location Services and Google Maps
 
-Most Android devices have built-in sensors such as motion sensors to detect screen orientation and position sensors to detect your current position. In fact, sensors are one of the criteria in the marking rubrics. Click [here](http://developer.android.com/guide/topics/sensors/sensors_overview.html) for an overview of sensors available in Android.
+Most, if not all, Android devices have built-in sensors such as motion sensors to detect screen orientation and position sensors to detect your current position. [Read the official API guide for an overview of sensors available on the Android platform](https://developer.android.com/guide/topics/sensors/sensors_overview.html). Among many sensors that are available, the most widely used one is the location sensor.
 
 ## Lab 1 Location Services
 
-There are several different ways of finding a location using Android device. In the first example, we’ll use the android.location package and built-in GPS sensors, as that is something we can emulate using an AVD with minimum configuration. For those of you who own an actual Android device, you can try to use your device instead of ADV. But you should be aware that the recommended way is to use the Google Location Services API, which is part of Google Play Services.
+There are different ways of determining an Android device's location. Two widely used APIs are the built-in Android location (android.location) and the Google Play services. The Google Play services location APIs, which are part of Google Play Services, are preferred over the Android framework location APIs (android.location) as it offers simpler interface and better battery usage.
 
-### Determine current location
+In the following exercise, we’ll use the Google Play services location APIs to create an app that is capable of determining a device's location. In addition, the app can interprete the device's location in terms of latitue/longitude and turn it into a meaningful address.
 
-Start a new Android project, and name it My Location. In activity_main.xml, delete the android:text attribute and give the TextView an ID of textView1. Your xml file should look like below:
+### The app
 
-![](.md_images/textview.png)
+Follow steps below to download the sample app from module's GitHub page and run it on your own machine.
 
+1. Make sure Google play service is available on your system. In Android Studio, click Tools ==> Android ==> SDK Manager, this will bring up the Preference tool window Android SDK settings page. Make sure that Google Play services are installed.
+    
+    ![](.md_images/sdk.png)
+    
+2. Install the app. Download sample project called MyLocation from module's GitHub page, and open it in Android Studio. Click Build ==> Rebuild Project. In case that the system complains about Google Play services version required is different from what is installed, you'll need to delete existing dependency and replace it with the one you have.
+    
+    ![](.md_images/dependency.png)
+    
+3. Get the permission. Run the app on an AVD (not real device, as you'll need to mock locations later), the first screen you'll see is something like below. These are really place holders.
+    
+    ![](.md_images/app_1st.png)
+    
+    Now if you click On/Off button, it'll ask your permissons to access device location. Click Allow.
+    
+    ![](.md_images/app_allow.png)
+    
+4. Simulate location change in AVD. In the Extended controls window for AVD, in the Location tab, insert the following location for latitude and longtitude respectively, 52.191064 and -1.707510, and click Send.
+    
+    ![](.md_images/app_mock.png)
+    
+5. Determine current location and display Address. If you click the Locate button in the app you'll see that the above latitude/longitude corresponds to an address in Stratford (Shakespeare birthplace). If you then decide to mock a new location and send to the AVD, the app should pick this new location automatically for you.
+    
+    ![](.md_images/app_locate.png)
 
-Now, go to MainActivity.java. You need the following member variables, which are defined just after the declaration of the class:
+### Source code
 
-![](.md_images/v.png)
+In following sections, some important concepts used in the demo app are explained. More importantly, the sample project are well documented. You should study the source code carefully and read comments. You should also try and change some source code to explore and see what different functions the altered software offers.
 
-Here, LocationManager is new. This is a class that provides system-wide location services. In order to get this service, you need to call the getSystemService method:
+** Get the permission **
 
-![](.md_images/get.png)
+The app needs to access the device's location. There're two parts to get this done:
 
-Next, we have our utility function and listener defined.  The first function is to update the TextView once we have some location data. This is easy to understand.
+1. First of all, declare 'uses-permission' in manifest file, contained witin the `manifest` tag
+    
+    ```xml
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    ```
+    
+2. In MainActivity.java, check if permission is granted or not. If not, request that permission. You'll only need to do this once.
+    
+    ```java
+   if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+           PackageManager.PERMISSION_GRANTED) {
+       ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+               REQUEST_LOCATION);
+   }
+    ```
+    
+    How Android system handles permission has changed. The old way is to require all permissions upon installation. And the new way is to require individual permissons on first use.
 
-![](.md_images/update.png)
+** Get last known location **
 
-The second one is to define a location listener, which is very similar to the onclick listener. As you type along, you’ll notice that Android Studio keeps giving your errors saying that you need to implement certain abstract methods. And once you implemented all those required abstract methods, the error message will go away.
+The app builds the GoogleApiClient to begin with. Once it is built, the client connects to Google Play services in the background. If it connects successfuly, getting the last known location is just a single line of code
 
-![](.md_images/listen.png)
+```java
+mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+```
 
-You probably noticed here we defined another member variable mListener, and this listener is being 'attached' or 'removed' depending on the app status, as you’ll see later. If you look at the [online documentation](http://developer.android.com/reference/android/location/LocationListener.html), you’ll see what abstract methods are being defined there. That is why we need to implement them all.
+Note here even though at the very beginning of this document we mentioned that the Google Play services location APIs are preferred over the Android framework location APIs, `getLastLocation()` function will infact return an `android.location.Location` object.
 
-![](.md_images/abs.png)
+** Receive location updates **
 
-The actual code that goes into the onLocationChanged method is relatively easy:
+To receive location updates, i.e. get notified each time the device has a new location, use the following code
 
-![](.md_images/change.png)
+```java
+LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+```
 
-Next, we need to override onResume and onPause methods, as follows
+In the above code, `this` pass the current opbject as the listener by implementing the `onLocationChanged()` method.
 
-![](.md_images/resume.png)
+```java
+ @Override
+    public void onLocationChanged(Location location) {
+    //actual code
+    }
+```
 
-These two methods make sure that we get the location before our activity goes online, and we stop updating before it goes offline. requestionLocationUpdates takes 4 parameters, as follows:
+** Turn geographic location into addresses **
 
-![](.md_images/para.png)
+To convert geographic location into address, or the opposite, you'll need the Geocoder class from android.location.
 
-Now, you need to give permission in Manifest so the app can access GPS data 
+```java
+List<Address> addresses = mGeocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
+```
 
-![](.md_images/perm.png)
-
-If you run this app, you should have something similar to the one below. But the app doesn’t detect location change – that’s what we’re going to do next.
-
-![](.md_images/detect.png)
-
-### Simulating location change
-
-The problem we have now is that the AVD is on an actual computer, and we cannot carry it around to have location change. To simulate location change, we need to do the following:
-
-1.    In Android Studio, open ToolsAndroidAndroid Device Monitor
-2.    Click the Emulator Control tab
-3.    Scroll down to the Location Controls part, and give some locations using the longitude and latitude coordinate, for example, the Coventry University location.
-
-![](.md_images/location.png)
-
-![](.md_images/display.png)
-
-Once you click Send, the location info will be displayed on your AVD screen.
+In fact, the three classes we need from android.location are Address, Geocoder and Location.
 
 ## Lab 2 Google Maps
 
+The first app allows you to manipulate devices' location without touching the Google Map. However, it'll be much nicer to see how the app interacts with the user on a real map. Before diving into module demo code, take a look at the [Getting Started on Google Maps Android API](https://developers.google.com/maps/documentation/android-api/start). 
+
+![](.md_images/gm_gs.png)
+
+In the above tutorial 'Step 4. Get a Google Maps API key', when you go to Google developer console to create new project, the default project name is also 'My Project'. If that name annoys you, it can be changed through Google Cloud Platform page, on the righ-hand-side under Project settings.
+
+![](.md_images/project_name.png)
+
+### The app
+
+Download our demo project MyLocation2 and run it.
+
+### Source code
+
+** asdf **
+
+
+
+
 ### Setting up Google Play Services
 
-Configuring to use Google Play Services on Android is a bit difficult compared to iOS. However, once it’s configured, it’s pretty easy to use. To get things ready, simply follow the following steps:
 
-1.    Open Android SDK Manager, install Google Play service under the Extras group
-    
-    ![](.md_images/extras.png)
-    
-2. Install Google APIs and relevant system images for your Android SDK. In my case, I installed both 32 and 64-bit images
-    
-    ![](.md_images/api.png)
-    
-3. Open Android Virtual Device Manager, create a new AVD that targets at Google APIs, 
-    
-    ![](.md_images/image.png)
-    
-4. Go to where you saved your Android SDK, then go to extras ==> google ==> google_play_services ==> libproject ==> google_play-services_lib ==> res ==> values ==> version.xml, open that file you’ll see the version number. It should be like this:
-    
-    ![](.md_images/version.png)
-    
-5. Take a note of the above number, open your module’s gradle file (that is build.gradle (Module: app)), and insert the following line into dependencies section so it becomes
-    
-    ![](.md_images/gradle.png)
-    
-    If your version number is not 6587, you’ll need to adjust accordingly. Save the file and click the Sync Project with Gradle Files button.
-    
-    > If you have problems following instructions above, try to do the following, taken from [here](http://stackoverflow.com/questions/16624827/android-studio-with-google-play-services):
-    
-    * Go to File -> Project Structure
-    * Select 'Project Settings'
-    * Select 'Dependencies' Tab
-    * Click '+' and select '1.Library Dependencies'
-    * Search for : com.google.android.gms:play-services
-    * Select the latest version and click 'OK'
-    
-6. Add the following line as a child of the application element in your manifest file
-    
-    ![](.md_images/meta.png)
-    
 ### Getting last known location
 
-**Preparation**
-
-Now we’re ready to get the location from Google Play Services. Copy and paste your MainAcitivity.java file in the same directory, and give it a name, for example, MainAcitivity_BACKUP.java. This is to produce a backup copy in case we need to reverse back. In MainAcitivity.java comment out lines that concerns locationManager or mListener. In fact, if you comment out the locationManager declaration and then the system will highlight those lines you need to comment out, as it doesn’t recognize that variable anymore.
-
-**Get the location**
-
-Next, change the class signature to implement GoogleApiClient.ConnectionCallbacks, and insert a new variable called mGoogleApiClient together with other variable declarations:
-
-![](.md_images/client.png)
-
-Insert the following lines of code into the class:
-
-![](.md_images/client2.png)
-
-What we did here is that we create the API client and implement the onConnection interface. Detailed requirements of the interface can be seen [here](https://developer.android.com/reference/com/google/android/gms/common/api/GoogleApiClient.ConnectionCallbacks.html).
 
 
-Basically we need to implement two abstract methods:
+## Lab 3 Advanced topics
 
-![](.md_images/methods.png)
+### Official training on Making Your App Location-Aware
 
-In addition, we call the `connect()` method in onStart callback. This ensures the API client starts connecting before the app appears.
+The MyLocation project roughly follows the Android official guide [Making Your App Location-Aware](https://developer.android.com/training/location/index.html). The complete source code for that project, called Basic Location Sample, is on [GitHub](https://github.com/googlesamples/android-play-location/tree/master/BasicLocationSample) too. However, that project is not quite up-to-date in a sense that how apps obtain permissions has changed. To get up-to-date on how the latest permission system works, take a look at the following:
 
-Next, insert the following line into the onCreate method. This concludes the code-editing part.
+* [Google Play Services and Runtime Permissions](https://developers.google.com/android/guides/permissions)
+* [Android Guide Requesting Permissions at Run Time](https://developer.android.com/training/permissions/requesting.html)
 
-![](.md_images/build.png)
+### Project names
 
-**Run the app**
-
-Start the AVD you created targeting at Google APIs. Following instructions in the previous step to set locations of your AVD, in order to get lastKnownLocation. This can be verified when you open Google Map and see that you’re at the University.
-
-![](.md_images/cov.png)
-
-Next, if you run the app you’ll see the location info displayed the same as what you had used android.location package. But now this is done using Google Play Services. If you have a slow connection, try to press the home button and then tap your app to resume. It can take several minutes to get the connection. 
-
-Now what we did for the Google Play Services is part of the online documentation at [here](http://developer.android.com/training/location/retrieve-current.html), the complete code examples are at [here](https://github.com/googlesamples/android-play-location/tree/master/BasicLocationSample). You can download the project and import into Android Studio to have a play around.
-
-![](.md_images/sample.png)
 

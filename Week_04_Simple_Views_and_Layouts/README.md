@@ -1069,7 +1069,10 @@ If you click Done, it'll take you back to the main Activity, like this
 
 ![done](.md_images/done.png)
 
+## Lab 3 Advanced topics
 
+* To combine ScrollView with `android:layout_weight` i.e. make ScrollView fullfill the screen, you need to set [`android:fillViewport` to true](https://developer.android.com/reference/android/widget/ScrollView.html#attr_android:fillViewport).
+* For EditText, to disable full-screen mode, you need to set [android:imeOptions="flagNoExtractUi"](https://developer.android.com/guide/topics/ui/controls/text.html#Flags).
 
 
 

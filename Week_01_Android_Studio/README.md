@@ -288,7 +288,7 @@ Android studio has built-in version control system (VCS) support. In fact, there
 
 1. Check if Git is available on the system. On machines in ECM15 Git has been installed. Open a terminal window and type in 'git' and then enter, if you see something like 'agreeing to the Xcode/iOS license requires admin privileges, please re-run as root via sudo', that means Git hasn't been configured properly. If that happens to you, open Xcode and accept all licenses and then use the git command in terminal to check again. You should see the following.
 
- > If you use Windows at home, you'll need to [download](https://git-scm.com/downloads) and install Git.
+ > If you use Windows at home, you'll need to [download](https://git-scm.com/downloads) and install Git. Some versions of Git set a user's home folder as it's default location (e.g. C:\users\[your username]\). To get rid of this, you need to open Git shell in the Linux version, navigate to that location and delete a folder called `.git`.
 
  ![git](.md_images/git.png)
 

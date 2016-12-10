@@ -612,4 +612,6 @@ Read through [the online tutorial written by Ravi Tamada](http://www.androidhive
 * How to define a 'contract' class, as suggested [in the official Android guide](http://developer.android.com/training/basics/data-storage/databases.html), to improve the tutorial?
 * How would you implement 'delete'/'update' on the UI?
 
+### A demo project on using a pre-existing SQLite database is available in the repository
+
 

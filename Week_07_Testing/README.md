@@ -573,4 +573,7 @@ The implications of this fast-changing are:
 * [Testing Android Applications](https://www.jetbrains.com/help/idea/2016.2/testing-android-applications.html)
 * [Test Runner Tab](https://www.jetbrains.com/help/idea/2016.2/test-runner-tab.html)
 
+### A demo project on using Espresso with Navigation drawer is available in the repository.
+
+
 

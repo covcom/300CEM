@@ -575,5 +575,6 @@ The implications of this fast-changing are:
 
 ### A demo project on using Espresso with Navigation drawer is available in the repository.
 
+### A demo project testing database operation is available in the repository.
 
 

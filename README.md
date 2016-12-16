@@ -310,7 +310,7 @@ Refer to Moodle for this.
 1. Week1, in Android Studio intro, use something from https://developer.android.com/studio/intro/index.html
 2. Week2, together with Toast, introduce Snackbar, https://developer.android.com/training/snackbar/showing.html
 3. Week3, creating old non-generic arraylist example, http://www.javatpoint.com/ArrayList-in-collection-framework
-4. Week5, together with listview, introduce RecyclerView, https://developer.android.com/training/material/lists-cards.html
+4. Week5, together with listview, introduce RecyclerView, viewholder, TextInputLayout, card view etc., https://developer.android.com/training/material/lists-cards.html
 
 
 # About this Github repository

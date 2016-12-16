@@ -498,7 +498,7 @@ Follow steps below to create an instrumented unit test:
     
     As you can see we don't need to mock anything anymore. We can use some system resources such as `InstrumentationRegistry` and `Log`. Basically, Android instrumentation is a set of control methods or 'hooks' in the Android system. With Android instrumentation, you can invoke for example activity callback methods in your test code. This gives you fine control of everything. For more details on instrumentation, read this [Android docs backed up by MIT](https://stuff.mit.edu/afs/sipb/project/android/docs/tools/testing/testing_android.html#Instrumentation).
     
-    However, remember instrumented tests are still unit tests, which means the system doesn't start the actual app and so it doesn't have access to things like activity methods such as `findViewById()`.
+    However, remember instrumented tests are still unit tests, which means the system doesn't start the actual app and so it doesn't have access to things like activity methods such as `findViewById()`. Another thing to note here is that AndroidJUnit4.class is an [aliase of the current default Android JUnit 4 class runner for future-proofing](). That means at this moment (until the release of JUnit 5) you can safely delete line `@RunWith(AndroidJUnit4.class)` and your code will still run.
     
 5. If you right-click the class and run, you'll see that all tests are passed. In addition, in the logcat tool window, you'll see the actual log message. 
     

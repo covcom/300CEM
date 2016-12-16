@@ -1,10 +1,8 @@
 package com.example.jianhuayang.mysqlite;
 
 import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -12,7 +10,7 @@ import static junit.framework.Assert.assertEquals;
  * Created by jianhuayang on 13/12/2016.
  */
 
-@RunWith(AndroidJUnit4.class)
+//@RunWith(AndroidJUnit4.class)
 public class DbTest {
 
     @Test
